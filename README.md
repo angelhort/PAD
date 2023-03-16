@@ -9,6 +9,8 @@ Repositorio para el proyecto de la asignatura PAD (Programación de aplicaciones
 
 ## Diseño en Figma
 https://www.figma.com/file/fWRpFGJLX6dwQe8Mriua3x/Sacapalabra
+#### Componentes Android UI Kit
+https://www.figma.com/file/IPtmaaA6jfqEgvTECeoR7F/Android-UI-Kit-(Community)
 
 ## Propuesta del Proyecto
 https://docs.google.com/document/u/1/d/1sCJ0Ny8zyoOnmOJiH9DLv2k8Xu1HlFsLW8ZN3dOcUkQ/
