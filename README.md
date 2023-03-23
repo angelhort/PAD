@@ -21,6 +21,7 @@ https://docs.google.com/presentation/d/1RmkFNEc3w761FdUjoZP7vWeCD195fNKRt_BRJ1lr
 ## APIS
 * https://clientes.api.greenborn.com.ar/public-random-word?c=1&l=5
 * http://random-word-api.herokuapp.com/home
+* https://random-word-api.vercel.app/     -- LA BUENA
 <br><br><br>
 
 <image src="./mascota.jpeg" style="text-align:center;" alt="Descripción de la imagen">
