@@ -16,7 +16,7 @@
         android:layout_marginBottom="658dp"
         android:background="@drawable/roundbutton"
         android:drawablePadding="8dp"
-        android:drawableGravity="center"
+        android:gravity="center"
         app:icon="@drawable/settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

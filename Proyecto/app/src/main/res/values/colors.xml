@@ -7,9 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <!-- Colores personalizados -->
+    <color name="gray">#A0A5A8</color>
     <color name="green">#30B236</color>
+    <color name="dark_green">#43A047</color>
     <color name="orange">#E4A81D</color>
-    <color name="grey">#A0A5A8</color>
 </resources>
