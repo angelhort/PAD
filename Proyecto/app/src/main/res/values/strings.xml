@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SacaPalabra</string>
+    <string name="home_title_1">Saca</string>
+    <string name="home_title_2">Palabra</string>
 </resources>
