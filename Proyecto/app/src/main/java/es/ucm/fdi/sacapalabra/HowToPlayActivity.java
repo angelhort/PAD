@@ -7,13 +7,18 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class HowToPlayActivity extends FragmentActivity {
 
     private static final int NUM_PAG = 5;
     private ViewPager page;
     private PagerAdapter pagerAdapter;
+
+    private Button jugar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +27,39 @@ public class HowToPlayActivity extends FragmentActivity {
 
         // Instantiate a ViewPager and a PagerAdapter.
         page = (ViewPager) findViewById(R.id.view_pager);
+        jugar = findViewById(R.id.button5);
+        jugar.setVisibility(View.GONE);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         page.setAdapter(pagerAdapter);
+
+        page.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // No se usa en este caso
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 4) {
+                    jugar.setVisibility(View.VISIBLE);
+                } else {
+                    jugar.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                // No se usa en este caso
+            }
+        });
+
+        jugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HowToPlayActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
