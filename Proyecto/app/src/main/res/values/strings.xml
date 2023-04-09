@@ -2,4 +2,18 @@
     <string name="app_name">SacaPalabra</string>
     <string name="home_title_1">Saca</string>
     <string name="home_title_2">Palabra</string>
+    <string name="seleccIdioma">Idioma</string>
+    <string name="seleccIdiomaEsp">Español</string>
+    <string name="seleccIdiomaIng">Inglés</string>
+    <string name="seleccIdiomaGal">Gallego</string>
+    <string name="seleccModo">Modo</string>
+    <string name="seleccModoNormal">Normal</string>
+    <string name="seleccModoContrarreloj">Contrarreloj</string>
+    <string name="seleccModoAcentos">Acentos</string>
+    <string name="seleccNumIntentos">Número de intentos</string>
+    <string name="seleccNumIntentos3">3</string>
+    <string name="seleccNumIntentos4">4</string>
+    <string name="seleccNumIntentos5">5</string>
+    <string name="seleccNumIntentos6">6</string>
+    <string name="seleccNumIntentos7">7</string>
 </resources>
