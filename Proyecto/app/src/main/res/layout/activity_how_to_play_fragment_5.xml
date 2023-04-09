@@ -227,7 +227,7 @@
         android:layout_marginEnd="91dp"
         android:gravity="center"
         android:text="La solución era DATOS"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
