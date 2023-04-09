@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Palabra" />
+        android:text="@string/word" />
 
     <TextView
         android:id="@+id/textViewIdioma"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Idioma" />
+        android:text="@string/language" />
 
     <TextView
         android:id="@+id/textViewModo"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Modo" />
+        android:text="@string/mode" />
 
     <TextView
         android:id="@+id/textViewIntentos"
@@ -34,6 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Intentos" />
+        android:text="@string/tries" />
 
 </LinearLayout>

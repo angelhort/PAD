@@ -17,10 +17,10 @@
         android:paddingVertical="10sp">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/estadisticas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estadísticas"
+            android:text="@string/statistics"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="34sp" />
 
@@ -37,7 +37,7 @@
             android:id="@+id/textView13"
             android:layout_width="131dp"
             android:layout_height="wrap_content"
-            android:text="Partidas"
+            android:text="@string/games"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
 
@@ -46,7 +46,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="% Victorias"
+            android:text="@string/wins"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
     </LinearLayout>
@@ -85,7 +85,7 @@
             android:layout_width="177dp"
             android:layout_height="90dp"
             android:gravity="center"
-            android:text="Racha de victorias actual"
+            android:text="@string/currentStreak"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
 
@@ -94,7 +94,7 @@
             android:layout_width="173dp"
             android:layout_height="75dp"
             android:gravity="center"
-            android:text="Mejor racha de victorias"
+            android:text="@string/bestStreak"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp" />
     </LinearLayout>
@@ -111,7 +111,8 @@
             android:id="@+id/textViewRachaActual"
             android:layout_width="67dp"
             android:layout_height="wrap_content"
-            android:text="0" />
+            android:text="0"
+            android:textColor="@color/green" />
 
         <TextView
             android:id="@+id/textViewMejorRacha"
@@ -129,10 +130,10 @@
         android:paddingVertical="20sp">
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/Historial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Historial"
+            android:text="@string/history"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="34sp" />
 
@@ -150,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Palabra"
+            android:text="@string/word"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <TextView
@@ -159,7 +160,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Idioma"
+            android:text="@string/language"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <TextView
@@ -168,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Modo"
+            android:text="@string/mode"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <TextView
@@ -177,7 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Intentos"
+            android:text="@string/tries"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     </LinearLayout>

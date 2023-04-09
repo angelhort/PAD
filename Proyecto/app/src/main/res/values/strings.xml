@@ -42,4 +42,16 @@
     <string name="config_theme_op1">Noche</string>
     <string name="config_theme_op2">Día</string>
 
+    <!-- History activity -->
+    <string name="statistics">Estadísticas</string>
+    <string name="games">Partidas</string>
+    <string name="wins">% Victorias</string>
+    <string name="currentStreak">Racha de victorias actual</string>
+    <string name="bestStreak">Mejor racha de victorias</string>
+    <string name="history">Historial</string>
+    <string name="word">Palabra</string>
+    <string name="language">Idioma</string>
+    <string name="mode">Modo</string>
+    <string name="tries">Intentos</string>
+
 </resources>
