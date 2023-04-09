@@ -11,21 +11,13 @@
         android:layout_height="61dp"
         android:layout_marginStart="17dp"
         android:layout_marginEnd="37dp"
-<<<<<<< Updated upstream
         android:layout_marginBottom="172dp"
         android:text="La letra no aparece en la palabra"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-=======
-        android:layout_marginBottom="164dp"
-        android:text="La letra no aparece en la palabra"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
->>>>>>> Stashed changes
         app:layout_constraintStart_toEndOf="@+id/linearLayout" />
 
     <TextView
