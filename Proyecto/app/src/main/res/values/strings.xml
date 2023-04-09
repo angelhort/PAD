@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">SacaPalabra</string>
+
+    <!-- Main activity -->
     <string name="home_title_1">Saca</string>
     <string name="home_title_2">Palabra</string>
+
+    <!-- Game options activity -->
     <string name="seleccIdioma">Idioma</string>
     <string name="seleccIdiomaEsp">Español</string>
     <string name="seleccIdiomaIng">Inglés</string>
@@ -16,4 +20,26 @@
     <string name="seleccNumIntentos5">5</string>
     <string name="seleccNumIntentos6">6</string>
     <string name="seleccNumIntentos7">7</string>
+
+    <!-- How to play activity -->
+    <string name="howtoplay">¿Cómo jugar?</string>
+
+    <!-- Configuration activity -->
+    <string name="config">Configuración</string>
+    <string name="config_language">Idioma de la interfaz</string>
+    <string name="config_language_op1">Español</string>
+    <string name="config_language_op2">Inglés</string>
+    <string name="config_mode">Modo daltónico</string>
+    <string name="config_mode_op1">Sí</string>
+    <string name="config_mode_op2">No</string>
+    <string name="config_font">Tamaño de la fuente</string>
+    <string name="config_font_op1">12</string>
+    <string name="config_font_op2">14</string>
+    <string name="config_font_op3">16</string>
+    <string name="config_font_op4">18</string>
+    <string name="config_font_op5">20</string>
+    <string name="config_theme">Tema de la interfaz</string>
+    <string name="config_theme_op1">Noche</string>
+    <string name="config_theme_op2">Día</string>
+
 </resources>
