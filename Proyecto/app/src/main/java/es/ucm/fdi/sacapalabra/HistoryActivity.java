@@ -14,9 +14,9 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         ListView historial = findViewById(R.id.lvHistorialPartidas);
-        TextView textRachaVictorias = findViewById(R.id.textRachaVictorias);
-        TextView textMejorRachaVictorias = findViewById(R.id.textMejorRachaVictorias);
-        TextView textPartidas = findViewById(R.id.textPartidas);
-        TextView textVictoriasPorcentaje = findViewById(R.id.textVictoriasPorcentaje);
+        TextView textRachaVictorias = findViewById(R.id.textViewRachaActual);
+        TextView textMejorRachaVictorias = findViewById(R.id.textViewMejorRacha);
+        TextView textPartidas = findViewById(R.id.textViewPartidasJugadas);
+        TextView textVictoriasPorcentaje = findViewById(R.id.textViewVictorias);
     }
 }

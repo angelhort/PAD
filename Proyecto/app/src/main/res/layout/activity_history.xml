@@ -1,134 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/estadisticasehistorial"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryActivity">
-
-    <TextView
-        android:id="@+id/estadisticas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="173dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="667dp"
-        android:text="Estadísticas"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/partidas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="179dp"
-        android:layout_marginBottom="74dp"
-        android:text="Partidas"
-        app:layout_constraintBottom_toTopOf="@+id/rachaVictorias"
-        app:layout_constraintEnd_toStartOf="@+id/victoriasPorcentaje"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textPartidas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="36dp"
-        android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/rachaVictorias"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/partidas" />
-
-    <TextView
-        android:id="@+id/victoriasPorcentaje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="179dp"
-        android:layout_marginTop="106dp"
-        android:text="% Victorias"
-        app:layout_constraintStart_toEndOf="@+id/partidas"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textVictoriasPorcentaje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="226dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginBottom="37dp"
-        android:text="0 %"
-        app:layout_constraintBottom_toTopOf="@+id/mejorRachaVictorias"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textPartidas"
-        app:layout_constraintTop_toBottomOf="@+id/victoriasPorcentaje" />
-
-    <TextView
-        android:id="@+id/rachaVictorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="74dp"
-        android:text="Racha de victorias actual"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/partidas" />
-
-    <TextView
-        android:id="@+id/textRachaVictorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="76dp"
-        android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rachaVictorias" />
-
-    <TextView
-        android:id="@+id/mejorRachaVictorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="67dp"
-        android:text="Mejor racha de victorias"
-        app:layout_constraintBottom_toTopOf="@+id/historial"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rachaVictorias"
-        app:layout_constraintTop_toBottomOf="@+id/victoriasPorcentaje" />
-
-    <TextView
-        android:id="@+id/historial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Historial"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.409" />
+    android:foregroundGravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/Estadisticas"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingVertical="10sp">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estadísticas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="34sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Partidas"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:text="Partidas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="% Victorias"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/textPartidas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="330dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/textViewPartidasJugadas"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/textViewVictorias"
+            android:layout_width="113dp"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:text="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Rachas"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="177dp"
+            android:layout_height="90dp"
+            android:gravity="center"
+            android:text="Racha de victorias actual"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="173dp"
+            android:layout_height="75dp"
+            android:gravity="center"
+            android:text="Mejor racha de victorias"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/textRachas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="10sp">
+
+        <TextView
+            android:id="@+id/textViewRachaActual"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/textViewMejorRacha"
+            android:layout_width="115dp"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:text="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingVertical="20sp">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Historial"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="34sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textViewTituloPalabra"
@@ -168,14 +182,11 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="370dp"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <ListView
             android:id="@+id/lvHistorialPartidas"
@@ -183,18 +194,4 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textMejorRachaVictorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="226dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="95dp"
-        android:layout_marginBottom="76dp"
-        android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textRachaVictorias"
-        app:layout_constraintTop_toBottomOf="@+id/mejorRachaVictorias" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
