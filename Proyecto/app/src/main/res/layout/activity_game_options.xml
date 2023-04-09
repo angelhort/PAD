@@ -6,4 +6,256 @@
     android:layout_height="match_parent"
     tools:context=".GameOptionsActivity">
 
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="82dp"
+        android:background="@color/green"
+        android:checked="false"
+        android:text="@string/seleccIdiomaEsp"
+        android:textOff="@string/seleccIdiomaEsp"
+        android:textOn="@string/seleccIdiomaEsp"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="11dp"
+        android:text="@string/seleccIdioma"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:layout_marginTop="82dp"
+        android:text="@string/seleccIdiomaGal"
+        android:textOff="@string/seleccIdiomaGal"
+        android:textOn="@string/seleccIdiomaGal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:layout_marginTop="82dp"
+        android:text="@string/seleccIdiomaIng"
+        android:textOff="@string/seleccIdiomaIng"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccModoAcentos"
+        android:textOff="@string/seleccModoAcentos"
+        android:textOn="@string/seleccModoAcentos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton5"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton2" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/green"
+        android:text="@string/seleccModoNormal"
+        android:textOff="@string/seleccModoNormal"
+        android:textOn="@string/seleccModoNormal"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton5"
+        app:layout_constraintHorizontal_bias="0.734"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:layout_marginTop="96dp"
+        android:text="@string/seleccModoNormal"
+        android:textOff="@string/seleccModoContrarreloj"
+        android:textOn="@string/seleccModoContrarreloj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton3" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="11dp"
+        android:text="@string/seleccModo"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="13dp"
+        android:text="@string/seleccNumIntentos"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton4"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton7"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos3"
+        android:textOff="@string/seleccNumIntentos3"
+        android:textOn="@string/seleccNumIntentos3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton8"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos4"
+        android:textOff="@string/seleccNumIntentos4"
+        android:textOn="@string/seleccNumIntentos4"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton9"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton7"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton9"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos5"
+        android:textOff="@string/seleccNumIntentos5"
+        android:textOn="@string/seleccNumIntentos5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton10"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos6"
+        android:textOff="@string/seleccNumIntentos6"
+        android:textOn="@string/seleccNumIntentos6"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton11"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton9"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton11"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="36dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos7"
+        android:textOff="@string/seleccNumIntentos7"
+        android:textOn="@string/seleccNumIntentos7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton6" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton12"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos3"
+        android:textOff="@string/seleccNumIntentos3"
+        android:textOn="@string/seleccNumIntentos3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton7" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton13"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos4"
+        android:textOff="@string/seleccNumIntentos4"
+        android:textOn="@string/seleccNumIntentos4"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton14"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton12"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton8" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton14"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos5"
+        android:textOff="@string/seleccNumIntentos5"
+        android:textOn="@string/seleccNumIntentos5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton9" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton15"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos6"
+        android:textOff="@string/seleccNumIntentos6"
+        android:textOn="@string/seleccNumIntentos6"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton16"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton14"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton10" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton16"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="36dp"
+        android:background="@color/green"
+        android:text="@string/seleccNumIntentos7"
+        android:textOff="@string/seleccNumIntentos7"
+        android:textOn="@string/seleccNumIntentos7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton11" />
 </androidx.constraintlayout.widget.ConstraintLayout>
