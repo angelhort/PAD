@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:foregroundGravity="center"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_dark">
 
     <LinearLayout
         android:id="@+id/Estadisticas"

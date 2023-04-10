@@ -7,6 +7,7 @@
     android:background="@drawable/bg_dark"
     tools:context=".MainActivity">
 
+    <!-- Boton de CONFIGURACION -->
     <Button
         android:id="@+id/button"
         android:layout_width="61dp"
@@ -26,6 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Boton de JUGAR -->
     <Button
         android:id="@+id/button2"
         android:layout_width="173dp"
@@ -47,6 +49,7 @@
         app:layout_constraintVertical_bias="1.0"
         />
 
+    <!-- Boton de HISTORIAL -->
     <Button
         android:id="@+id/button3"
         android:layout_width="95dp"
@@ -65,6 +68,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.72" />
 
+    <!-- Boton de INSTRUCCIONES-->
     <Button
         android:id="@+id/button4"
         android:layout_width="79dp"
@@ -80,21 +84,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.708" />
 
-    <TextView
-        android:id="@+id/textView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pacifico"
-        android:text="@string/home_title_2"
-        android:textAppearance="@style/homeTitle"
-        android:textColor="#FEFEFE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239" />
-
+    <!-- TITULO APP 1/2 -->
     <TextView
         android:id="@+id/textView33"
         android:layout_width="wrap_content"
@@ -109,5 +99,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.143" />
+
+    <!-- TITULO APP 2/2 -->
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pacifico"
+        android:text="@string/home_title_2"
+        android:textAppearance="@style/homeTitle"
+        android:textColor="#FEFEFE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.239" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

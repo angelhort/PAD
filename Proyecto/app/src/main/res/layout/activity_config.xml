@@ -5,21 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_dark"
-    tools:context=".Config">
+    tools:context=".ConfigActivity">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="411dp"
+        android:layout_height="660dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteX="-1dp"
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
             android:id="@+id/textView35"
+            style="@style/heading"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
+            android:layout_height="74dp"
+            android:fontFamily="@font/baloo"
             android:text="@string/config"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="34sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,51 +31,84 @@
 
             <TextView
                 android:id="@+id/textView36"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/heading2"
+                android:layout_width="121dp"
                 android:layout_weight="1"
                 android:text="@string/config_language" />
 
-            <TextView
-                android:id="@+id/textView37"
+            <Button
+                android:id="@+id/button6"
+                style="@style/configButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:layout_marginRight="16sp"
                 android:layout_weight="1"
                 android:text="@string/config_language_op1" />
 
-            <TextView
-                android:id="@+id/textView38"
+            <Button
+                android:id="@+id/button7"
+                style="@style/configButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/config_language_op2" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="130dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView36"
+                style="@style/heading2"
+                android:layout_width="109dp"
+                android:layout_weight="1"
+                android:text="@string/config_theme" />
+
+            <Button
+                android:id="@+id/button6"
+                style="@style/configButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:layout_marginRight="16sp"
+                android:layout_weight="1"
+                android:text="@string/config_theme_op1" />
+
+            <Button
+                android:id="@+id/button7"
+                style="@style/configButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/config_theme_op2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="163dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView36"
+                style="@style/heading2"
+                android:layout_width="20dp"
                 android:layout_weight="1"
                 android:text="@string/config_mode" />
 
-            <TextView
-                android:id="@+id/textView37"
-                android:layout_width="wrap_content"
+            <Switch
+                android:id="@+id/switch1"
+                style="@style/switchButton"
+                android:layout_width="7dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="@string/config_mode_op1" />
+                android:switchPadding="0dp" />
 
-            <TextView
-                android:id="@+id/textView38"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/config_mode_op2" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,38 +118,19 @@
 
             <TextView
                 android:id="@+id/textView36"
+                style="@style/heading2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/config_font" />
 
+            <SeekBar
+                android:id="@+id/seekBar"
+                style="@style/seekBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView36"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/config_theme" />
-
-            <TextView
-                android:id="@+id/textView37"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/config_theme_op1" />
-
-            <TextView
-                android:id="@+id/textView38"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/config_theme_op2" />
-        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

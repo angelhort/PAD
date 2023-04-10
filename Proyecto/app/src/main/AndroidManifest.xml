@@ -15,7 +15,7 @@
             android:name=".inGame"
             android:exported="false" />
         <activity
-            android:name=".Config"
+            android:name=".ConfigActivity"
             android:exported="false" />
         <activity
             android:name=".HistoryActivity"

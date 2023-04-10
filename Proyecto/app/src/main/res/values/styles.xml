@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Heading styles -->
+    <style name="heading">
+        <item name="android:textSize">34sp</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="heading2">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:maxWidth">10sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">10sp</item>
+
+    </style>
+
+    <!-- Text styles -->
+    <style name="plaintext">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="switchText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- UI Elements style -->
+    <style name="configButton">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:layout_marginRight">10sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="switchButton">
+        <item name="android:switchTextAppearance">@style/switchText</item>
+        <item name="android:layout_marginRight">20sp</item>
+        <item name="android:layout_marginLeft">20sp</item>
+        <item name="android:showText">true</item>
+        <item name="android:textOff">@string/config_mode_op2</item>
+        <item name="android:textOn">@string/config_mode_op1</item>
+        <item name="android:thumb">@drawable/thumb</item>
+        <item name="android:track">@drawable/track</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="seekBar">
+        <item name="android:switchTextAppearance">@style/switchText</item>
+        <item name="android:layout_marginRight">20sp</item>
+        <item name="android:layout_marginLeft">20sp</item>
+        <item name="android:max">24</item>
+        <item name="android:min">18</item>
+        <item name="android:stepSize">2</item>
+        <item name="android:progress">18</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
     <!-- Home title style -->
     <style name="homeTitle">
         <item name="android:textSize">60sp</item>

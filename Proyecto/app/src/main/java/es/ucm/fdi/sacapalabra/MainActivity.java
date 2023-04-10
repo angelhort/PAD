@@ -9,18 +9,22 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button info;
-    private Button history;
+    private Button button_info;
+    private Button button_history;
+    private Button button_config;
+    private Button button_play;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        info = findViewById(R.id.button4);
+        button_info = findViewById(R.id.button4);
+        button_history = findViewById(R.id.button3);
+        button_config = findViewById(R.id.button);
+        button_play = findViewById(R.id.button);
 
-        history = findViewById(R.id.button3);
-
-        info.setOnClickListener(new View.OnClickListener() {
+        button_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HowToPlayActivity.class);
@@ -28,10 +32,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        history.setOnClickListener(new View.OnClickListener() {
+        button_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_config.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ConfigActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GameOptionsActivity.class);
                 startActivity(intent);
             }
         });
