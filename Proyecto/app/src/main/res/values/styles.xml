@@ -18,7 +18,15 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginLeft">10sp</item>
-
+    </style>
+    <style name="heading_gameoptions">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxWidth">10sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">10sp</item>
     </style>
 
     <!-- Text styles -->
@@ -38,6 +46,17 @@
     </style>
 
     <!-- UI Elements style -->
+    <style name="gameoptionsbutton">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:layout_marginRight">10sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="configButton">
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/baloo</item>

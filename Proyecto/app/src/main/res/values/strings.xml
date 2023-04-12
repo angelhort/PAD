@@ -6,6 +6,7 @@
     <string name="home_title_2">Palabra</string>
 
     <!-- Game options activity -->
+    <string name="gameoptionstitle">Modo</string>
     <string name="chooseLanguage">Idioma</string>
     <string name="chooseLanguage_op1">Español</string>
     <string name="chooseLanguage_op2">Inglés</string>
@@ -15,11 +16,13 @@
     <string name="chooseMode_op2">Contrarreloj</string>
     <string name="chooseMode_op3">Acentos</string>
     <string name="chooseTries">Número de intentos</string>
+    <string name="chooseLenght">Longitud de la palabra</string>
     <string name="chooseTries_op1">3</string>
     <string name="chooseTries_op2">4</string>
     <string name="chooseTries_op3">5</string>
     <string name="chooseTries_op4">6</string>
     <string name="chooseTries_op5">7</string>
+    <string name="play">Jugar</string>
 
     <!-- How to play activity -->
     <string name="howtoplay">¿Cómo jugar?</string>
@@ -41,6 +44,7 @@
     <string name="config_theme">Tema de la interfaz</string>
     <string name="config_theme_op1">Noche</string>
     <string name="config_theme_op2">Día</string>
+    <string name="config_confirm">Confirmar</string>
 
     <!-- History activity -->
     <string name="statistics">Estadísticas</string>

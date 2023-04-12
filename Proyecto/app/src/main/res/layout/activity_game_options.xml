@@ -4,259 +4,319 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_dark"
-    tools:context=".GameOptionsActivity">
+    android:background="@drawable/bg_dark">
 
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:background="@color/green"
-        android:checked="false"
-        android:text="@string/chooseLanguage_op1"
-        android:textOff="@string/chooseLanguage_op1"
-        android:textOn="@string/chooseLanguage_op1"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView35"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="11dp"
-        android:text="@string/chooseLanguage"
-        app:layout_constraintBottom_toTopOf="@+id/toggleButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
 
-    <ToggleButton
-        android:id="@+id/toggleButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:layout_marginTop="82dp"
-        android:text="@string/chooseLanguage_op3"
-        android:textOff="@string/chooseLanguage_op3"
-        android:textOn="@string/chooseLanguage_op3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton3"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView35"
+            style="@style/heading"
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:fontFamily="@font/baloo"
+            android:text="@string/gameoptionstitle"
+            android:textAlignment="center"
+            android:textSize="34sp" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:layout_marginTop="82dp"
-        android:text="@string/chooseLanguage_op2"
-        android:textOff="@string/chooseLanguage_op2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="139dp"
+            android:orientation="vertical">
 
-    <ToggleButton
-        android:id="@+id/toggleButton6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseMode_op3"
-        android:textOff="@string/chooseMode_op3"
-        android:textOn="@string/chooseMode_op3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton5"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton2" />
+            <TextView
+                android:id="@+id/textView38"
+                style="@style/heading_gameoptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/chooseLanguage" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/green"
-        android:text="@string/chooseMode_op1"
-        android:textOff="@string/chooseMode_op1"
-        android:textOn="@string/chooseMode_op1"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton5"
-        app:layout_constraintHorizontal_bias="0.734"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-    <ToggleButton
-        android:id="@+id/toggleButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:layout_marginTop="96dp"
-        android:text="@string/chooseMode_op1"
-        android:textOff="@string/chooseMode_op2"
-        android:textOn="@string/chooseMode_op2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton3" />
+                <ToggleButton
+                    android:id="@+id/toggleButton18"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseLanguage_op3"
+                    android:textOff="@string/chooseLanguage_op3"
+                    android:textOn="@string/chooseLanguage_op3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/toggleButton3"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView36"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginBottom="11dp"
-        android:text="@string/chooseMode"
-        app:layout_constraintBottom_toTopOf="@+id/toggleButton4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+                <ToggleButton
+                    android:id="@+id/toggleButton23"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseLanguage_op2"
+                    android:textOff="@string/chooseLanguage_op2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView37"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="13dp"
-        android:text="@string/chooseTries"
-        app:layout_constraintBottom_toTopOf="@+id/toggleButton8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton4"
-        app:layout_constraintVertical_bias="1.0" />
+                <ToggleButton
+                    android:id="@+id/toggleButton17"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:checked="true"
+                    android:text="@string/chooseLanguage_op1"
+                    android:textOff="@string/chooseLanguage_op1"
+                    android:textOn="@string/chooseLanguage_op1"
+                    app:layout_constraintEnd_toStartOf="@+id/toggleButton3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
 
-    <ToggleButton
-        android:id="@+id/toggleButton7"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op1"
-        android:textOff="@string/chooseTries_op1"
-        android:textOn="@string/chooseTries_op1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+        </LinearLayout>
 
-    <ToggleButton
-        android:id="@+id/toggleButton8"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op2"
-        android:textOff="@string/chooseTries_op2"
-        android:textOn="@string/chooseTries_op2"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton9"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton7"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="145dp"
+            android:orientation="vertical">
 
-    <ToggleButton
-        android:id="@+id/toggleButton9"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op3"
-        android:textOff="@string/chooseTries_op3"
-        android:textOn="@string/chooseTries_op3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+            <TextView
+                android:id="@+id/textView38"
+                style="@style/heading_gameoptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/chooseMode" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton10"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op4"
-        android:textOff="@string/chooseTries_op4"
-        android:textOn="@string/chooseTries_op4"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton11"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton9"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="113dp"
+                android:orientation="horizontal">
 
-    <ToggleButton
-        android:id="@+id/toggleButton11"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="36dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op5"
-        android:textOff="@string/chooseTries_op5"
-        android:textOn="@string/chooseTries_op5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton6" />
+                <ToggleButton
+                    android:id="@+id/toggleButton24"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:checked="true"
+                    android:text="@string/chooseMode_op1"
+                    android:textOff="@string/chooseMode_op1"
+                    android:textOn="@string/chooseMode_op1"
+                    app:layout_constraintEnd_toStartOf="@+id/toggleButton5"
+                    app:layout_constraintHorizontal_bias="0.734"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton12"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op1"
-        android:textOff="@string/chooseTries_op1"
-        android:textOn="@string/chooseTries_op1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton7" />
+                <ToggleButton
+                    android:id="@+id/toggleButton25"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseMode_op1"
+                    android:textOff="@string/chooseMode_op2"
+                    android:textOn="@string/chooseMode_op2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton3" />
+            </LinearLayout>
+        </LinearLayout>
 
-    <ToggleButton
-        android:id="@+id/toggleButton13"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op2"
-        android:textOff="@string/chooseTries_op2"
-        android:textOn="@string/chooseTries_op2"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton14"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton12"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton8" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <ToggleButton
-        android:id="@+id/toggleButton14"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op3"
-        android:textOff="@string/chooseTries_op3"
-        android:textOn="@string/chooseTries_op3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton9" />
+            <TextView
+                android:id="@+id/textView38"
+                style="@style/heading_gameoptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/chooseTries" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton15"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op4"
-        android:textOff="@string/chooseTries_op4"
-        android:textOn="@string/chooseTries_op4"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton16"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton14"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton10" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="116dp"
+                android:orientation="horizontal">
 
-    <ToggleButton
-        android:id="@+id/toggleButton16"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="36dp"
-        android:background="@color/green"
-        android:text="@string/chooseTries_op5"
-        android:textOff="@string/chooseTries_op5"
-        android:textOn="@string/chooseTries_op5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton11" />
+                <ToggleButton
+                    android:id="@+id/toggleButton26"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseTries_op1"
+                    android:textOff="@string/chooseTries_op1"
+                    android:textOn="@string/chooseTries_op1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton27"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseTries_op2"
+                    android:textOff="@string/chooseTries_op2"
+                    android:textOn="@string/chooseTries_op2"
+                    app:layout_constraintEnd_toStartOf="@+id/toggleButton9"
+                    app:layout_constraintStart_toEndOf="@+id/toggleButton7"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton28"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:checked="true"
+                    android:text="@string/chooseTries_op3"
+                    android:textOff="@string/chooseTries_op3"
+                    android:textOn="@string/chooseTries_op3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton29"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseTries_op4"
+                    android:textOff="@string/chooseTries_op4"
+                    android:textOn="@string/chooseTries_op4"
+                    app:layout_constraintEnd_toStartOf="@+id/toggleButton11"
+                    app:layout_constraintStart_toEndOf="@+id/toggleButton9"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton30"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseTries_op5"
+                    android:textOff="@string/chooseTries_op5"
+                    android:textOn="@string/chooseTries_op5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton6" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView38"
+                style="@style/heading_gameoptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/chooseLenght" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="91dp"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/toggleButton31"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseTries_op1"
+                    android:textOff="@string/chooseTries_op1"
+                    android:textOn="@string/chooseTries_op1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton32"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseTries_op2"
+                    android:textOff="@string/chooseTries_op2"
+                    android:textOn="@string/chooseTries_op2"
+                    app:layout_constraintEnd_toStartOf="@+id/toggleButton9"
+                    app:layout_constraintStart_toEndOf="@+id/toggleButton7"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton33"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:checked="true"
+                    android:text="@string/chooseTries_op3"
+                    android:textOff="@string/chooseTries_op3"
+                    android:textOn="@string/chooseTries_op3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton34"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseTries_op4"
+                    android:textOff="@string/chooseTries_op4"
+                    android:textOn="@string/chooseTries_op4"
+                    app:layout_constraintEnd_toStartOf="@+id/toggleButton11"
+                    app:layout_constraintStart_toEndOf="@+id/toggleButton9"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton35"
+                    style="@style/gameoptionsbutton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/togglebutton"
+                    android:text="@string/chooseTries_op5"
+                    android:textOff="@string/chooseTries_op5"
+                    android:textOn="@string/chooseTries_op5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggleButton6" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button7"
+            style="@style/gameoptionsbutton"
+            android:layout_width="178dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/play" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

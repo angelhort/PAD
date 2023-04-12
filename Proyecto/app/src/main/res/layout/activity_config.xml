@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="411dp"
-        android:layout_height="660dp"
+        android:layout_height="729dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-1dp"
         tools:layout_editor_absoluteY="1dp">
@@ -36,23 +36,29 @@
                 android:layout_weight="1"
                 android:text="@string/config_language" />
 
-            <Button
-                android:id="@+id/button6"
+            <ToggleButton
+                android:id="@+id/toggleButton19"
                 style="@style/configButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16sp"
-                android:layout_marginRight="16sp"
                 android:layout_weight="1"
-                android:text="@string/config_language_op1" />
+                android:background="@drawable/togglebutton"
+                android:button="@drawable/togglebutton"
+                android:checked="true"
+                android:textOff="@string/config_language_op1"
+                android:textOn="@string/config_language_op1" />
 
-            <Button
-                android:id="@+id/button7"
+            <ToggleButton
+                android:id="@+id/toggleButton20"
                 style="@style/configButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/config_language_op2" />
+                android:background="@drawable/togglebutton"
+                android:button="@drawable/togglebutton"
+                android:checked="false"
+                android:textOff="@string/config_language_op2"
+                android:textOn="@string/config_language_op2" />
 
         </LinearLayout>
 
@@ -68,23 +74,29 @@
                 android:layout_weight="1"
                 android:text="@string/config_theme" />
 
-            <Button
-                android:id="@+id/button6"
+            <ToggleButton
+                android:id="@+id/toggleButton22"
                 style="@style/configButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16sp"
-                android:layout_marginRight="16sp"
                 android:layout_weight="1"
-                android:text="@string/config_theme_op1" />
+                android:background="@drawable/togglebutton"
+                android:button="@drawable/togglebutton"
+                android:checked="true"
+                android:textOff="@string/config_theme_op1"
+                android:textOn="@string/config_theme_op1" />
 
-            <Button
-                android:id="@+id/button7"
+            <ToggleButton
+                android:id="@+id/toggleButton21"
                 style="@style/configButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/config_theme_op2" />
+                android:background="@drawable/togglebutton"
+                android:button="@drawable/togglebutton"
+                android:checked="false"
+                android:textOff="@string/config_theme_op2"
+                android:textOn="@string/config_theme_op2" />
 
         </LinearLayout>
 
@@ -113,7 +125,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="161dp"
+            android:layout_height="127dp"
             android:orientation="horizontal">
 
             <TextView
@@ -131,6 +143,15 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button6"
+            style="@style/configButton"
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/config_confirm"
+            android:textAlignment="center" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
