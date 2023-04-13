@@ -42,21 +42,21 @@
                 android:orientation="horizontal">
 
                 <ToggleButton
-                    android:id="@+id/toggleButton18"
+                    android:id="@+id/toggleButtonEspannol"
                     style="@style/gameoptionsbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/togglebutton"
-                    android:text="@string/chooseLanguage_op3"
-                    android:textOff="@string/chooseLanguage_op3"
-                    android:textOn="@string/chooseLanguage_op3"
+                    android:text="@string/chooseLanguage_op1"
+                    android:textOff="@string/chooseLanguage_op1"
+                    android:textOn="@string/chooseLanguage_op1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/toggleButton3"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton23"
+                    android:id="@+id/toggleButtonIngles"
                     style="@style/gameoptionsbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,16 +70,15 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton17"
+                    android:id="@+id/toggleButtonGallego"
                     style="@style/gameoptionsbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/togglebutton"
-                    android:checked="true"
-                    android:text="@string/chooseLanguage_op1"
-                    android:textOff="@string/chooseLanguage_op1"
-                    android:textOn="@string/chooseLanguage_op1"
+                    android:text="@string/chooseLanguage_op3"
+                    android:textOff="@string/chooseLanguage_op3"
+                    android:textOn="@string/chooseLanguage_op3"
                     app:layout_constraintEnd_toStartOf="@+id/toggleButton3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -105,13 +104,12 @@
                 android:orientation="horizontal">
 
                 <ToggleButton
-                    android:id="@+id/toggleButton24"
+                    android:id="@+id/toggleButtonNormal"
                     style="@style/gameoptionsbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/togglebutton"
-                    android:checked="true"
                     android:text="@string/chooseMode_op1"
                     android:textOff="@string/chooseMode_op1"
                     android:textOn="@string/chooseMode_op1"
@@ -121,7 +119,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton25"
+                    android:id="@+id/toggleButtonContrarreloj"
                     style="@style/gameoptionsbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,7 +152,7 @@
                 android:orientation="horizontal">
 
                 <ToggleButton
-                    android:id="@+id/toggleButton26"
+                    android:id="@+id/toggleButtonNIntentos3"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -167,7 +165,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton27"
+                    android:id="@+id/toggleButtonNIntentos4"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -181,13 +179,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton28"
+                    android:id="@+id/toggleButtonNIntentos5"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:background="@drawable/togglebutton"
-                    android:checked="true"
                     android:text="@string/chooseTries_op3"
                     android:textOff="@string/chooseTries_op3"
                     android:textOn="@string/chooseTries_op3"
@@ -196,7 +193,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton29"
+                    android:id="@+id/toggleButtonNIntentos6"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -210,7 +207,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton30"
+                    android:id="@+id/toggleButtonNIntentos7"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -242,7 +239,7 @@
                 android:orientation="horizontal">
 
                 <ToggleButton
-                    android:id="@+id/toggleButton31"
+                    android:id="@+id/toggleButtonLPalabra3"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -255,7 +252,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton32"
+                    android:id="@+id/toggleButtonLPalabra4"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -269,13 +266,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton33"
+                    android:id="@+id/toggleButtonLPalabra5"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:background="@drawable/togglebutton"
-                    android:checked="true"
                     android:text="@string/chooseTries_op3"
                     android:textOff="@string/chooseTries_op3"
                     android:textOn="@string/chooseTries_op3"
@@ -284,7 +280,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton34"
+                    android:id="@+id/toggleButtonLPalabra6"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -298,7 +294,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton35"
+                    android:id="@+id/toggleButtonLPalabra7"
                     style="@style/gameoptionsbutton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
