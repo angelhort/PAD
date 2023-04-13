@@ -58,4 +58,19 @@
     <string name="mode">Modo</string>
     <string name="tries">Intentos</string>
 
+    <!-- How to play activities -->
+    <string name="ready">¿Estás listo?</string>
+    <string name="how_to_play">Cómo jugar</string>
+    <string name="explanation">Cada vez que introduces una palabra sus letras se pueden teñir de tres colores:</string>
+    <string name="letter_ok">La letra aparece y está en la posición correcta</string>
+    <string name="letter_almost_ok">La letra aparece, pero en otra posición</string>
+    <string name="letter_not_ok">La letra no aparece en la palabra</string>
+    <string name="slide">Desliza para continuar</string>
+    <string name="explanation2">Introducimos una palabra</string>
+    <string name="example_word">Torre</string>
+    <string name="explanation3">Sus letras se tiñen de los colores según corresponda</string>
+    <string name="example_word2">Gatos</string>
+    <string name="example_word3">Datos</string>
+    <string name="explanation4">La solución era DATOS</string>
+
 </resources>
