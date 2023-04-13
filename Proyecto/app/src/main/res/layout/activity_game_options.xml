@@ -64,6 +64,7 @@
                     android:background="@drawable/togglebutton"
                     android:text="@string/chooseLanguage_op2"
                     android:textOff="@string/chooseLanguage_op2"
+                    android:textOn="@string/chooseLanguage_op2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
