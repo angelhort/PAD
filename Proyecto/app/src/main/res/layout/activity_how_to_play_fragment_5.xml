@@ -14,7 +14,7 @@
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="1dp"
 
-        android:text="¿Cómo jugar?"
+        android:text="@string/how_to_play"
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -226,7 +226,7 @@
         android:layout_marginTop="27dp"
         android:layout_marginEnd="91dp"
         android:gravity="center"
-        android:text="La solución era DATOS"
+        android:text="@string/explanation4"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"

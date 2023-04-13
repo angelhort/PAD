@@ -207,7 +207,7 @@
         android:layout_width="342dp"
         android:layout_height="118dp"
         android:gravity="center"
-        android:text="La solución era DATOS"
+        android:text="@string/explanation4"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
