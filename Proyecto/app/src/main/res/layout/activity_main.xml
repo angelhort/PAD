@@ -105,7 +105,6 @@
         android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pacifico"
         android:text="@string/home_title_2"
         android:textAppearance="@style/homeTitle"
         android:textColor="#FEFEFE"

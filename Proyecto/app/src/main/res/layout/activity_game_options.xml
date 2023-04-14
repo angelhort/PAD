@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_dark">
 
-
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"

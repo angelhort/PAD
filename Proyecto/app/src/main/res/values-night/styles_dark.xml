@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="centered" >
+    <style name="base_style">
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="centered" parent="base_style">
         <item name="android:textAlignment">center</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -18,7 +23,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginLeft">10sp</item>
     </style>
-    <style name="heading_gameoptions">
+    <style name="heading_gameoptions" parent="base_style">
         <item name="android:textSize">20sp</item>
         <item name="android:maxWidth">10sp</item>
         <item name="android:layout_height">match_parent</item>
@@ -30,13 +35,13 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="switchText">
+    <style name="switchText" parent="base_style">
         <item name="android:textSize">16sp</item>
         <item name="android:gravity">center</item>
     </style>
 
     <!-- UI Elements style -->
-    <style name="gameoptionsbutton">
+    <style name="gameoptionsbutton" parent="base_style">
         <item name="android:textSize">16sp</item>
         <item name="android:layout_marginLeft">10sp</item>
         <item name="android:layout_marginRight">10sp</item>
@@ -45,7 +50,7 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="configButton">
+    <style name="configButton" parent="base_style">
         <item name="android:textSize">16sp</item>
         <item name="android:layout_marginLeft">10sp</item>
         <item name="android:layout_marginRight">10sp</item>

@@ -1,2 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">SacaPalabra</string>
+
+    <!-- Main activity -->
+    <string name="home_title_1">Saca</string>
+    <string name="home_title_2">Palabra</string>
+
+    <!-- Game options activity -->
+    <string name="gameoptionstitle">Modo</string>
+    <string name="chooseLanguage">Idioma</string>
+    <string name="chooseLanguage_op1">Spanish</string>
+    <string name="chooseLanguage_op2">English</string>
+    <string name="chooseLanguage_op3">Gallego</string>
+    <string name="chooseMode">Modo</string>
+    <string name="chooseMode_op1">Normal</string>
+    <string name="chooseMode_op2">Contrarreloj</string>
+    <string name="chooseMode_op3">Acentos</string>
+    <string name="chooseTries">Número de intentos</string>
+    <string name="chooseLenght">Longitud de la palabra</string>
+    <string name="chooseTries_op1">3</string>
+    <string name="chooseTries_op2">4</string>
+    <string name="chooseTries_op3">5</string>
+    <string name="chooseTries_op4">6</string>
+    <string name="chooseTries_op5">7</string>
+    <string name="play">Jugar</string>
+
+    <!-- How to play activity -->
+    <string name="howtoplay">¿Cómo jugar?</string>
+
+    <!-- Configuration activity -->
+    <string name="config">Configuración</string>
+    <string name="config_language">Idioma de la interfaz</string>
+    <string name="config_language_op1">Spanish</string>
+    <string name="config_language_op2">English</string>
+    <string name="config_mode">Modo daltónico</string>
+    <string name="config_mode_op1">Sí</string>
+    <string name="config_mode_op2">No</string>
+    <string name="config_font">Tamaño de la fuente</string>
+    <string name="config_font_op1">12</string>
+    <string name="config_font_op2">14</string>
+    <string name="config_font_op3">16</string>
+    <string name="config_font_op4">18</string>
+    <string name="config_font_op5">20</string>
+    <string name="config_theme">Tema de la interfaz</string>
+    <string name="config_theme_op1">Noche</string>
+    <string name="config_theme_op2">Día</string>
+    <string name="config_confirm">Confirmar</string>
+
+    <!-- History activity -->
+    <string name="statistics">Estadísticas</string>
+    <string name="games">Partidas</string>
+    <string name="wins">% Victorias</string>
+    <string name="currentStreak">Racha de victorias actual</string>
+    <string name="bestStreak">Mejor racha de victorias</string>
+    <string name="history">Historial</string>
+    <string name="word">Palabra</string>
+    <string name="language">Idioma</string>
+    <string name="mode">Modo</string>
+    <string name="tries">Intentos</string>
+
+    <!-- How to play activities -->
+    <string name="ready">¿Estás listo?</string>
+    <string name="how_to_play">Cómo jugar</string>
+    <string name="explanation">Cada vez que introduces una palabra sus letras se pueden teñir de tres colores:</string>
+    <string name="letter_ok">La letra aparece y está en la posición correcta</string>
+    <string name="letter_almost_ok">La letra aparece, pero en otra posición</string>
+    <string name="letter_not_ok">La letra no aparece en la palabra</string>
+    <string name="slide">Desliza para continuar</string>
+    <string name="explanation2">Introducimos una palabra</string>
+    <string name="example_word">Torre</string>
+    <string name="explanation3">Sus letras se tiñen de los colores según corresponda</string>
+    <string name="example_word2">Gatos</string>
+    <string name="example_word3">Datos</string>
+    <string name="explanation4">La solución era DATOS</string>
+
+</resources>

@@ -7,75 +7,75 @@ import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
     public class GameOptionsActivity extends AppCompatActivity {
-        private ToggleButton bEspannol;
-        private ToggleButton bIngles;
+        private ToggleButton bSpanish;
+        private ToggleButton bEnglish;
         private ToggleButton bGallego;
 
         private ToggleButton bNormal;
         private ToggleButton bContrarreloj;
 
-        private ToggleButton bNIntentos3;
-        private ToggleButton bNIntentos4;
-        private ToggleButton bNIntentos5;
-        private ToggleButton bNIntentos6;
-        private ToggleButton bNIntentos7;
+        private ToggleButton bNTries3;
+        private ToggleButton bNTries4;
+        private ToggleButton bNTries5;
+        private ToggleButton bNTries6;
+        private ToggleButton bNTries7;
 
-        private ToggleButton bLPalabra3;
-        private ToggleButton bLPalabra4;
-        private ToggleButton bLPalabra5;
-        private ToggleButton bLPalabra6;
-        private ToggleButton bLPalabra7;
+        private ToggleButton bLWord3;
+        private ToggleButton bLWord4;
+        private ToggleButton bLWord5;
+        private ToggleButton bLWord6;
+        private ToggleButton bLWord7;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_game_options);
             addListeners();
 
-            bEspannol.setChecked(true);
+            bSpanish.setChecked(true);
             bNormal.setChecked(true);
-            bNIntentos5.setChecked(true);
-            bLPalabra5.setChecked(true);
+            bNTries5.setChecked(true);
+            bLWord5.setChecked(true);
         }
 
         private void addListeners(){
-            bEspannol = findViewById(R.id.toggleButtonEspannol);
-            bIngles = findViewById(R.id.toggleButtonIngles);
+            bSpanish = findViewById(R.id.toggleButtonEspannol);
+            bEnglish = findViewById(R.id.toggleButtonIngles);
             bGallego = findViewById(R.id.toggleButtonGallego);
 
             bNormal = findViewById(R.id.toggleButtonNormal);
             bContrarreloj = findViewById(R.id.toggleButtonContrarreloj);
 
-            bNIntentos3 = findViewById(R.id.toggleButtonNIntentos3);
-            bNIntentos4 = findViewById(R.id.toggleButtonNIntentos4);
-            bNIntentos5 = findViewById(R.id.toggleButtonNIntentos5);
-            bNIntentos6 = findViewById(R.id.toggleButtonNIntentos6);
-            bNIntentos7 = findViewById(R.id.toggleButtonNIntentos7);
+            bNTries3 = findViewById(R.id.toggleButtonNIntentos3);
+            bNTries4 = findViewById(R.id.toggleButtonNIntentos4);
+            bNTries5 = findViewById(R.id.toggleButtonNIntentos5);
+            bNTries6 = findViewById(R.id.toggleButtonNIntentos6);
+            bNTries7 = findViewById(R.id.toggleButtonNIntentos7);
 
-            bLPalabra3 = findViewById(R.id.toggleButtonLPalabra3);
-            bLPalabra4 = findViewById(R.id.toggleButtonLPalabra4);
-            bLPalabra5 = findViewById(R.id.toggleButtonLPalabra5);
-            bLPalabra6 = findViewById(R.id.toggleButtonLPalabra6);
-            bLPalabra7 = findViewById(R.id.toggleButtonLPalabra7);
+            bLWord3 = findViewById(R.id.toggleButtonLPalabra3);
+            bLWord4 = findViewById(R.id.toggleButtonLPalabra4);
+            bLWord5 = findViewById(R.id.toggleButtonLPalabra5);
+            bLWord6 = findViewById(R.id.toggleButtonLPalabra6);
+            bLWord7 = findViewById(R.id.toggleButtonLPalabra7);
 
             // Add action listeners to toggle buttons
             bGallego.setOnCheckedChangeListener(toggleButtonListener);
-            bIngles.setOnCheckedChangeListener(toggleButtonListener);
-            bEspannol.setOnCheckedChangeListener(toggleButtonListener);
+            bEnglish.setOnCheckedChangeListener(toggleButtonListener);
+            bSpanish.setOnCheckedChangeListener(toggleButtonListener);
 
             bNormal.setOnCheckedChangeListener(toggleButtonListener);
             bContrarreloj.setOnCheckedChangeListener(toggleButtonListener);
 
-            bNIntentos3.setOnCheckedChangeListener(toggleButtonListener);
-            bNIntentos4.setOnCheckedChangeListener(toggleButtonListener);
-            bNIntentos5.setOnCheckedChangeListener(toggleButtonListener);
-            bNIntentos6.setOnCheckedChangeListener(toggleButtonListener);
-            bNIntentos7.setOnCheckedChangeListener(toggleButtonListener);
+            bNTries3.setOnCheckedChangeListener(toggleButtonListener);
+            bNTries4.setOnCheckedChangeListener(toggleButtonListener);
+            bNTries5.setOnCheckedChangeListener(toggleButtonListener);
+            bNTries6.setOnCheckedChangeListener(toggleButtonListener);
+            bNTries7.setOnCheckedChangeListener(toggleButtonListener);
 
-            bLPalabra3.setOnCheckedChangeListener(toggleButtonListener);
-            bLPalabra4.setOnCheckedChangeListener(toggleButtonListener);
-            bLPalabra5.setOnCheckedChangeListener(toggleButtonListener);
-            bLPalabra6.setOnCheckedChangeListener(toggleButtonListener);
-            bLPalabra7.setOnCheckedChangeListener(toggleButtonListener);
+            bLWord3.setOnCheckedChangeListener(toggleButtonListener);
+            bLWord4.setOnCheckedChangeListener(toggleButtonListener);
+            bLWord5.setOnCheckedChangeListener(toggleButtonListener);
+            bLWord6.setOnCheckedChangeListener(toggleButtonListener);
+            bLWord7.setOnCheckedChangeListener(toggleButtonListener);
         }
 
         CompoundButton.OnCheckedChangeListener toggleButtonListener = new CompoundButton.OnCheckedChangeListener() {
@@ -85,16 +85,16 @@ import android.widget.ToggleButton;
                     // Uncheck other toggle buttons in the same category
                     switch (buttonView.getId()) {
                         case R.id.toggleButtonGallego:
-                            bIngles.setChecked(false);
-                            bEspannol.setChecked(false);
+                            bEnglish.setChecked(false);
+                            bSpanish.setChecked(false);
                             break;
                         case R.id.toggleButtonIngles:
                             bGallego.setChecked(false);
-                            bEspannol.setChecked(false);
+                            bSpanish.setChecked(false);
                             break;
                         case R.id.toggleButtonEspannol:
                             bGallego.setChecked(false);
-                            bIngles.setChecked(false);
+                            bEnglish.setChecked(false);
                             break;
                         case R.id.toggleButtonNormal:
                             bContrarreloj.setChecked(false);
@@ -141,65 +141,65 @@ import android.widget.ToggleButton;
         private void uncheckOtherToggleButtonsInSameCategory(int checkedButtonId) {
             switch (checkedButtonId) {
                 case R.id.toggleButtonNIntentos3:
-                    bNIntentos4.setChecked(false);
-                    bNIntentos5.setChecked(false);
-                    bNIntentos6.setChecked(false);
-                    bNIntentos7.setChecked(false);
+                    bNTries4.setChecked(false);
+                    bNTries5.setChecked(false);
+                    bNTries6.setChecked(false);
+                    bNTries7.setChecked(false);
                     break;
                 case R.id.toggleButtonNIntentos4:
-                    bNIntentos3.setChecked(false);
-                    bNIntentos5.setChecked(false);
-                    bNIntentos6.setChecked(false);
-                    bNIntentos7.setChecked(false);
+                    bNTries3.setChecked(false);
+                    bNTries5.setChecked(false);
+                    bNTries6.setChecked(false);
+                    bNTries7.setChecked(false);
                     break;
                 case R.id.toggleButtonNIntentos5:
-                    bNIntentos3.setChecked(false);
-                    bNIntentos4.setChecked(false);
-                    bNIntentos6.setChecked(false);
-                    bNIntentos7.setChecked(false);
+                    bNTries3.setChecked(false);
+                    bNTries4.setChecked(false);
+                    bNTries6.setChecked(false);
+                    bNTries7.setChecked(false);
                     break;
                 case R.id.toggleButtonNIntentos6:
-                    bNIntentos3.setChecked(false);
-                    bNIntentos4.setChecked(false);
-                    bNIntentos5.setChecked(false);
-                    bNIntentos7.setChecked(false);
+                    bNTries3.setChecked(false);
+                    bNTries4.setChecked(false);
+                    bNTries5.setChecked(false);
+                    bNTries7.setChecked(false);
                     break;
                 case R.id.toggleButtonNIntentos7:
-                    bNIntentos3.setChecked(false);
-                    bNIntentos4.setChecked(false);
-                    bNIntentos5.setChecked(false);
-                    bNIntentos6.setChecked(false);
+                    bNTries3.setChecked(false);
+                    bNTries4.setChecked(false);
+                    bNTries5.setChecked(false);
+                    bNTries6.setChecked(false);
                     break;
 
                 case R.id.toggleButtonLPalabra3:
-                    bLPalabra4.setChecked(false);
-                    bLPalabra5.setChecked(false);
-                    bLPalabra6.setChecked(false);
-                    bLPalabra7.setChecked(false);
+                    bLWord4.setChecked(false);
+                    bLWord5.setChecked(false);
+                    bLWord6.setChecked(false);
+                    bLWord7.setChecked(false);
                     break;
                 case R.id.toggleButtonLPalabra4:
-                    bLPalabra3.setChecked(false);
-                    bLPalabra5.setChecked(false);
-                    bLPalabra6.setChecked(false);
-                    bLPalabra7.setChecked(false);
+                    bLWord3.setChecked(false);
+                    bLWord5.setChecked(false);
+                    bLWord6.setChecked(false);
+                    bLWord7.setChecked(false);
                     break;
                 case R.id.toggleButtonLPalabra5:
-                    bLPalabra3.setChecked(false);
-                    bLPalabra4.setChecked(false);
-                    bLPalabra6.setChecked(false);
-                    bLPalabra7.setChecked(false);
+                    bLWord3.setChecked(false);
+                    bLWord4.setChecked(false);
+                    bLWord6.setChecked(false);
+                    bLWord7.setChecked(false);
                     break;
                 case R.id.toggleButtonLPalabra6:
-                    bLPalabra3.setChecked(false);
-                    bLPalabra4.setChecked(false);
-                    bLPalabra5.setChecked(false);
-                    bLPalabra7.setChecked(false);
+                    bLWord3.setChecked(false);
+                    bLWord4.setChecked(false);
+                    bLWord5.setChecked(false);
+                    bLWord7.setChecked(false);
                     break;
                 case R.id.toggleButtonLPalabra7:
-                    bLPalabra3.setChecked(false);
-                    bLPalabra4.setChecked(false);
-                    bLPalabra5.setChecked(false);
-                    bLPalabra6.setChecked(false);
+                    bLWord3.setChecked(false);
+                    bLWord4.setChecked(false);
+                    bLWord5.setChecked(false);
+                    bLWord6.setChecked(false);
                     break;
             }
         }
