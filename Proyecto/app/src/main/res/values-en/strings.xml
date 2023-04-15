@@ -6,71 +6,75 @@
     <string name="home_title_2">Palabra</string>
 
     <!-- Game options activity -->
-    <string name="gameoptionstitle">Modo</string>
-    <string name="chooseLanguage">Idioma</string>
+    <string name="gameoptionstitle">Mode</string>
+    <string name="chooseLanguage">Language</string>
     <string name="chooseLanguage_op1">Spanish</string>
     <string name="chooseLanguage_op2">English</string>
-    <string name="chooseLanguage_op3">Gallego</string>
-    <string name="chooseMode">Modo</string>
+    <string name="chooseLanguage_op3">Galician</string>
+    <string name="chooseMode">Mode</string>
     <string name="chooseMode_op1">Normal</string>
-    <string name="chooseMode_op2">Contrarreloj</string>
-    <string name="chooseMode_op3">Acentos</string>
-    <string name="chooseTries">Número de intentos</string>
-    <string name="chooseLenght">Longitud de la palabra</string>
+    <string name="chooseMode_op2">Time Trial</string>
+    <string name="chooseMode_op3">Accents</string>
+    <string name="chooseTries">Number of tries</string>
+    <string name="chooseLenght">Word lenght</string>
     <string name="chooseTries_op1">3</string>
     <string name="chooseTries_op2">4</string>
     <string name="chooseTries_op3">5</string>
     <string name="chooseTries_op4">6</string>
     <string name="chooseTries_op5">7</string>
-    <string name="play">Jugar</string>
+    <string name="play">Play</string>
 
     <!-- How to play activity -->
-    <string name="howtoplay">¿Cómo jugar?</string>
+    <string name="howtoplay">How to play?</string>
 
     <!-- Configuration activity -->
-    <string name="config">Configuración</string>
-    <string name="config_language">Idioma de la interfaz</string>
+    <string name="config">Configuration</string>
+    <string name="config_language">Interface language</string>
     <string name="config_language_op1">Spanish</string>
     <string name="config_language_op2">English</string>
-    <string name="config_mode">Modo daltónico</string>
-    <string name="config_mode_op1">Sí</string>
+    <string name="config_mode">Colour-blind mode</string>
+    <string name="config_mode_op1">Yes</string>
     <string name="config_mode_op2">No</string>
-    <string name="config_font">Tamaño de la fuente</string>
+    <string name="config_font">Font Size</string>
     <string name="config_font_op1">12</string>
     <string name="config_font_op2">14</string>
     <string name="config_font_op3">16</string>
     <string name="config_font_op4">18</string>
     <string name="config_font_op5">20</string>
-    <string name="config_theme">Tema de la interfaz</string>
-    <string name="config_theme_op1">Noche</string>
-    <string name="config_theme_op2">Día</string>
-    <string name="config_confirm">Confirmar</string>
+    <string name="config_theme">Interface theme</string>
+    <string name="config_theme_op1">Night</string>
+    <string name="config_theme_op2">Day</string>
+    <string name="config_confirm">Confirm</string>
 
     <!-- History activity -->
-    <string name="statistics">Estadísticas</string>
-    <string name="games">Partidas</string>
-    <string name="wins">% Victorias</string>
-    <string name="currentStreak">Racha de victorias actual</string>
-    <string name="bestStreak">Mejor racha de victorias</string>
-    <string name="history">Historial</string>
-    <string name="word">Palabra</string>
-    <string name="language">Idioma</string>
-    <string name="mode">Modo</string>
-    <string name="tries">Intentos</string>
+    <string name="statistics">Statistics</string>
+    <string name="games">Games</string>
+    <string name="wins">% Wins</string>
+    <string name="currentStreak">Actual win streak</string>
+    <string name="bestStreak">Best win streak</string>
+    <string name="history">History</string>
+    <string name="word">Word</string>
+    <string name="language">Language</string>
+    <string name="mode">Mode</string>
+    <string name="tries">Tries</string>
 
     <!-- How to play activities -->
-    <string name="ready">¿Estás listo?</string>
-    <string name="how_to_play">Cómo jugar</string>
-    <string name="explanation">Cada vez que introduces una palabra sus letras se pueden teñir de tres colores:</string>
-    <string name="letter_ok">La letra aparece y está en la posición correcta</string>
-    <string name="letter_almost_ok">La letra aparece, pero en otra posición</string>
-    <string name="letter_not_ok">La letra no aparece en la palabra</string>
-    <string name="slide">Desliza para continuar</string>
-    <string name="explanation2">Introducimos una palabra</string>
-    <string name="example_word">Torre</string>
-    <string name="explanation3">Sus letras se tiñen de los colores según corresponda</string>
-    <string name="example_word2">Gatos</string>
-    <string name="example_word3">Datos</string>
-    <string name="explanation4">La solución era DATOS</string>
+    <string name="ready">Are you ready?</string>
+    <string name="how_to_play">How to play</string>
+    <string name="explanation">Every time you introduce a word their letters can dye in three ways:</string>
+    <string name="letter_ok">The letter is contained and is in the correct position</string>
+    <string name="letter_almost_ok">The letter is contained, but it is not in the correct position</string>
+    <string name="letter_not_ok">The letter is not contained</string>
+    <string name="slide">Slide to continue</string>
+    <string name="explanation2">Submit a word</string>
+    <string name="example_word">Tower</string>
+    <string name="explanation3">Their letters will be dyed to the appropriate colors</string>
+    <string name="example_word2"></string>
+    <string name="example_word3"></string>
+    <string name="explanation4">The solution was </string>
+
+    <!-- Preferences -->>
+    <string name="pref_language1">Establecer el idioma de la interfaz en español</string>
+    <string name="pref_language2">Establecer el idioma de la interfaz en ingles</string>
 
 </resources>

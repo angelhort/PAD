@@ -94,7 +94,6 @@
         <item name="android:layout_height">60dp</item>
         <item name="android:text">" "</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/gray</item>
     </style>
 
@@ -106,7 +105,6 @@
         <item name="android:layout_height">60dp</item>
         <item name="android:text">" "</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/orange</item>
     </style>
 
@@ -118,7 +116,6 @@
         <item name="android:layout_height">60dp</item>
         <item name="android:text">" "</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/dark_green</item>
     </style>
 
