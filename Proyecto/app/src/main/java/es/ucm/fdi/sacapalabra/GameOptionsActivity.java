@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
@@ -53,12 +54,25 @@ public class GameOptionsActivity extends AppCompatActivity {
             Locale locale;
 
             // Tema
-            if (theme.equals("dark")) {
-                setTheme(R.style.Theme_Default);
-                layout.setBackgroundResource(R.drawable.bg_dark);
+            int rotacion = getWindowManager().getDefaultDisplay().getRotation();
+            if (rotacion == Surface.ROTATION_0 || rotacion == Surface.ROTATION_180) {
+                //...hacer lo que quiera con la pantalla vertical
+                if (theme.equals("dark")) {
+                    setTheme(R.style.Theme_Default);
+                    layout.setBackgroundResource(R.drawable.bg_dark);
+                } else {
+                    setTheme(R.style.Theme_White);
+                    layout.setBackgroundResource(R.drawable.bg_white);
+                }
             } else {
-                setTheme(R.style.Theme_White);
-                layout.setBackgroundResource(R.drawable.bg_white);
+                //...hacer lo que quiera con la pantalla horizontal
+                if (theme.equals("dark")) {
+                    setTheme(R.style.Theme_Default);
+                    layout.setBackgroundResource(R.drawable.bg_dark_h);
+                } else {
+                    setTheme(R.style.Theme_White);
+                    layout.setBackgroundResource(R.drawable.bg_white_h);
+                }
             }
 
             // Idioma

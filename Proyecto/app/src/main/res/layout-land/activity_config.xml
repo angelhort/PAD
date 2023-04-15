@@ -7,6 +7,7 @@
     android:background="@drawable/bg_dark_h"
     android:foregroundGravity="center"
     android:gravity="center"
+    android:id="@+id/config_layout"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,14 +28,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/idioma"
+                    android:id="@+id/config_text_language"
                     style="@style/heading2"
                     android:layout_width="121dp"
                     android:layout_weight="1"
                     android:text="@string/config_language" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton19"
+                    android:id="@+id/config_language_op1"
                     style="@style/configButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
                     android:textOn="@string/config_language_op1" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton20"
+                    android:id="@+id/config_language_op2"
                     style="@style/configButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,14 +66,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tema"
+                    android:id="@+id/config_text_theme"
                     style="@style/heading2"
                     android:layout_width="109dp"
                     android:layout_weight="1"
                     android:text="@string/config_theme" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton22"
+                    android:id="@+id/config_theme_op1"
                     style="@style/configButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,7 +85,7 @@
                     android:textOn="@string/config_theme_op1" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton21"
+                    android:id="@+id/config_theme_op2"
                     style="@style/configButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,14 +112,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/modoDaltonico"
+                    android:id="@+id/config_text_daltonism"
                     style="@style/heading2"
                     android:layout_width="20dp"
                     android:layout_weight="1"
                     android:text="@string/config_mode" />
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/config_switch_daltonism"
                     style="@style/switchButton"
                     android:layout_width="7dp"
                     android:layout_height="wrap_content"
@@ -134,14 +135,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tamanoFuente"
+                    android:id="@+id/config_text_fontsize"
                     style="@style/heading2"
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/config_font" />
 
                 <SeekBar
-                    android:id="@+id/seekBar"
+                    android:id="@+id/config_seekbar_fontsize"
                     style="@style/seekBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -153,7 +154,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button_confirm"
         style="@style/configButton"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
