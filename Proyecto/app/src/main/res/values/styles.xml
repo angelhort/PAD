@@ -82,7 +82,6 @@
     <style name="homeTitle">
         <item name="android:textSize">60sp</item>
         <item name="android:fontFamily">@font/pacifico</item>
-        <item name="android:textColor">@color/black</item>
     </style>
 
     <!-- Block letters style -->

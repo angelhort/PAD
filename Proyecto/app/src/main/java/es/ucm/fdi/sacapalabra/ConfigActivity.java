@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -34,27 +35,35 @@ public class ConfigActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+
+        // Recuperamos las preferencias
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
         String language = sharedPreferences.getString("language", "es");
         String theme = sharedPreferences.getString("theme", "dark");
+        Locale locale;
 
-        // Utilizar la preferencia en tu código
+        // Idioma
         if (language.equals("es")) {
+            locale = new Locale("es");
 
         } else {
-
+            locale = new Locale("en");
         }
 
-        // Utilizar la preferencia en tu código
-        if (theme.equals("dark")) {
+        Configuration configuration = getResources().getConfiguration();
+        configuration.setLocale(locale);
+        Context context = createConfigurationContext(configuration);
+        Resources resources = context.getResources();
 
+       // Tema
+        if (theme.equals("dark")) {
+            setTheme(R.style.Theme_Default);
         } else {
             setTheme(R.style.Theme_White);
         }
 
-        super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_White);
         setContentView(R.layout.activity_config);
 
         bSpanish = findViewById(R.id.config_language_op1);
@@ -67,7 +76,6 @@ public class ConfigActivity extends AppCompatActivity {
         bDarkTheme.setOnCheckedChangeListener(bDarkThemeListener);
         bWhiteTheme.setOnCheckedChangeListener(bWhiteThemeListener);
 
-        // Utilizar la preferencia en tu código
         if (language.equals("es")) {
             bEnglish.setChecked(false);
             bSpanish.setChecked(true);
@@ -80,7 +88,6 @@ public class ConfigActivity extends AppCompatActivity {
             bSpanish.setClickable(true);
         }
 
-        // Utilizar la preferencia en tu código
         if (theme.equals("dark")) {
             bWhiteTheme.setChecked(false);
             bDarkTheme.setChecked(true);
@@ -91,8 +98,6 @@ public class ConfigActivity extends AppCompatActivity {
             bDarkTheme.setChecked(false);
             bWhiteTheme.setClickable(false);
             bDarkTheme.setClickable(true);
-
-            setTheme(R.style.Theme_White);
         }
 
         if (savedInstanceState != null) {
@@ -117,22 +122,7 @@ public class ConfigActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
 
-        if(bSpanish.isChecked()) {
-            outState.putInt("language", 0);
-        } else {
-            outState.putInt("language", 1);
-        }
-        if(bDarkTheme.isChecked()) {
-            outState.putInt("theme", 0);
-        } else {
-            outState.putInt("theme", 1);
-        }
-
-    }
 
     // Listener boton de español
     CompoundButton.OnCheckedChangeListener bSpanishListener = new CompoundButton.OnCheckedChangeListener() {
@@ -142,11 +132,7 @@ public class ConfigActivity extends AppCompatActivity {
                 bEnglish.setClickable(true);
                 bSpanish.setClickable(false);
 
-                // Obtener una instancia del editor de SharedPreferences
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("language", "es");
-                editor.apply();
-                recreate();
+                sharedPreferences.edit().putString("language", "es").apply();
 
             }
         }
@@ -161,11 +147,7 @@ public class ConfigActivity extends AppCompatActivity {
                 bSpanish.setClickable(true);
                 bEnglish.setClickable(false);
 
-                // Obtener una instancia del editor de SharedPreferences
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("language", "en");
-                editor.apply();
-                recreate();
+                sharedPreferences.edit().putString("language", "en").apply();
 
             }
         }
@@ -179,11 +161,8 @@ public class ConfigActivity extends AppCompatActivity {
                 bWhiteTheme.setClickable(true);
                 bDarkTheme.setClickable(false);
 
-                // Obtener una instancia del editor de SharedPreferences
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("theme", "dark");
-                editor.apply();
-                recreate();
+
+                sharedPreferences.edit().putString("theme", "dark").apply();
 
             }
         }
@@ -197,10 +176,9 @@ public class ConfigActivity extends AppCompatActivity {
                 bDarkTheme.setClickable(true);
                 bWhiteTheme.setClickable(false);
 
-                sharedPreferences.edit().putString("theme", "white");
-                sharedPreferences.edit().commit();
-                recreate();
-
+                sharedPreferences.edit().putString("theme", "white").apply();
+                // recreate();
+                Log.d("Config","recreate");
             }
         }
     };

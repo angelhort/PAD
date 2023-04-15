@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_dark"
     tools:context=".ConfigActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/config_layout">
 
     <TextView
         android:id="@+id/config_text_title"
