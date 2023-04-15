@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,15 +29,18 @@ public class ConfigActivity extends AppCompatActivity {
     private ToggleButton bWhiteTheme;
 
     private Button confirm_button;
+
     private Switch dswitch;
     private SeekBar fontBar;
 
     private SharedPreferences sharedPreferences;
+    private View layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_config);
 
         // Recuperamos las preferencias
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -43,19 +48,36 @@ public class ConfigActivity extends AppCompatActivity {
         String language = sharedPreferences.getString("language", "es");
         String theme = sharedPreferences.getString("theme", "dark");
         Locale locale;
+        layout = findViewById(R.id.config_layout);
+
+        // Tema
+        if (theme.equals("dark")) {
+            setTheme(R.style.Theme_Default);
+            layout.setBackgroundResource(R.drawable.bg_dark);
+        } else {
+            setTheme(R.style.Theme_White);
+            layout.setBackgroundResource(R.drawable.bg_white);
+        }
 
         // Idioma
         if (language.equals("es")) {
             locale = new Locale("es");
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = locale;
+            res.updateConfiguration(conf, dm);
+            Log.d("miaaaau","recreate");
 
         } else {
             locale = new Locale("en");
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = locale;
+            res.updateConfiguration(conf, dm);
+            Log.d("miau","recreate");
         }
-
-        Configuration configuration = getResources().getConfiguration();
-        configuration.setLocale(locale);
-        Context context = createConfigurationContext(configuration);
-        Resources resources = context.getResources();
 
        // Tema
         if (theme.equals("dark")) {
@@ -63,8 +85,6 @@ public class ConfigActivity extends AppCompatActivity {
         } else {
             setTheme(R.style.Theme_White);
         }
-
-        setContentView(R.layout.activity_config);
 
         bSpanish = findViewById(R.id.config_language_op1);
         bEnglish = findViewById(R.id.config_language_op2);
@@ -75,6 +95,8 @@ public class ConfigActivity extends AppCompatActivity {
         bEnglish.setOnCheckedChangeListener(bEnglishListener);
         bDarkTheme.setOnCheckedChangeListener(bDarkThemeListener);
         bWhiteTheme.setOnCheckedChangeListener(bWhiteThemeListener);
+
+        confirm_button = findViewById(R.id.button_confirm);
 
         if (language.equals("es")) {
             bEnglish.setChecked(false);
@@ -120,20 +142,28 @@ public class ConfigActivity extends AppCompatActivity {
                     break;
             }
         }
+
+        confirm_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
-
 
     // Listener boton de español
     CompoundButton.OnCheckedChangeListener bSpanishListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
+
                 bEnglish.setChecked(false);
                 bEnglish.setClickable(true);
                 bSpanish.setClickable(false);
 
                 sharedPreferences.edit().putString("language", "es").apply();
-
+                //recreate();
+                Log.d("pito","recreate");
             }
         }
     };
@@ -148,7 +178,8 @@ public class ConfigActivity extends AppCompatActivity {
                 bEnglish.setClickable(false);
 
                 sharedPreferences.edit().putString("language", "en").apply();
-
+                //recreate();
+                Log.d("pene","recreate");
             }
         }
     };
@@ -157,13 +188,14 @@ public class ConfigActivity extends AppCompatActivity {
     CompoundButton.OnCheckedChangeListener bDarkThemeListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
+
                 bWhiteTheme.setChecked(false);
                 bWhiteTheme.setClickable(true);
                 bDarkTheme.setClickable(false);
 
 
                 sharedPreferences.edit().putString("theme", "dark").apply();
-
+                //recreate();
             }
         }
     };
@@ -172,15 +204,15 @@ public class ConfigActivity extends AppCompatActivity {
     CompoundButton.OnCheckedChangeListener bWhiteThemeListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
+
                 bDarkTheme.setChecked(false);
                 bDarkTheme.setClickable(true);
                 bWhiteTheme.setClickable(false);
 
                 sharedPreferences.edit().putString("theme", "white").apply();
-                // recreate();
+                //recreate();
                 Log.d("Config","recreate");
             }
         }
     };
-
 }

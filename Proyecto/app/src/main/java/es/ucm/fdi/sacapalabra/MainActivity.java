@@ -9,6 +9,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
         String theme = sharedPreferences.getString("theme", "dark");
+        String language = sharedPreferences.getString("language", "es");
+        Locale locale;
 
         // Tema
         if (theme.equals("dark")) {
@@ -43,6 +47,26 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setTheme(R.style.Theme_White);
             layout.setBackgroundResource(R.drawable.bg_white);
+        }
+
+        // Idioma
+        if (language.equals("es")) {
+            locale = new Locale("es");
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = locale;
+            res.updateConfiguration(conf, dm);
+            Log.d("miaaaau","recreate");
+
+        } else {
+            locale = new Locale("en");
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = locale;
+            res.updateConfiguration(conf, dm);
+            Log.d("miau","recreate");
         }
 
         button_info = findViewById(R.id.button4);

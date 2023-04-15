@@ -139,7 +139,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/config_button_confirm"
+            android:id="@+id/button_confirm"
             style="@style/configButton"
             android:layout_width="148dp"
             android:layout_height="wrap_content"
