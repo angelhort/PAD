@@ -4,22 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_dark"
     android:id="@+id/main_layout"
     tools:context=".MainActivity">
 
     <!-- Boton de CONFIGURACION -->
     <Button
         android:id="@+id/button"
+        style="@style/homeButton"
         android:layout_width="61dp"
         android:layout_height="61dp"
         android:layout_marginStart="338dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="658dp"
-        android:background="@drawable/roundbutton"
-        android:gravity="center"
-        android:textAlignment="center"
         app:icon="@drawable/settings"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
@@ -31,14 +28,11 @@
     <!-- Boton de JUGAR -->
     <Button
         android:id="@+id/button2"
+        style="@style/homeButton"
         android:layout_width="173dp"
         android:layout_height="173dp"
         android:layout_marginTop="502dp"
         android:layout_marginBottom="56dp"
-        android:background="@drawable/roundbutton"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:tint="@android:color/white"
         app:icon="@drawable/ic_baseline_play_arrow"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
@@ -47,12 +41,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        />
+        app:layout_constraintVertical_bias="1.0" />
 
     <!-- Boton de HISTORIAL -->
     <Button
         android:id="@+id/button3"
+        style="@style/homeButton"
         android:layout_width="95dp"
         android:layout_height="95dp"
         android:layout_marginBottom="17dp"
@@ -72,6 +66,7 @@
     <!-- Boton de INSTRUCCIONES-->
     <Button
         android:id="@+id/button4"
+        style="@style/homeButton"
         android:layout_width="79dp"
         android:layout_height="79dp"
         android:layout_marginEnd="88dp"
@@ -88,12 +83,11 @@
     <!-- TITULO APP 1/2 -->
     <TextView
         android:id="@+id/textView33"
+        style="@style/homeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="false"
         android:text="@string/home_title_1"
-        android:textAppearance="@style/homeTitle"
-        android:textColor="#FDFDFD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.359"
@@ -104,11 +98,10 @@
     <!-- TITULO APP 2/2 -->
     <TextView
         android:id="@+id/textView34"
+        style="@style/homeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_title_2"
-        android:textAppearance="@style/homeTitle"
-        android:textColor="#FEFEFE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.65"

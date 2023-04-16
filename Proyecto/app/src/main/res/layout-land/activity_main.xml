@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_dark"
     android:id="@+id/main_layout"
     tools:context=".MainActivity">
 
@@ -84,12 +83,10 @@
 
     <TextView
         android:id="@+id/textView34"
+        style="@style/homeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pacifico"
         android:text="@string/home_title_2"
-        android:textAppearance="@style/homeTitle"
-        android:textColor="#FEFEFE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.65"
@@ -99,12 +96,11 @@
 
     <TextView
         android:id="@+id/textView33"
+        style="@style/homeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="false"
         android:text="@string/home_title_1"
-        android:textAppearance="@style/homeTitle"
-        android:textColor="#FDFDFD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.359"

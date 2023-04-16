@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Helpful -->
     <style name="centered" >
         <item name="android:textAlignment">center</item>
         <item name="android:gravity">center_vertical</item>
@@ -35,7 +36,19 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <!-- UI Elements style -->
+    <!-- UI Main elements style -->
+    <style name="homeTitle">
+        <item name="android:textSize">60sp</item>
+        <item name="android:fontFamily">@font/pacifico</item>
+    </style>
+
+    <style name="homeButton">
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">"@drawable/roundbutton"</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- UI Config elements style -->
     <style name="gameoptionsbutton">
         <item name="android:textSize">16sp</item>
         <item name="android:layout_marginLeft">10sp</item>
@@ -76,12 +89,6 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_width">wrap_content</item>
-    </style>
-
-    <!-- Home title style -->
-    <style name="homeTitle">
-        <item name="android:textSize">60sp</item>
-        <item name="android:fontFamily">@font/pacifico</item>
     </style>
 
     <!-- Block letters style -->

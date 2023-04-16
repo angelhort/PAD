@@ -34,26 +34,12 @@ public class HistoryActivity extends AppCompatActivity {
         String language = sharedPreferences.getString("language", "es");
         Locale locale;
 
-        // Tema
-        int rotacion = getWindowManager().getDefaultDisplay().getRotation();
-        if (rotacion == Surface.ROTATION_0 || rotacion == Surface.ROTATION_180) {
-            //...hacer lo que quiera con la pantalla vertical
-            if (theme.equals("dark")) {
-                setTheme(R.style.Theme_Default);
-                layout.setBackgroundResource(R.drawable.bg_dark);
-            } else {
-                setTheme(R.style.Theme_White);
-                layout.setBackgroundResource(R.drawable.bg_white);
-            }
+        if (theme.equals("dark")) {
+            setTheme(R.style.Theme_Default);
+            layout.setBackgroundResource(R.drawable.bg_dark);
         } else {
-            //...hacer lo que quiera con la pantalla horizontal
-            if (theme.equals("dark")) {
-                setTheme(R.style.Theme_Default);
-                layout.setBackgroundResource(R.drawable.bg_dark_h);
-            } else {
-                setTheme(R.style.Theme_White);
-                layout.setBackgroundResource(R.drawable.bg_white_h);
-            }
+            setTheme(R.style.Theme_White);
+            layout.setBackgroundResource(R.drawable.bg_white);
         }
 
         // Idioma
@@ -64,7 +50,6 @@ public class HistoryActivity extends AppCompatActivity {
             Configuration conf = res.getConfiguration();
             conf.locale = locale;
             res.updateConfiguration(conf, dm);
-            Log.d("miaaaau","recreate");
 
         } else {
             locale = new Locale("en");
@@ -73,7 +58,6 @@ public class HistoryActivity extends AppCompatActivity {
             Configuration conf = res.getConfiguration();
             conf.locale = locale;
             res.updateConfiguration(conf, dm);
-            Log.d("miau","recreate");
         }
 
         ListView historial = findViewById(R.id.lvHistorialPartidas);
