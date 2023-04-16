@@ -91,5 +91,7 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
+    <!-- inGame activity -->
+    <string name="sacapalabra">SacaPalabra</string>
 
 </resources>

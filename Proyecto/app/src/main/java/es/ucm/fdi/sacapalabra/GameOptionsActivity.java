@@ -2,6 +2,7 @@ package es.ucm.fdi.sacapalabra;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -10,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
@@ -37,6 +39,8 @@ public class GameOptionsActivity extends AppCompatActivity {
 
         private View layout;
 
+        private Button bPlay;
+
         private SharedPreferences sharedPreferences;
 
         @Override
@@ -60,6 +64,24 @@ public class GameOptionsActivity extends AppCompatActivity {
             bNormal.setChecked(true);
             bNTries5.setChecked(true);
             bLWord5.setChecked(true);
+
+            // Add OnClickListener to bPlay button
+            bPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Create Intent to start InGameActivity
+                    Intent intent = new Intent(GameOptionsActivity.this, inGame.class);
+
+                    // Put selected data as extras in Intent
+                    intent.putExtra("idioma", getSelectedLanguage());
+                    intent.putExtra("modo", getSelectedMode());
+                    intent.putExtra("intentos", getSelectedNTries());
+                    intent.putExtra("longitud", getSelectedLWord());
+
+                    // Start InGameActivity with Intent
+                    startActivity(intent);
+                }
+            });
         }
 
         private void addListeners(){
@@ -82,6 +104,8 @@ public class GameOptionsActivity extends AppCompatActivity {
             bLWord6 = findViewById(R.id.toggleButtonLPalabra6);
             bLWord7 = findViewById(R.id.toggleButtonLPalabra7);
 
+            bPlay = findViewById(R.id.bPlay);
+
             // Add action listeners to toggle buttons
             bGallego.setOnCheckedChangeListener(toggleButtonListener);
             bEnglish.setOnCheckedChangeListener(toggleButtonListener);
@@ -101,6 +125,8 @@ public class GameOptionsActivity extends AppCompatActivity {
             bLWord5.setOnCheckedChangeListener(toggleButtonListener);
             bLWord6.setOnCheckedChangeListener(toggleButtonListener);
             bLWord7.setOnCheckedChangeListener(toggleButtonListener);
+
+
         }
 
         CompoundButton.OnCheckedChangeListener toggleButtonListener = new CompoundButton.OnCheckedChangeListener() {
@@ -228,4 +254,67 @@ public class GameOptionsActivity extends AppCompatActivity {
                     break;
             }
         }
+
+        private String getSelectedLanguage() {
+            if (bSpanish.isChecked()) {
+                return "es";
+            } else if (bEnglish.isChecked()) {
+                return "en";
+            } else if (bGallego.isChecked()) {
+                return "gl";
+            } else {
+                // Si no se ha seleccionado ningún idioma, devolvemos el idioma por defecto
+                return "es";
+            }
+        }
+
+        private String getSelectedMode() {
+            if (bNormal.isChecked()) {
+                return "normal";
+            } else if (bContrarreloj.isChecked()) {
+                return "contrarreloj";
+            } else {
+                // Si no se ha seleccionado ningún modo, devolvemos el modo por defecto
+                return "normal";
+            }
+        }
+
+        private int getSelectedNTries() {
+            if (bNTries3.isChecked()) {
+                return 3;
+            } else if (bNTries4.isChecked()) {
+                return 4;
+            } else if (bNTries5.isChecked()) {
+                return 5;
+            } else if (bNTries6.isChecked()) {
+                return 6;
+            } else if (bNTries7.isChecked()) {
+                return 7;
+            } else {
+                // Si no se ha seleccionado ningún número de intentos, devolvemos el número de intentos por defecto
+                return 5;
+            }
+        }
+
+        private int getSelectedLWord() {
+            if (bLWord3.isChecked()) {
+                return 3;
+            } else if (bLWord4.isChecked()) {
+                return 4;
+            } else if (bLWord5.isChecked()) {
+                return 5;
+            } else if (bLWord6.isChecked()) {
+                return 6;
+            } else if (bLWord7.isChecked()) {
+                return 7;
+            } else {
+                // Si no se ha seleccionado ninguna longitud de palabra, devolvemos la longitud de palabra por defecto
+                return 5;
+            }
+        }
+
+
+
     }
+
+    

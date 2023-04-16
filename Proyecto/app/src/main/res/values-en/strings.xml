@@ -73,5 +73,7 @@
     <string name="example_word3"></string>
     <string name="explanation4">The solution was </string>
 
+    <!-- inGame activity -->
+    <string name="sacapalabra">SacaPalabra</string>
 
 </resources>

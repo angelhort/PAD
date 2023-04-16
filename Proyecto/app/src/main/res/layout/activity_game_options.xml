@@ -308,7 +308,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/bPlay"
             style="@style/gameoptionsbutton"
             android:layout_width="178dp"
             android:layout_height="wrap_content"
