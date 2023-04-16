@@ -1,6 +1,8 @@
 package es.ucm.fdi.sacapalabra;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -51,6 +53,8 @@ public class ConfigActivity extends AppCompatActivity {
     View.OnClickListener confirmListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         }
     };
