@@ -71,6 +71,9 @@ private void createTextViewGrid(int rows, int cols, TextView[] myTextViews) {
     generalLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     generalLayout.setOrientation(LinearLayout.VERTICAL);
 
+    int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+    int marginSize = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+    int squareSize = (screenWidth - 2 * marginSize - (cols - 1) * 5) / cols;
 
     LinearLayout linearLayout;
     TextView textView;
@@ -79,17 +82,18 @@ private void createTextViewGrid(int rows, int cols, TextView[] myTextViews) {
     // Creamos los LinearLayouts horizontales y los TextViews dentro de ellos
     for (int i = 0; i < rows; i++) {
         linearLayout = new LinearLayout(this);
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(50, 50));
+        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        linearLayout.setGravity(Gravity.CENTER);
+        linearLayout.setWeightSum(cols);
 
         for (int j = 0; j < cols; j++) {
             textView = new TextView(this);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(60, 60, 1));
+            textView.setLayoutParams(new LinearLayout.LayoutParams(squareSize, squareSize, 1));
             textView.setGravity(Gravity.CENTER);
             textView.setBackground(getResources().getDrawable(R.drawable.textview_border));
             textView.setText(Character.toString((char)('a' + (i*cols)+j))); // Set the text of each TextView to a different letter
-            textView.setTextColor(Color.RED);
+            textView.setTextColor(Color.WHITE);
+            textView.setPadding(marginSize, marginSize, 0, 0);
             myTextViews[(i*cols)+j] = textView;
             linearLayout.addView(textView);
         }
