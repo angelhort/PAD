@@ -21,14 +21,11 @@ public class ConfigActivity extends AppCompatActivity {
 
     private ToggleButton bSpanish;
     private ToggleButton bEnglish;
-
     private ToggleButton bDarkTheme;
     private ToggleButton bWhiteTheme;
-
     private Button confirm_button;
 
     private Switch dswitch;
-    private SeekBar fontBar;
 
     private SharedPreferences sharedPreferences;
 
@@ -58,7 +55,6 @@ public class ConfigActivity extends AppCompatActivity {
             finish();
         }
     };
-
     // Listener boton de español
     CompoundButton.OnCheckedChangeListener bSpanishListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -69,12 +65,10 @@ public class ConfigActivity extends AppCompatActivity {
                 bSpanish.setClickable(false);
 
                 sharedPreferences.edit().putString("language", "es").apply();
-                setLanguage("es");
 
             }
         }
     };
-
     // Listener boton de ingles
     CompoundButton.OnCheckedChangeListener bEnglishListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -85,11 +79,9 @@ public class ConfigActivity extends AppCompatActivity {
                 bEnglish.setClickable(false);
 
                 sharedPreferences.edit().putString("language", "en").apply();
-                setLanguage("en");
             }
         }
     };
-
     // Listener boton de tema oscuro
     CompoundButton.OnCheckedChangeListener bDarkThemeListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -100,11 +92,9 @@ public class ConfigActivity extends AppCompatActivity {
                 bDarkTheme.setClickable(false);
 
                 sharedPreferences.edit().putString("theme", "dark").apply();
-                setTheme("dark");
             }
         }
     };
-
     // Listener boton de tema claro
     CompoundButton.OnCheckedChangeListener bWhiteThemeListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -115,7 +105,6 @@ public class ConfigActivity extends AppCompatActivity {
                 bWhiteTheme.setClickable(false);
 
                 sharedPreferences.edit().putString("theme", "white").apply();
-                setTheme("white");
             }
         }
     };
@@ -182,7 +171,6 @@ public class ConfigActivity extends AppCompatActivity {
             int languageSelected = savedInstanceState.getInt("language");
             int themeSelected = savedInstanceState.getInt("theme");
             int switchSelected = savedInstanceState.getInt("colourblind");
-            int fontSizeSelected = savedInstanceState.getInt("fontSize");
 
             switch (languageSelected) {
                 case 0:                     // Idioma en español

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="1dp"
+
+        android:text="@string/how_to_play"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="408dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="230dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <LinearLayout
+            android:layout_width="343dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView28"
+                style="@style/letrasOtroSitio"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="T" />
+
+            <TextView
+                android:id="@+id/textView20"
+                style="@style/letrasOtroSitio"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="O" />
+
+            <TextView
+                android:id="@+id/textView19"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="R" />
+
+            <TextView
+                android:id="@+id/textView18"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="R" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="E" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="343dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView29"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="G" />
+
+            <TextView
+                android:id="@+id/textView23"
+                style="@style/letrasOk"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="A" />
+
+            <TextView
+                android:id="@+id/textView22"
+                style="@style/letrasOk"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="T" />
+
+            <TextView
+                android:id="@+id/textView8"
+                style="@style/letrasOk"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="O" />
+
+            <TextView
+                android:id="@+id/textView21"
+                style="@style/letrasOk"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="S" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="343dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView30"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView26"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView25"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView24"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="343dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView31"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView14"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView15"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView16"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView17"
+                style="@style/letras"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="290dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="44dp"
+        android:gravity="center"
+        android:text="@string/explanation3"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="185dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="185dp"
+        android:layout_marginBottom="107dp"
+        android:text="@string/example_word3"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+</androidx.constraintlayout.widget.ConstraintLayout>
