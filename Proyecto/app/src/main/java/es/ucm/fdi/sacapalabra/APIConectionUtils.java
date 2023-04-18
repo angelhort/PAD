@@ -1,6 +1,7 @@
 package es.ucm.fdi.sacapalabra;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.Normalizer;
 
 public class APIConectionUtils {
 
@@ -39,33 +41,47 @@ public class APIConectionUtils {
         HttpURLConnection conn = null;
         String resultString = "";
 
-        try{
-            wordUrl = new URL(url);
-            conn = (HttpURLConnection) wordUrl.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
+        boolean hasAccents = true;
+        while (hasAccents) {
+            try{
+                wordUrl = new URL(url);
+                conn = (HttpURLConnection) wordUrl.openConnection();
+                conn.setRequestMethod("GET");
+                conn.connect();
 
-            int responseCode = conn.getResponseCode();
-            input = conn.getInputStream();
-            resultString = convertInputToString(input);
-        } catch (MalformedURLException e){
-            throw new RuntimeException(e);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+                int responseCode = conn.getResponseCode();
+                input = conn.getInputStream();
+                resultString = convertInputToString(input);
+                resultString = removeBracketsAndQuotes(resultString);
 
-        finally{
-            conn.disconnect();
-            if(input != null){
-                try{
-                    input.close();
-                } catch (IOException e){
-                    e.printStackTrace();
+                hasAccents = false;
+
+                for (int i = 0; i < resultString.length(); i++) {
+                    char c = resultString.charAt(i);
+                    if (c == 'ñ' || c == 'á' || c == 'é' || c == 'ó' || c == 'í' || c == 'ú') {
+                        System.out.println("Word contains accent or ñ: " + resultString);
+                        hasAccents = true;
+                    }
+                }
+
+                Log.i("api", hasAccents + resultString);
+            } catch (MalformedURLException e){
+                throw new RuntimeException(e);
+            } catch (IOException e){
+                throw new RuntimeException(e);
+            } finally{
+                conn.disconnect();
+                if(input != null){
+                    try{
+                        input.close();
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }
 
-        return removeBracketsAndQuotes(resultString);
+        return resultString;
     }
 
     private static String convertInputToString(InputStream input) throws IOException {
