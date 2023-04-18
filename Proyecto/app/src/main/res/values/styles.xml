@@ -92,6 +92,21 @@
     </style>
 
     <!-- Block letters style -->
+
+    <!-- Game -->
+    <style name="bloque_letra">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@drawable/textview_border</item>
+    </style>
+
+    <!-- HTP -->
     <style name="letras">
         <item name="android:layout_margin">4dp</item>
         <item name="android:textSize">24sp</item>

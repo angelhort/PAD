@@ -65,7 +65,7 @@ public class ConfigActivity extends AppCompatActivity {
                 bSpanish.setClickable(false);
 
                 sharedPreferences.edit().putString("language", "es").apply();
-
+                setLanguage("es");
             }
         }
     };
@@ -79,6 +79,7 @@ public class ConfigActivity extends AppCompatActivity {
                 bEnglish.setClickable(false);
 
                 sharedPreferences.edit().putString("language", "en").apply();
+                setLanguage("en");
             }
         }
     };
@@ -190,5 +191,4 @@ public class ConfigActivity extends AppCompatActivity {
             }
         }
     }
-
 }

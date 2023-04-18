@@ -21,7 +21,7 @@ public class WordLoader extends AsyncTaskLoader<String> {
     @Nullable
     @Override
     public String loadInBackground(){
-        return ConnectionUtils.getWord(this.length, this.language);
+        return APIConectionUtils.getWord(this.length, this.language);
     }
 
     @Override

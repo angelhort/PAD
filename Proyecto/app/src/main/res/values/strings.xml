@@ -93,5 +93,7 @@
 
     <!-- inGame activity -->
     <string name="sacapalabra">SacaPalabra</string>
+    <string name="inputText">Introduce una palabra</string>
+
 
 </resources>

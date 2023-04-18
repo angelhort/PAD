@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ConnectionUtils {
+public class APIConectionUtils {
 
     public static String getWord(String length, String language){
 

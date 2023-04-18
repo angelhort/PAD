@@ -178,7 +178,7 @@ public class GameOptionsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             // Create Intent to start InGameActivity
-            Intent intent = new Intent(GameOptionsActivity.this, inGame.class);
+            Intent intent = new Intent(GameOptionsActivity.this, inGameActivity.class);
 
             // Put selected data as extras in Intent
             intent.putExtra("idioma", getSelectedLanguage());
