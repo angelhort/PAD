@@ -83,6 +83,22 @@
         app:layout_constraintVertical_bias="0.708" />
 
     <!-- TITULO APP 1/2 -->
+
+    <!-- TITULO APP 2/2 -->
+
+    <TextView
+        android:id="@+id/textView34"
+        style="@style/homeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_title_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.597"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.24" />
+
     <TextView
         android:id="@+id/textView33"
         style="@style/homeTitle"
@@ -92,23 +108,9 @@
         android:text="@string/home_title_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
-
-    <!-- TITULO APP 2/2 -->
-    <TextView
-        android:id="@+id/textView34"
-        style="@style/homeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home_title_2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239" />
+        app:layout_constraintVertical_bias="0.145" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,4 +38,7 @@ public class Game {
     public int getLenght(){
         return lenght;
     }
+
+
+
 }

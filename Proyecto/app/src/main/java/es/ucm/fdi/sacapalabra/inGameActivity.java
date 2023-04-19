@@ -103,6 +103,11 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         generalLayout.setOrientation(LinearLayout.VERTICAL);
 
         title = new TextView(this);
+        LinearLayout.LayoutParams titleLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+        titleLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        titleLayoutParams.setMargins(0,50,0,0);
+        title.setLayoutParams(titleLayoutParams);
+
         title.setText(R.string.sacapalabra);
         title.setTextSize(48);
         title.setGravity(Gravity.CENTER);
@@ -112,18 +117,26 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         createBoard(game.getNtries(), game.getLenght(), myTextViews);
 
         inputText = new EditText(this);
-        inputText.setText(R.string.inputText);
+        LinearLayout.LayoutParams inputLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+        inputLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        inputLayoutParams.setMargins(0,50,0,0);
+        inputText.setLayoutParams(inputLayoutParams);
+        inputText.setHint(R.string.inputText);
+        inputText.setTextSize(28);
         inputText.setGravity(Gravity.CENTER);
         inputText.setTextColor(ContextCompat.getColor(this, R.color.white));
+        inputText.setHintTextColor(ContextCompat.getColor(this, R.color.theme_green));
 
         confirmButton = new Button(this);
         confirmButton.setBackgroundResource(R.drawable.roundbutton);
         confirmButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        confirmButton.setGravity(Gravity.CENTER_VERTICAL);
-        confirmButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_arrow_forward, 0, 0, 0);
+        confirmButton.setGravity(Gravity.CENTER);
+        confirmButton.setText(R.string.confirmWord);
+        confirmButton.setTextSize(20);
 
         LinearLayout.LayoutParams confirmButtonParams = (new LinearLayout.LayoutParams(240, 240, 1));
         confirmButtonParams.gravity = Gravity.CENTER_HORIZONTAL;
+        confirmButtonParams.setMargins(0,50,0,0);
         confirmButton.setLayoutParams(confirmButtonParams);
 
         generalLayout.addView(inputText);
@@ -134,25 +147,31 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
     private void createBoard(int rows, int cols, TextView[][] myTextViews) {
 
         // Layout para tablero
-
         LinearLayout boardLayout = new LinearLayout(this);
-        boardLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        LinearLayout.LayoutParams boardLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+
         boardLayout.setOrientation(LinearLayout.VERTICAL);
-        boardLayout.setPadding(100,100,100,100);
+        boardLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        boardLayoutParams.setMargins(0,50,0,50);
+
+        boardLayout.setLayoutParams(boardLayoutParams);
 
         // Creamos los LinearLayouts horizontales y los TextViews dentro de ellos
         LinearLayout linearLayout;
         TextView textView;
 
-        int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+        int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels - 30;       // 50 actua de margen
         int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-        int marginSize = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+        int marginSize = 3; // Grid margin
         int maxSquareSize = (screenWidth - 2 * marginSize - (cols - 1) * 5) / cols;
-        int squareSize = Math.min(Math.min(maxSquareSize, (screenHeight - 2 * marginSize - (rows - 1) * 5) / rows), 200);
+        int squareSize = Math.min(Math.min(maxSquareSize, (screenHeight - 2 * marginSize - (rows - 1) * 5) / rows), 150);
 
         for (int i = 0; i < rows; i++) {
             linearLayout = new LinearLayout(this);
-            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(squareSize*cols, ViewGroup.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams rowLayout = (new LinearLayout.LayoutParams(squareSize*cols, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+            rowLayout.gravity = Gravity.CENTER;
+
+            linearLayout.setLayoutParams(rowLayout);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             linearLayout.setWeightSum(cols);
 
@@ -164,7 +183,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
                 textView.setBackgroundResource(R.drawable.textview_border);
                 textView.setTextSize(24);
                 textView.setGravity(Gravity.CENTER);
-                textView.setTypeface(null, Typeface.BOLD);
+                textView.setTypeface(null, Typeface.BOLD);;
                 textView.setText(Character.toString((char)('a' + (i*cols)+j))); // Set the text of each TextView to a different letter
 
                 myTextViews[i][j] = textView;
