@@ -517,7 +517,6 @@ esteras
 esteros
 estibas
 estivas
-Estonia
 estonia
 estorbe
 estruja
@@ -1242,7 +1241,7 @@ velejar
 veletas
 venales
 venenos
-Ventura
+ventura
 veredas
 veremos
 verraco
