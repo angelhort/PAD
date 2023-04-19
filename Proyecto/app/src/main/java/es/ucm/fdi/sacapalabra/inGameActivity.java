@@ -59,7 +59,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         game = new Game(intent.getStringExtra("idioma"), intent.getStringExtra("modo"),intent.getIntExtra("intentos", 0),intent.getIntExtra("longitud", 0));
 
         // Check for internet connectivity
-        if (isNetworkAvailable()) {
+        if (isNetworkAvailable() && (game.getLanguage().equals("es") || game.getLanguage().equals("en"))) {
             Log.d("game", "hay internet");
             // Create wordLoaderCallbacks
             wordLoaderCallbacks = new WordLoaderCallbacks(this, this);
@@ -72,7 +72,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
             queryBundle.putString(WordLoaderCallbacks.LANGUAGE, game.getLanguage());
             LoaderManager.getInstance(this).restartLoader(WORD_LOADER_ID, queryBundle, wordLoaderCallbacks);
         } else {
-            Log.d("game", "no hay internet");
+            Log.d("game", "no hay internet o idioma es gal. idioma: "+game.getLanguage());
             // Load word from local file
             String fileName = game.getLanguage() + "_" + game.getLenght() + ".txt";
             List<String> words = new ArrayList<>();

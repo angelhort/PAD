@@ -18,7 +18,7 @@ public class APIConectionUtils {
     public static String getWord(String length, String language){
 
         final String API_URL_ES = "https://clientes.api.greenborn.com.ar/public-random-word?";
-        final String API_URL_EN = "";
+        final String API_URL_EN = "https://random-word-api.vercel.app/api?";
         Uri resultUri;
 
         if(language.equals("es")){
@@ -27,12 +27,11 @@ public class APIConectionUtils {
                     .appendQueryParameter("l", length)
                     .build();
         }else{
-            resultUri = Uri.parse(API_URL_ES).buildUpon()
-                    .appendQueryParameter("c", "1")
-                    .appendQueryParameter("l", length)
+            resultUri = Uri.parse(API_URL_EN).buildUpon()
+                    .appendQueryParameter("words", "1")
+                    .appendQueryParameter("length", length)
                     .build();
         }
-
 
         String url = resultUri.toString();
 

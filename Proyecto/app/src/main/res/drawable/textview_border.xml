@@ -5,5 +5,5 @@
         android:color="@color/black" />
     <corners
         android:radius="4dp" />
-    <solid android:color="@color/dark_grey"/>
+    <solid android:color="@color/grey"/>
 </shape>
