@@ -42,6 +42,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
     private TextView title;
     private EditText inputText;
     private Button confirmButton;
+    private TextView[][] myTextViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +94,20 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
                 e.printStackTrace();
             }
         }
+        myTextViews = new TextView[game.getNtries()][game.getLenght()];
         addViews();
-    }    
+
+        Button exampleButton = new Button(this);
+        exampleButton.setText("PULSA");
+        exampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myTextViews[0][0].setText("VA");
+            }
+        });
+        generalLayout.addView(exampleButton);
+
+    }
 
     private void addViews(){
 
@@ -113,8 +126,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         title.setGravity(Gravity.CENTER);
         generalLayout.addView(title);
 
-        TextView[][] myTextViews = new TextView[game.getNtries()][game.getLenght()];
-        createBoard(game.getNtries(), game.getLenght(), myTextViews);
+        createBoard(game.getNtries(), game.getLenght());
 
         inputText = new EditText(this);
         LinearLayout.LayoutParams inputLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
@@ -144,7 +156,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
 
     }
 
-    private void createBoard(int rows, int cols, TextView[][] myTextViews) {
+    private void createBoard(int rows, int cols) {
 
         // Layout para tablero
         LinearLayout boardLayout = new LinearLayout(this);
