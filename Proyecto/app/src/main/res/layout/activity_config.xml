@@ -19,7 +19,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="178dp"
+        android:layout_height="150dp"
         android:orientation="horizontal">
 
         <TextView
@@ -57,7 +57,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="149dp"
+        android:layout_height="150dp"
         android:orientation="horizontal">
 
         <TextView
@@ -93,36 +93,60 @@
 
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="163dp"
-            android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/config_text_daltonism"
-                style="@style/heading2"
-                android:layout_width="20dp"
-                android:layout_weight="1"
-                android:text="@string/config_mode" />
+        <TextView
+            android:id="@+id/config_text_daltonism"
+            style="@style/heading2"
+            android:layout_width="20dp"
+            android:layout_weight="1"
+            android:text="@string/config_mode" />
 
-            <Switch
-                android:id="@+id/config_switch_daltonism"
-                style="@style/switchButton"
-                android:layout_width="7dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:switchPadding="0dp" />
-
-        </LinearLayout>
-
-    <Button
-            android:id="@+id/button_confirm"
-            style="@style/configButton"
-            android:layout_width="148dp"
+        <Switch
+            android:id="@+id/config_switch_daltonism"
+            style="@style/switchButton"
+            android:layout_width="7dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/config_confirm"
-            android:textAlignment="center" />
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:switchPadding="0dp" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/config_text_daltonism2"
+            style="@style/heading2"
+            android:layout_width="7dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/config_notifications" />
+
+        <Switch
+            android:id="@+id/config_switch_notif"
+            style="@style/switchButton"
+            android:layout_width="7dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:switchPadding="0dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_confirm"
+        style="@style/configButton"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/config_confirm"
+        android:textAlignment="center" />
+
+</LinearLayout>
