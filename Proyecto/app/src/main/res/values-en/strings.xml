@@ -71,7 +71,7 @@
     <string name="explanation3">Their letters will be dyed to the appropriate colors</string>
     <string name="example_word2"></string>
     <string name="example_word3"></string>
-    <string name="explanation4">The solution was </string>
+    <string name="explanation4">The solution was TRUCK</string>
 
     <!-- inGame activity -->
     <string name="sacapalabra">SacaPalabra</string>

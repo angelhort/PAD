@@ -6,7 +6,7 @@
     <string name="home_title_2">Palabra</string>
 
     <!-- Game options activity -->
-    <string name="gameoptionstitle">Modo</string>
+    <string name="gameoptionstitle">Opciones de Juego</string>
     <string name="chooseLanguage">Idioma</string>
     <string name="chooseLanguage_op1">Español</string>
     <string name="chooseLanguage_op2">Inglés</string>

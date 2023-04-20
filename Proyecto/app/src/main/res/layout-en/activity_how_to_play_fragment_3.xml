@@ -46,15 +46,15 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="T" />
+                android:text="R" />
 
             <TextView
                 android:id="@+id/textView20"
-                style="@style/letrasOtroSitio"
+                style="@style/letras"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="O" />
+                android:text="I" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -62,7 +62,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="R" />
+                android:text="V" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -70,7 +70,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="R" />
+                android:text="E" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -78,7 +78,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="E" />
+                android:text="R" />
         </LinearLayout>
 
         <LinearLayout
