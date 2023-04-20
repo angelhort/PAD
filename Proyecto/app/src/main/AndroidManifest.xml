@@ -1,47 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission
-        android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <application
-        android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Default"
-        tools:targetApi="31">
-        <activity
-            android:name=".inGameActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ConfigActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GameOptionsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HowToPlayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+package es.ucm.fdi.sacapalabra;
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+import androidx.appcompat.app.AppCompatActivity;
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-    </application>
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-</manifest>
+import java.util.Locale;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button button_info;
+    private Button button_history;
+    private Button button_config;
+    private Button button_play;
+
+    private SharedPreferences sharedPreferences;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        // Recuperamos las preferencias
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+        String theme = sharedPreferences.getString("theme", "dark");
+        String language = sharedPreferences.getString("language", "es");
+
+        setTheme(theme);
+        setLanguage(language);
+
+        setContentView(R.layout.activity_main);
+        assignButtons();
+
+        createNotificationChannel(); // creamos el canal de notificaciones que utilizaremos más tarde
+    }
+
+    View.OnClickListener bhtpListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, HowToPlayActivity.class);
+            startActivity(intent);
+        }
+    };
+    View.OnClickListener bHistoryListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            startActivity(intent);
+        }
+    };
+    View.OnClickListener bConfigListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, ConfigActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+    View.OnClickListener bPlayListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, GameOptionsActivity.class);
+            Log.i("MainActivity", "Pulsado play");
+            startActivity(intent);
+        }
+    };
+
+    private void assignButtons(){
+
+        button_info = findViewById(R.id.button4);
+        button_history = findViewById(R.id.button3);
+        button_config = findViewById(R.id.button);
+        button_play = findViewById(R.id.button2);
+
+        button_info.setOnClickListener(bhtpListener);
+        button_history.setOnClickListener(bHistoryListener);
+        button_config.setOnClickListener(bConfigListener);
+        button_play.setOnClickListener(bPlayListener);
+    }
+    private void setTheme(String theme){
+        if (theme.equals("dark")) {
+            setTheme(R.style.Theme_Default);
+        } else {
+            setTheme(R.style.Theme_White);
+        }
+    }
+    private void setLanguage(String language){
+        Locale locale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = locale;
+        res.updateConfiguration(conf, dm);
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Notificaciones";
+            String description = "Notificaciones para Pasapalabra";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system. You can't change the importance
+            // or other notification behaviors after this.
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+}
