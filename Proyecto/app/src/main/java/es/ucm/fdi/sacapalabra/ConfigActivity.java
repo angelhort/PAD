@@ -1,17 +1,23 @@
 package es.ucm.fdi.sacapalabra;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.ToggleButton;
 
@@ -26,8 +32,15 @@ public class ConfigActivity extends AppCompatActivity {
     private Button confirm_button;
 
     private Switch dswitch;
+    private Switch notifSwitch;
 
     private SharedPreferences sharedPreferences;
+
+    private NotificationCompat.Builder notif;
+    NotificationManager notifManager;
+
+    private final static int id = 10000;
+    private final static String CHANNEL_ID = "channel_01";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +55,13 @@ public class ConfigActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_config);
         assignButtons();
-        setButtons(language,theme);
+        setButtons(language, theme);
         recoverSavedInstance(savedInstanceState);
+
+        notif = new NotificationCompat.Builder(this, CHANNEL_ID);
+        notif.setAutoCancel(true);
+
+        initChannels(this);
     }
 
     // Listener button
@@ -109,6 +127,41 @@ public class ConfigActivity extends AppCompatActivity {
             }
         }
     };
+    // Listener switch de notificaciones
+    CompoundButton.OnCheckedChangeListener notifSwitchListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) { // En realidad no se si es checked, deberia ver si esta en Sí
+                notif.setSmallIcon(R.drawable.mascota);
+                notif.setTicker("Nueva notificacion");
+                notif.setWhen(1);
+                notif.setContentTitle("Pasapalabra");
+                notif.setContentText("Ven a jugar tu primera partida del día!");
+
+                new CountDownTimer(30000, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                    }
+
+                    public void onFinish() {
+                        Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
+
+                        PendingIntent pendingIntent = PendingIntent.getActivity(ConfigActivity.this,0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        notif.setContentIntent(pendingIntent);
+
+                        notifManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                        notifManager.notify(id, notif.build());
+
+                        sharedPreferences.edit().putString("notif", "yes").apply();
+                    }
+                }.start();
+
+            }
+
+            else{
+                sharedPreferences.edit().putString("notif", "no").apply();
+            }
+        }
+    };
 
     private void assignButtons(){
 
@@ -117,12 +170,14 @@ public class ConfigActivity extends AppCompatActivity {
         bDarkTheme = findViewById(R.id.config_theme_op1);
         bWhiteTheme = findViewById(R.id.config_theme_op2);
         confirm_button = findViewById(R.id.button_confirm);
+        notifSwitch = findViewById(R.id.config_switch_notif);
 
         bSpanish.setOnCheckedChangeListener(bSpanishListener);
         bEnglish.setOnCheckedChangeListener(bEnglishListener);
         bDarkTheme.setOnCheckedChangeListener(bDarkThemeListener);
         bWhiteTheme.setOnCheckedChangeListener(bWhiteThemeListener);
         confirm_button.setOnClickListener(confirmListener);
+        notifSwitch.setOnCheckedChangeListener(notifSwitchListener);
     }
     private void setButtons(String language, String theme){
 
@@ -149,6 +204,8 @@ public class ConfigActivity extends AppCompatActivity {
             bWhiteTheme.setClickable(false);
             bDarkTheme.setClickable(true);
         }
+
+
     }
     private void setTheme(String theme){
         if (theme.equals("dark")) {
@@ -191,4 +248,18 @@ public class ConfigActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void initChannels(Context context) {
+        if (Build.VERSION.SDK_INT < 26) {
+            return;
+        }
+        notifManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                "Channel name",
+                NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription("Channel description");
+        notifManager.createNotificationChannel(channel);
+    }
+
 }
