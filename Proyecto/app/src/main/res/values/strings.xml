@@ -45,6 +45,7 @@
     <string name="config_theme_op1">Noche</string>
     <string name="config_theme_op2">Día</string>
     <string name="config_confirm">Confirmar</string>
+    <string name="config_notifications">Notifications</string>
 
     <!-- History activity -->
     <string name="statistics">Estadísticas</string>
