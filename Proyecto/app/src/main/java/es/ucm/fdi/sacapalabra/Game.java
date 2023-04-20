@@ -10,6 +10,8 @@ public class Game {
     private int ntries;
     private int lenght;
 
+    private int actualTry;
+
     // private WordLoaderCallbacks wordLoaderCallbacks;
 
     public Game(String idioma, String modo, int intentos, int longitud){
@@ -17,6 +19,7 @@ public class Game {
         mode = modo;
         ntries = intentos;
         lenght = longitud;
+        actualTry = 0;
     }
 
     public void setWord(String palabra){
@@ -38,7 +41,17 @@ public class Game {
     public int getLenght(){
         return lenght;
     }
+    public int getActualTry(){return actualTry;}
+    public void incrementTry(){actualTry++;}
 
+    public boolean validateWord(String palabra){
 
+        // Comprobar numeros
+        // Comprobar longitud
+        return true;
+    }
+    public boolean isSolution(String palabra){
+        return palabra == word;
+    }
 
 }

@@ -59,7 +59,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         game = new Game(intent.getStringExtra("idioma"), intent.getStringExtra("modo"),intent.getIntExtra("intentos", 0),intent.getIntExtra("longitud", 0));
 
         // Check for internet connectivity
-        if (isNetworkAvailable() && (game.getLanguage().equals("es") || game.getLanguage().equals("en"))) {
+        /*if (isNetworkAvailable() && (game.getLanguage().equals("es") || game.getLanguage().equals("en"))) {
             Log.d("game", "hay internet");
             // Create wordLoaderCallbacks
             wordLoaderCallbacks = new WordLoaderCallbacks(this, this);
@@ -93,19 +93,9 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         myTextViews = new TextView[game.getNtries()][game.getLenght()];
         addViews();
-
-        Button exampleButton = new Button(this);
-        exampleButton.setText("PULSA");
-        exampleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myTextViews[0][0].setText("VA");
-            }
-        });
-        generalLayout.addView(exampleButton);
 
     }
 
@@ -150,12 +140,12 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         confirmButtonParams.gravity = Gravity.CENTER_HORIZONTAL;
         confirmButtonParams.setMargins(0,50,0,0);
         confirmButton.setLayoutParams(confirmButtonParams);
+        confirmButton.setOnClickListener(sendWordListener);
 
         generalLayout.addView(inputText);
         generalLayout.addView(confirmButton);
 
     }
-
     private void createBoard(int rows, int cols) {
 
         // Layout para tablero
@@ -195,8 +185,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
                 textView.setBackgroundResource(R.drawable.textview_border);
                 textView.setTextSize(24);
                 textView.setGravity(Gravity.CENTER);
-                textView.setTypeface(null, Typeface.BOLD);;
-                textView.setText(Character.toString((char)('a' + (i*cols)+j))); // Set the text of each TextView to a different letter
+                textView.setTypeface(null, Typeface.BOLD);
 
                 myTextViews[i][j] = textView;
                 linearLayout.addView(textView);
@@ -208,6 +197,9 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         generalLayout.addView(boardLayout);
         setContentView(generalLayout);
     }
+    private void finishGame(){
+
+    }
 
     private void setTheme(String theme){
         if (theme.equals("dark")) {
@@ -216,17 +208,48 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
             setTheme(R.style.Theme_White);
         }
     }
-
     @Override
     public void onWordLoaded(String word) {
         game.setWord(word);
         System.out.println(game.getWord());
     }
-
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         Log.d("InGame", "Active network info: " + activeNetworkInfo);
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+    private void repaintLetters(String palabra, int nTry){
+
+        for(int i = 0; i < palabra.length();i++){
+            // COMPROBAR POSICION DE CADA LETRA -- Game.getWordPosition()
+            myTextViews[nTry][i].setText(palabra); // HACER TOUPPERCASE()
+        }
+    }
+
+    View.OnClickListener sendWordListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            String palabra = inputText.getText().toString();
+
+            if(game.validateWord(palabra)){
+                repaintLetters(palabra,game.getActualTry());
+                game.incrementTry();
+                if(game.isSolution(palabra)){
+                    // PRINTEAR ACIERTO
+                    // BORRAR BOTONES
+                    // PREGUNTAR RECREATE O SALIR AL MENU
+                } else {
+                    if (game.getActualTry() == game.getNtries()){
+                        // PRINTEAR FALLO
+                        // PREGUNTAR RECREATE O SALIR AL MENU
+                    }
+                }
+            }
+        }
+    };
+
+
 }
