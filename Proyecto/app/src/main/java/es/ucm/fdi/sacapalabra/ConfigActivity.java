@@ -131,7 +131,7 @@ public class ConfigActivity extends AppCompatActivity {
     CompoundButton.OnCheckedChangeListener notifSwitchListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) { // En realidad no se si es checked, deberia ver si esta en Sí
-                notif.setSmallIcon(R.drawable.mascota);
+                // notif.setSmallIcon(R.drawable.mascota);
                 notif.setTicker("Nueva notificacion");
                 notif.setWhen(1);
                 notif.setContentTitle("Pasapalabra");
