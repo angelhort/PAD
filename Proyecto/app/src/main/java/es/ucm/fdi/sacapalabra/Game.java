@@ -20,6 +20,7 @@ public class Game {
         ntries = intentos;
         lenght = longitud;
         actualTry = 0;
+        word = "torre";
     }
 
     public void setWord(String palabra){
@@ -46,12 +47,16 @@ public class Game {
 
     public boolean validateWord(String palabra){
 
-        // Comprobar numeros
-        // Comprobar longitud
-        return true;
+        boolean correct = true;
+
+        if(lenght != palabra.length())
+           correct = false;
+        if(palabra.matches(".*\\d+.*"))
+            correct = false;
+        return correct;
     }
     public boolean isSolution(String palabra){
-        return palabra == word;
+        return word.equals(palabra);
     }
 
 }

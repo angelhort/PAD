@@ -78,6 +78,12 @@
     <string name="sacapalabra">SacaPalabra</string>
     <string name="inputText">Introduce una palabra</string>
     <string name="confirmWord">Enviar</string>
+    <string name="inputError">Introduce una palabra valida</string>
+    <string name="winText">¡ CORRECTO !</string>
+    <string name="loseText">¡ FALLASTE !</string>
+    <string name="playAgain"> Jugar de nuevo </string>
+    <string name="returnMenu"> Volver al menú principal </string>
+
 
     <!-- Preferences -->>
     <string name="pref_language1">Establecer el idioma de la interfaz en español</string>

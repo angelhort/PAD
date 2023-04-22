@@ -78,6 +78,7 @@
     <string name="sacapalabra">SacaPalabra</string>
     <string name="inputText">Submit your word</string>
     <string name="confirmWord">Send</string>
+    <string name="inputError">Introduce a valid word</string>
 
     <!-- Preferences -->>
     <string name="pref_language1">Establecer el idioma de la interfaz en español</string>
