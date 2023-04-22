@@ -20,7 +20,6 @@ public class Game {
         ntries = intentos;
         lenght = longitud;
         actualTry = 0;
-        word = "torre";
     }
 
     public void setWord(String palabra){
@@ -49,9 +48,9 @@ public class Game {
 
         boolean correct = true;
 
-        if(lenght != palabra.length())
+        if (lenght != palabra.length())
            correct = false;
-        if(palabra.matches(".*\\d+.*"))
+        if (palabra.matches(".*\\d+.*"))
             correct = false;
         return correct;
     }

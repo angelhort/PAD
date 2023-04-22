@@ -2,6 +2,7 @@ package es.ucm.fdi.sacapalabra;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.loader.app.LoaderManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,13 +21,20 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class inGameActivity extends AppCompatActivity implements WordLoaderCallbacksListener {
 
     private static final int WORD_LOADER_ID = 0;
+    private WordLoaderCallbacks wordLoaderCallbacks;
 
     private SharedPreferences sharedPreferences;
-
-    private WordLoaderCallbacks wordLoaderCallbacks;
 
     private Game game;
     private LinearLayout generalLayout;
@@ -34,6 +42,8 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
     private EditText inputText;
     private Button submitButton;
     private TextView[][] myTextViews;
+
+    private boolean colorblind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,50 +53,18 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         // Recuperamos las preferencias
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String theme = sharedPreferences.getString("theme", "dark");
-        // String colourBlind = sharedPreferences.getString("colorBlind","false");
+        colorblind = sharedPreferences.getBoolean("colorblind",false);
         setTheme(theme);
 
-        // Create Game object
+        // Crear game object y tablero
         Intent intent = getIntent();
         game = new Game(intent.getStringExtra("idioma"), intent.getStringExtra("modo"),intent.getIntExtra("intentos", 0),intent.getIntExtra("longitud", 0));
-
-        // Check for internet connectivity
-        /*if (isNetworkAvailable() && (game.getLanguage().equals("es") || game.getLanguage().equals("en"))) {
-            Log.d("game", "hay internet");
-            // Create wordLoaderCallbacks
-            wordLoaderCallbacks = new WordLoaderCallbacks(this, this);
-            LoaderManager loaderManager = LoaderManager.getInstance(this);
-            if(loaderManager.getLoader(WORD_LOADER_ID) != null){
-                loaderManager.initLoader(WORD_LOADER_ID, null, wordLoaderCallbacks);
-            }
-            Bundle queryBundle = new Bundle();
-            queryBundle.putString(WordLoaderCallbacks.LENGTH, String.valueOf(game.getLenght()));
-            queryBundle.putString(WordLoaderCallbacks.LANGUAGE, game.getLanguage());
-            LoaderManager.getInstance(this).restartLoader(WORD_LOADER_ID, queryBundle, wordLoaderCallbacks);
-        } else {
-            Log.d("game", "no hay internet o idioma es gal. idioma: "+game.getLanguage());
-            // Load word from local file
-            String fileName = game.getLanguage() + "_" + game.getLenght() + ".txt";
-            List<String> words = new ArrayList<>();
-            try {
-                InputStream inputStream = getAssets().open(fileName);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    words.add(line);
-                }
-                reader.close();
-                inputStream.close();
-                Random random = new Random();
-                int index = random.nextInt(words.size());
-                String randomWord = words.get(index);
-                game.setWord(randomWord);
-                System.out.println("fichero: "+game.getWord());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
         myTextViews = new TextView[game.getNtries()][game.getLenght()];
+
+        // Obtener palabra del juego
+        getAPIword();
+
+        // Añadir vistas a la actividad
         addViews();
 
     }
@@ -214,6 +192,12 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         endGameText.setTextSize(48);
         endGameText.setGravity(Gravity.CENTER);
 
+        TextView solutionText = new TextView(this);
+        LinearLayout.LayoutParams solutionLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+        solutionLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        solutionLayoutParams.setMargins(0,20,0,0);
+        solutionText.setLayoutParams(solutionLayoutParams);
+
         if(win) {
             endGameText.setText(R.string.winText);
             endGameText.setTextColor(getResources().getColor(R.color.green,getTheme()));
@@ -221,6 +205,12 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         else {
             endGameText.setText(R.string.loseText);
             endGameText.setTextColor(getResources().getColor(R.color.red,getTheme()));
+
+            solutionText.setTextSize(20);
+            solutionText.setGravity(Gravity.CENTER);
+            solutionText.setText(R.string.solutionText);
+            solutionText.append(" ");
+            solutionText.append(game.getWord());
         }
 
         // Crear boton de jugar de nuevo
@@ -258,12 +248,13 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
 
         // Añadir vistas
         generalLayout.addView(endGameText);
+        generalLayout.addView(solutionText);
         generalLayout.addView(playAgainButton);
         generalLayout.addView(returnMenuButton);
 
     }
 
-    private void repaintLetters(String palabra, int nTry){
+    private void paintLetters(String palabra, int nTry){
 
         String letra;
 
@@ -271,7 +262,10 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
             letra = String.valueOf(palabra.charAt(i));
             if(game.getWord().contains(letra)) {
                 if (String.valueOf(game.getWord().charAt(i)).equals(letra)) {
-                    myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_correct);
+                    if(!colorblind)
+                        myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_correct);
+                    else
+                        myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_correct_colorblind);
                 } else {
                     myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_wrongpos);
                 }
@@ -286,16 +280,67 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
             setTheme(R.style.Theme_White);
         }
     }
+
+    private void getAPIword() {
+
+        /* Como el juego dispone de jugabilidad local, si tenemos conexión llamaremos a la API para que nos sumistre la palabra
+        * en caso contrario la palabra se tomara de un .txt local de forma aleatoria
+        *
+        * Para las palabras en gallego no existe API, por tanto siempre se tomarán de un txt local con palabras en gallego
+        *
+        * */
+
+        // A) Hay conexion a internet
+        if (isNetworkAvailable() && (game.getLanguage().equals("es") || game.getLanguage().equals("en"))) {
+            Log.d("inGame", "hay internet");
+            // Create wordLoaderCallbacks
+            wordLoaderCallbacks = new WordLoaderCallbacks(this, this);
+            LoaderManager loaderManager = LoaderManager.getInstance(this);
+            if(loaderManager.getLoader(WORD_LOADER_ID) != null){
+                loaderManager.initLoader(WORD_LOADER_ID, null, wordLoaderCallbacks);
+            }
+            Bundle queryBundle = new Bundle();
+            queryBundle.putString(WordLoaderCallbacks.LENGTH, String.valueOf(game.getLenght()));
+            queryBundle.putString(WordLoaderCallbacks.LANGUAGE, game.getLanguage());
+            LoaderManager.getInstance(this).restartLoader(WORD_LOADER_ID, queryBundle, wordLoaderCallbacks);
+        }
+        // B) No hay conexión a internet
+        else {
+            Log.d("inGame", "no hay internet o idioma es gal. idioma: " + game.getLanguage());
+            // Load word from local file
+            String fileName = game.getLanguage() + "_" + game.getLenght() + ".txt";
+            List<String> words = new ArrayList<>();
+            try {
+                InputStream inputStream = getAssets().open(fileName);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    words.add(line);
+                }
+                reader.close();
+                inputStream.close();
+                Random random = new Random();                       // Se desplaza la posición para leer de forma aleatoria
+                int index = random.nextInt(words.size());
+                String randomWord = words.get(index);
+                game.setWord(randomWord);
+                System.out.println("fichero: "+game.getWord());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        Log.d("InGame", "Active network info: " + activeNetworkInfo);
+        Log.d("inGame", "Active network info: " + activeNetworkInfo);
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
     @Override
     public void onWordLoaded(String word) {
         game.setWord(word);
-        System.out.println(game.getWord());
+        Log.d("inGame", "Palabra cargada correctamente");
     }
 
     View.OnClickListener sendWordListener = new View.OnClickListener() {
@@ -306,7 +351,7 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
 
             if(game.validateWord(palabra)){
                 inputText.setError(null);                                               // Borramos posibles errores de palabras anteriores
-                repaintLetters(palabra,game.getActualTry());
+                paintLetters(palabra,game.getActualTry());
                 game.incrementTry();
 
                 if (game.isSolution(palabra)) {

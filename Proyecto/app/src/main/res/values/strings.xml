@@ -79,11 +79,11 @@
     <string name="inputText">Introduce una palabra</string>
     <string name="confirmWord">Enviar</string>
     <string name="inputError">Introduce una palabra valida</string>
+    <string name="solutionText"> La solución era:</string>
     <string name="winText">¡ CORRECTO !</string>
     <string name="loseText">¡ FALLASTE !</string>
     <string name="playAgain"> Jugar de nuevo </string>
     <string name="returnMenu"> Volver al menú principal </string>
-
 
     <!-- Preferences -->>
     <string name="pref_language1">Establecer el idioma de la interfaz en español</string>
@@ -103,6 +103,5 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-
 
 </resources>

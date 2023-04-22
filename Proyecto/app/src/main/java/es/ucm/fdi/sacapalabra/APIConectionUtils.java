@@ -15,10 +15,11 @@ import java.text.Normalizer;
 
 public class APIConectionUtils {
 
+    private static final String API_URL_ES = "https://clientes.api.greenborn.com.ar/public-random-word?";
+    private static final String API_URL_EN = "https://random-word-api.vercel.app/api?";
+
     public static String getWord(String length, String language){
 
-        final String API_URL_ES = "https://clientes.api.greenborn.com.ar/public-random-word?";
-        final String API_URL_EN = "https://random-word-api.vercel.app/api?";
         Uri resultUri;
 
         if(language.equals("es")){
@@ -57,8 +58,8 @@ public class APIConectionUtils {
 
                 for (int i = 0; i < resultString.length(); i++) {
                     char c = resultString.charAt(i);
-                    if (c == 'ñ' || c == 'á' || c == 'é' || c == 'ó' || c == 'í' || c == 'ú') {
-                        System.out.println("Word contains accent or ñ: " + resultString);
+                    if (c == 'ñ' || c == 'á' || c == 'é' || c == 'í' || c == 'ó' || c == 'ú') {
+                        System.out.println("Word contains accents or ñ: " + resultString);
                         hasAccents = true;
                     }
                 }

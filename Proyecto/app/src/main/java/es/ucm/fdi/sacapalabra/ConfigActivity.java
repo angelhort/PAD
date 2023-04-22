@@ -31,7 +31,7 @@ public class ConfigActivity extends AppCompatActivity {
     private ToggleButton bWhiteTheme;
     private Button confirm_button;
 
-    private Switch dswitch;
+    private Switch dSwitch;
     private Switch notifSwitch;
 
     private SharedPreferences sharedPreferences;
@@ -56,130 +56,34 @@ public class ConfigActivity extends AppCompatActivity {
         setContentView(R.layout.activity_config);
         assignButtons();
         setButtons(language, theme);
-        recoverSavedInstance(savedInstanceState);
 
         notif = new NotificationCompat.Builder(this, CHANNEL_ID);
         notif.setAutoCancel(true);
-
         initChannels(this);
+
+        if (savedInstanceState != null)
+            recoverSavedInstance(savedInstanceState);
     }
 
-    // Listener button
-    View.OnClickListener confirmListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    };
-    // Listener boton de español
-    CompoundButton.OnCheckedChangeListener bSpanishListener = new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-
-                bEnglish.setChecked(false);
-                bEnglish.setClickable(true);
-                bSpanish.setClickable(false);
-
-                sharedPreferences.edit().putString("language", "es").apply();
-                setLanguage("es");
-            }
-        }
-    };
-    // Listener boton de ingles
-    CompoundButton.OnCheckedChangeListener bEnglishListener = new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-
-                bSpanish.setChecked(false);
-                bSpanish.setClickable(true);
-                bEnglish.setClickable(false);
-
-                sharedPreferences.edit().putString("language", "en").apply();
-                setLanguage("en");
-            }
-        }
-    };
-    // Listener boton de tema oscuro
-    CompoundButton.OnCheckedChangeListener bDarkThemeListener = new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-
-                bWhiteTheme.setChecked(false);
-                bWhiteTheme.setClickable(true);
-                bDarkTheme.setClickable(false);
-
-                sharedPreferences.edit().putString("theme", "dark").apply();
-            }
-        }
-    };
-    // Listener boton de tema claro
-    CompoundButton.OnCheckedChangeListener bWhiteThemeListener = new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-
-                bDarkTheme.setChecked(false);
-                bDarkTheme.setClickable(true);
-                bWhiteTheme.setClickable(false);
-
-                sharedPreferences.edit().putString("theme", "white").apply();
-            }
-        }
-    };
-    // Listener switch de notificaciones
-    CompoundButton.OnCheckedChangeListener notifSwitchListener = new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) { // En realidad no se si es checked, deberia ver si esta en Sí
-                // notif.setSmallIcon(R.drawable.mascota);
-                notif.setTicker("Nueva notificacion");
-                notif.setWhen(1);
-                notif.setContentTitle("Pasapalabra");
-                notif.setContentText("Ven a jugar tu primera partida del día!");
-
-                new CountDownTimer(30000, 1000) {
-                    @Override
-                    public void onTick(long l) {
-                    }
-
-                    public void onFinish() {
-                        Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
-
-                        PendingIntent pendingIntent = PendingIntent.getActivity(ConfigActivity.this,0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        notif.setContentIntent(pendingIntent);
-
-                        notifManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                        notifManager.notify(id, notif.build());
-
-                        sharedPreferences.edit().putString("notif", "yes").apply();
-                    }
-                }.start();
-
-            }
-
-            else{
-                sharedPreferences.edit().putString("notif", "no").apply();
-            }
-        }
-    };
-
-    private void assignButtons(){
+    private void assignButtons() {
 
         bSpanish = findViewById(R.id.config_language_op1);
         bEnglish = findViewById(R.id.config_language_op2);
         bDarkTheme = findViewById(R.id.config_theme_op1);
         bWhiteTheme = findViewById(R.id.config_theme_op2);
-        confirm_button = findViewById(R.id.button_confirm);
+        dSwitch = findViewById(R.id.config_switch_daltonism);
         notifSwitch = findViewById(R.id.config_switch_notif);
+        confirm_button = findViewById(R.id.button_confirm);
 
         bSpanish.setOnCheckedChangeListener(bSpanishListener);
         bEnglish.setOnCheckedChangeListener(bEnglishListener);
         bDarkTheme.setOnCheckedChangeListener(bDarkThemeListener);
         bWhiteTheme.setOnCheckedChangeListener(bWhiteThemeListener);
-        confirm_button.setOnClickListener(confirmListener);
+        dSwitch.setOnCheckedChangeListener(dSwitchListener);
         notifSwitch.setOnCheckedChangeListener(notifSwitchListener);
+        confirm_button.setOnClickListener(confirmListener);
     }
-    private void setButtons(String language, String theme){
+    private void setButtons(String language, String theme) {
 
         if (language.equals("es")) {
             bEnglish.setChecked(false);
@@ -204,49 +108,21 @@ public class ConfigActivity extends AppCompatActivity {
             bWhiteTheme.setClickable(false);
             bDarkTheme.setClickable(true);
         }
-
-
     }
-    private void setTheme(String theme){
+    private void setTheme(String theme) {
         if (theme.equals("dark")) {
             setTheme(R.style.Theme_Default);
         } else {
             setTheme(R.style.Theme_White);
         }
     }
-    private void setLanguage(String language){
+    private void setLanguage(String language) {
         Locale locale = new Locale(language);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
         conf.locale = locale;
         res.updateConfiguration(conf, dm);
-    }
-
-    private void recoverSavedInstance(Bundle savedInstanceState){
-        // Recuperar la instancia si se ha cambiado la configuración
-        if (savedInstanceState != null) {
-            int languageSelected = savedInstanceState.getInt("language");
-            int themeSelected = savedInstanceState.getInt("theme");
-            int switchSelected = savedInstanceState.getInt("colourblind");
-
-            switch (languageSelected) {
-                case 0:                     // Idioma en español
-                    bEnglish.setChecked(false);
-                    bSpanish.setChecked(true);
-                    bEnglish.setClickable(true);
-                    bSpanish.setClickable(false);
-                    break;
-                case 1:                     // Idioma en ingles
-                    bEnglish.setChecked(true);
-                    bSpanish.setChecked(false);
-                    bEnglish.setClickable(false);
-                    bSpanish.setClickable(true);
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 
     public void initChannels(Context context) {
@@ -262,4 +138,152 @@ public class ConfigActivity extends AppCompatActivity {
         notifManager.createNotificationChannel(channel);
     }
 
+
+    private void recoverSavedInstance(Bundle savedInstanceState) {
+        // Recuperar la instancia si se ha cambiado la configuración
+        if (savedInstanceState != null) {
+            boolean languageSelected = savedInstanceState.getBoolean("language");
+            boolean themeSelected = savedInstanceState.getBoolean("theme");
+            boolean colorSwitch = savedInstanceState.getBoolean("colorblind");
+            boolean notificationSwitch = savedInstanceState.getBoolean("notifications");
+
+            // Idioma
+            if (languageSelected) {
+                bEnglish.setChecked(false);
+                bSpanish.setChecked(true);
+                bEnglish.setClickable(true);
+                bSpanish.setClickable(false);
+            } else {
+                bEnglish.setChecked(true);
+                bSpanish.setChecked(false);
+                bEnglish.setClickable(false);
+                bSpanish.setClickable(true);
+            }
+
+            // Tema
+            if (themeSelected) {
+                bWhiteTheme.setChecked(false);
+                bDarkTheme.setChecked(true);
+                bWhiteTheme.setClickable(true);
+                bDarkTheme.setClickable(false);
+            } else {
+                bWhiteTheme.setChecked(true);
+                bDarkTheme.setChecked(false);
+                bWhiteTheme.setClickable(false);
+                bDarkTheme.setClickable(true);
+            }
+            // Daltonismo
+            dSwitch.setChecked(colorSwitch);
+            // Notificaciones
+            notifSwitch.setChecked(notificationSwitch);
+        }
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("language", bSpanish.isChecked());
+        outState.putBoolean("theme", bDarkTheme.isChecked());
+        outState.putBoolean("colorblind", dSwitch.isChecked());
+        outState.putBoolean("notifications", notifSwitch.isChecked());
+    }
+
+    View.OnClickListener confirmListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+    CompoundButton.OnCheckedChangeListener bSpanishListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+
+                bEnglish.setChecked(false);
+                bEnglish.setClickable(true);
+                bSpanish.setClickable(false);
+
+                sharedPreferences.edit().putString("language", "es").apply();
+                setLanguage("es");
+            }
+        }
+    };
+    CompoundButton.OnCheckedChangeListener bEnglishListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+
+                bSpanish.setChecked(false);
+                bSpanish.setClickable(true);
+                bEnglish.setClickable(false);
+
+                sharedPreferences.edit().putString("language", "en").apply();
+                setLanguage("en");
+            }
+        }
+    };
+    CompoundButton.OnCheckedChangeListener bDarkThemeListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+
+                bWhiteTheme.setChecked(false);
+                bWhiteTheme.setClickable(true);
+                bDarkTheme.setClickable(false);
+
+                sharedPreferences.edit().putString("theme", "dark").apply();
+            }
+        }
+    };
+    CompoundButton.OnCheckedChangeListener bWhiteThemeListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+
+                bDarkTheme.setChecked(false);
+                bDarkTheme.setClickable(true);
+                bWhiteTheme.setClickable(false);
+
+                sharedPreferences.edit().putString("theme", "white").apply();
+            }
+        }
+    };
+    CompoundButton.OnCheckedChangeListener notifSwitchListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) { // En realidad no se si es checked, deberia ver si esta en Sí
+                // notif.setSmallIcon(R.drawable.mascota);
+                notif.setTicker("Nueva notificacion");
+                notif.setWhen(1);
+                notif.setContentTitle("Pasapalabra");
+                notif.setContentText("Ven a jugar tu primera partida del día!");
+
+                new CountDownTimer(30000, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                    }
+
+                    public void onFinish() {
+                        Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
+
+                        PendingIntent pendingIntent = PendingIntent.getActivity(ConfigActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        notif.setContentIntent(pendingIntent);
+
+                        notifManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                        notifManager.notify(id, notif.build());
+
+                        sharedPreferences.edit().putString("notif", "yes").apply();
+                    }
+                }.start();
+
+            } else {
+                sharedPreferences.edit().putString("notif", "no").apply();
+            }
+        }
+    };
+    CompoundButton.OnCheckedChangeListener dSwitchListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                sharedPreferences.edit().putBoolean("colorblind", true).apply();
+            } else {
+                sharedPreferences.edit().putBoolean("colorblind", false).apply();
+            }
+        }
+    };
 }
