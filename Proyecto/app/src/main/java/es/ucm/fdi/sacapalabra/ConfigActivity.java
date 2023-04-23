@@ -51,18 +51,20 @@ public class ConfigActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String language = sharedPreferences.getString("language", "es");
         String theme = sharedPreferences.getString("theme", "dark");
+        boolean colors = sharedPreferences.getBoolean("colorblind", false);
+        boolean notifs = sharedPreferences.getBoolean("notifs", false);
         setTheme(theme);
 
         setContentView(R.layout.activity_config);
         assignButtons();
-        setButtons(language, theme);
+        setButtons(language, theme,colors,notifs);
 
         notif = new NotificationCompat.Builder(this, CHANNEL_ID);
         notif.setAutoCancel(true);
         initChannels(this);
 
-        if (savedInstanceState != null)
-            recoverSavedInstance(savedInstanceState);
+       if (savedInstanceState != null)
+           recoverSavedInstance(savedInstanceState);
     }
 
     private void assignButtons() {
@@ -83,7 +85,7 @@ public class ConfigActivity extends AppCompatActivity {
         notifSwitch.setOnCheckedChangeListener(notifSwitchListener);
         confirm_button.setOnClickListener(confirmListener);
     }
-    private void setButtons(String language, String theme) {
+    private void setButtons(String language, String theme, boolean colors, boolean notifs) {
 
         if (language.equals("es")) {
             bEnglish.setChecked(false);
@@ -108,6 +110,10 @@ public class ConfigActivity extends AppCompatActivity {
             bWhiteTheme.setClickable(false);
             bDarkTheme.setClickable(true);
         }
+
+        dSwitch.setChecked(colors);
+        notifSwitch.setChecked(notifs);
+
     }
     private void setTheme(String theme) {
         if (theme.equals("dark")) {
@@ -268,12 +274,12 @@ public class ConfigActivity extends AppCompatActivity {
                         notifManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                         notifManager.notify(id, notif.build());
 
-                        sharedPreferences.edit().putString("notif", "yes").apply();
+                        sharedPreferences.edit().putBoolean("notifs", true).apply();
                     }
                 }.start();
 
             } else {
-                sharedPreferences.edit().putString("notif", "no").apply();
+                sharedPreferences.edit().putBoolean("notifs", false).apply();
             }
         }
     };

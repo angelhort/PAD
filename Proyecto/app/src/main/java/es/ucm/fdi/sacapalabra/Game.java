@@ -12,8 +12,6 @@ public class Game {
 
     private int actualTry;
 
-    // private WordLoaderCallbacks wordLoaderCallbacks;
-
     public Game(String idioma, String modo, int intentos, int longitud){
         language = idioma;
         mode = modo;

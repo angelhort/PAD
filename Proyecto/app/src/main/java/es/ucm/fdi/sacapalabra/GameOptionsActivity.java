@@ -49,6 +49,9 @@ public class GameOptionsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game_options);
         assignButtons();
+
+        if (savedInstanceState != null)
+            recoverSavedInstance(savedInstanceState);
     }
 
     private void assignButtons(){
@@ -171,6 +174,62 @@ public class GameOptionsActivity extends AppCompatActivity {
             setTheme(R.style.Theme_Default);
         } else {
             setTheme(R.style.Theme_White);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Idioma
+        if (bSpanish.isChecked())
+            outState.putString("language", "es");
+        else if (bEnglish.isChecked())
+            outState.putString("language", "en");
+        else
+            outState.putString("language", "gl");
+
+        // Modo
+        if(bNormal.isChecked())
+            outState.putString("mode", "normal");
+        else
+            outState.putString("mode", "timetrial");
+
+        // Numero de intentos
+        if(bNTries3.isChecked())
+            outState.putInt("tries", 3);
+        else if(bNTries4.isChecked())
+            outState.putInt("tries", 4);
+        else if(bNTries5.isChecked())
+            outState.putInt("tries", 5);
+        else if(bNTries6.isChecked())
+            outState.putInt("tries", 6);
+        else if(bNTries7.isChecked())
+            outState.putInt("tries", 7);
+
+        // Longitud de palabra
+        if(bLWord3.isChecked())
+            outState.putInt("lenght", 3);
+        else if(bLWord4.isChecked())
+            outState.putInt("lenght", 4);
+        else if(bLWord5.isChecked())
+            outState.putInt("lenght", 5);
+        else if(bLWord6.isChecked())
+            outState.putInt("lenght", 6);
+        else if(bLWord7.isChecked())
+            outState.putInt("lenght", 7);
+
+    }
+
+    private void recoverSavedInstance(Bundle savedInstanceState) {
+        // Recuperar la instancia si se ha cambiado la configuración
+        if (savedInstanceState != null) {
+            String languageSelected = savedInstanceState.getString("language");
+            String modeSelected = savedInstanceState.getString("mode");
+            int nTriesSelected = savedInstanceState.getInt("tries");
+            int lenghtSelected = savedInstanceState.getInt("lenght");
+
+            // FALTA TERMINAR
         }
     }
 

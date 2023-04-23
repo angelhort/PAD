@@ -7,8 +7,7 @@
     android:foregroundGravity="center"
     android:gravity="center"
     android:orientation="horizontal"
-    android:id="@+id/history_layout"
-    android:background="@drawable/bg_dark">
+    android:id="@+id/history_layout">
 
 
     <LinearLayout

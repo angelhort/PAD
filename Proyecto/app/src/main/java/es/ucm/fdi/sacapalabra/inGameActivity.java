@@ -12,6 +12,7 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -38,12 +39,14 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
 
     private Game game;
     private LinearLayout generalLayout;
-    private TextView title;
+    private TextView titleText;
+    private TextView timeText;
     private EditText inputText;
     private Button submitButton;
     private TextView[][] myTextViews;
 
     private boolean colorblind;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,16 +59,32 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         colorblind = sharedPreferences.getBoolean("colorblind",false);
         setTheme(theme);
 
-        // Crear game object y tablero
+        // Crear game object y tablero (y temporizador en caso de ser contrarreloj)
         Intent intent = getIntent();
         game = new Game(intent.getStringExtra("idioma"), intent.getStringExtra("modo"),intent.getIntExtra("intentos", 0),intent.getIntExtra("longitud", 0));
         myTextViews = new TextView[game.getNtries()][game.getLenght()];
+
+        createTimer();
+
 
         // Obtener palabra del juego
         getAPIword();
 
         // Añadir vistas a la actividad
         addViews();
+
+    }
+
+    private void createTimer() {
+
+        if(game.getMode().equals("contrarreloj")) {
+            countDownTimer = new CountDownTimer(10000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    // Actualizar la etiqueta de texto con el tiempo restante
+                    timeText.setText("Tiempo restante: " + millisUntilFinished / 1000);
+                }
+            };
+        }
 
     }
 
@@ -76,16 +95,16 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         generalLayout.setOrientation(LinearLayout.VERTICAL);
 
         // Header Title
-        title = new TextView(this);
+        titleText = new TextView(this);
         LinearLayout.LayoutParams titleLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
         titleLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
         titleLayoutParams.setMargins(0,50,0,0);
-        title.setLayoutParams(titleLayoutParams);
+        titleText.setLayoutParams(titleLayoutParams);
 
-        title.setText(R.string.sacapalabra);
-        title.setTextSize(48);
-        title.setGravity(Gravity.CENTER);
-        generalLayout.addView(title);
+        titleText.setText(R.string.sacapalabra);
+        titleText.setTextSize(48);
+        titleText.setGravity(Gravity.CENTER);
+        generalLayout.addView(titleText);
 
         createBoard(game.getNtries(), game.getLenght());
 
