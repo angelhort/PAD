@@ -2,10 +2,8 @@ package es.ucm.fdi.sacapalabra;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,7 +11,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -61,13 +58,19 @@ public class ConfigActivity extends AppCompatActivity {
 
         notif = new NotificationCompat.Builder(this, CHANNEL_ID);
         notif.setAutoCancel(true);
+        setTheme(theme);
+        setContentView(R.layout.activity_config);
+        assignButtons();
+        setButtons(language, theme, colors, notifs);
+        recoverSavedInstance(savedInstanceState);
+
         initChannels(this);
 
        if (savedInstanceState != null)
            recoverSavedInstance(savedInstanceState);
     }
 
-    private void assignButtons() {
+    private void assignButtons(){
 
         bSpanish = findViewById(R.id.config_language_op1);
         bEnglish = findViewById(R.id.config_language_op2);
@@ -85,6 +88,7 @@ public class ConfigActivity extends AppCompatActivity {
         notifSwitch.setOnCheckedChangeListener(notifSwitchListener);
         confirm_button.setOnClickListener(confirmListener);
     }
+
     private void setButtons(String language, String theme, boolean colors, boolean notifs) {
 
         if (language.equals("es")) {
@@ -251,38 +255,7 @@ public class ConfigActivity extends AppCompatActivity {
             }
         }
     };
-    CompoundButton.OnCheckedChangeListener notifSwitchListener = new CompoundButton.OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) { // En realidad no se si es checked, deberia ver si esta en Sí
-                // notif.setSmallIcon(R.drawable.mascota);
-                notif.setTicker("Nueva notificacion");
-                notif.setWhen(1);
-                notif.setContentTitle("Pasapalabra");
-                notif.setContentText("Ven a jugar tu primera partida del día!");
 
-                new CountDownTimer(30000, 1000) {
-                    @Override
-                    public void onTick(long l) {
-                    }
-
-                    public void onFinish() {
-                        Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
-
-                        PendingIntent pendingIntent = PendingIntent.getActivity(ConfigActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        notif.setContentIntent(pendingIntent);
-
-                        notifManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                        notifManager.notify(id, notif.build());
-
-                        sharedPreferences.edit().putBoolean("notifs", true).apply();
-                    }
-                }.start();
-
-            } else {
-                sharedPreferences.edit().putBoolean("notifs", false).apply();
-            }
-        }
-    };
     CompoundButton.OnCheckedChangeListener dSwitchListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
@@ -292,4 +265,31 @@ public class ConfigActivity extends AppCompatActivity {
             }
         }
     };
+
+    CompoundButton.OnCheckedChangeListener notifSwitchListener = new CompoundButton.OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                sharedPreferences.edit().putBoolean("notifs", true).apply();
+                notifSwitch.setChecked(true);
+
+                startNotificationService(); // Arrancamos el servicio de notificaciones
+            } else {
+                sharedPreferences.edit().putBoolean("notifs", false).apply();
+                notifSwitch.setChecked(false);
+                stopNotificationService(); // Paramos el envío de notificaciones
+            }
+        }
+    };
+
+    private void startNotificationService() {
+        Intent intent = new Intent(this, NotificationService.class);
+        intent.putExtra("notification_enabled", true);
+        startService(intent);
+    }
+
+    private void stopNotificationService() {
+        Intent intent = new Intent(this, NotificationService.class);
+        stopService(intent);
+    }
+
 }

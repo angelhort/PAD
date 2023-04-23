@@ -136,7 +136,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:switchPadding="0dp" />
+            android:checked="false"
+            android:switchPadding="0dp"
+            tools:checked="false" />
 
     </LinearLayout>
 

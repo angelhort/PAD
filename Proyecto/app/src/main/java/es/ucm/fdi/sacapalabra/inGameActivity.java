@@ -83,6 +83,11 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
                     // Actualizar la etiqueta de texto con el tiempo restante
                     timeText.setText("Tiempo restante: " + millisUntilFinished / 1000);
                 }
+
+                @Override
+                public void onFinish() {
+
+                }
             };
         }
 
