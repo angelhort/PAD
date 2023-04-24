@@ -1,6 +1,7 @@
 package es.ucm.fdi.sacapalabra;
 
 import android.content.Intent;
+import android.util.Log;
 
 public class Game {
 
@@ -53,7 +54,6 @@ public class Game {
         return correct;
     }
     public boolean isSolution(String palabra){
-        return word.equals(palabra);
-    }
+        return word.trim().equals(palabra.trim());    }
 
 }

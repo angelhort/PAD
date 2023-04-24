@@ -199,6 +199,7 @@ logo
 lote
 loxa
 luar
+lugo
 lume
 luns
 lura

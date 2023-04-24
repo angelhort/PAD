@@ -7,6 +7,7 @@ import androidx.loader.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -42,6 +43,8 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
 
     private Game game;
     private LinearLayout generalLayout;
+
+    private LinearLayout leftColumn;
     private TextView titleText;
     private TextView timeText;
     private EditText inputText;
@@ -66,11 +69,25 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         game = new Game(intent.getStringExtra("idioma"), intent.getStringExtra("modo"),intent.getIntExtra("intentos", 0),intent.getIntExtra("longitud", 0));
         myTextViews = new TextView[game.getNtries()][game.getLenght()];
         if(game.getMode().equals("contrarreloj")) timeTrial = true;
-        // Obtener palabra del juego
-        getAPIword();
+
+        // Restaurar la palabra del juego si existe
+        if (savedInstanceState != null) {
+            String currentWord = savedInstanceState.getString("currentWord");
+            if (currentWord != null) {
+                game.setWord(currentWord);
+            }
+        } else {
+            // Obtener palabra del juego si no existe
+            getAPIword();
+        }
 
         // Añadir vistas a la actividad
-        addViews();
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            addViews();
+        } else {
+            addLandscapeViews();
+        }
         createTimer();
 
         //if (savedInstanceState != null)
@@ -144,7 +161,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         inputText.setGravity(Gravity.CENTER);
         inputText.setHintTextColor(ContextCompat.getColor(this, R.color.theme_green));
 
-
         // Submit button to send the word
         submitButton = new Button(this);
         submitButton.setBackgroundResource(R.drawable.roundbutton);
@@ -159,7 +175,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         submitButton.setLayoutParams(confirmButtonParams);
         submitButton.setOnClickListener(sendWordListener);
 
-
         // Add final views
         if(timeTrial){
             generalLayout.addView(timeText);
@@ -167,6 +182,71 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         generalLayout.addView(inputText);
         generalLayout.addView(submitButton);
     }
+
+    private void addLandscapeViews(){
+
+    generalLayout = new LinearLayout(this);
+    generalLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+    generalLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+    // Create two columns for landscape mode
+    leftColumn = new LinearLayout(this);
+    leftColumn.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+    leftColumn.setOrientation(LinearLayout.VERTICAL);
+    createBoard(game.getNtries(), game.getLenght());
+    generalLayout.addView(leftColumn);
+
+    LinearLayout rightColumn = new LinearLayout(this);
+    rightColumn.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+    rightColumn.setOrientation(LinearLayout.VERTICAL);
+
+    // Tiempo (solo si estamos en modo contrarreloj
+    if(timeTrial) {
+        timeText = new TextView(this);
+        LinearLayout.LayoutParams timeTextParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+        timeTextParams.gravity = Gravity.CENTER_HORIZONTAL;
+        timeTextParams.setMargins(0, 50, 0, 0);
+        timeText.setLayoutParams(timeTextParams);
+        timeText.setTextSize(20);
+        timeText.setGravity(Gravity.CENTER);
+        rightColumn.addView(timeText);
+    }
+
+    // Input Text for words
+    inputText = new EditText(this);
+    LinearLayout.LayoutParams inputLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+    inputLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+    inputLayoutParams.setMargins(0,50,0,0);
+    inputText.setLayoutParams(inputLayoutParams);
+    inputText.setHint(R.string.inputText);
+    inputText.setTextSize(28);
+    inputText.setGravity(Gravity.CENTER);
+    inputText.setHintTextColor(ContextCompat.getColor(this, R.color.theme_green));
+    rightColumn.addView(inputText);
+
+    // Submit button to send the word
+    submitButton = new Button(this);
+    submitButton.setBackgroundResource(R.drawable.roundbutton);
+    submitButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+    submitButton.setGravity(Gravity.CENTER);
+    submitButton.setText(R.string.confirmWord);
+    submitButton.setTextSize(20);
+
+    LinearLayout.LayoutParams confirmButtonParams = (new LinearLayout.LayoutParams(240, 240, 1));
+    confirmButtonParams.gravity = Gravity.CENTER_HORIZONTAL;
+    confirmButtonParams.setMargins(0,50,0,0);
+    submitButton.setLayoutParams(confirmButtonParams);
+    submitButton.setOnClickListener(sendWordListener);
+    rightColumn.addView(submitButton);
+
+    // Add final views
+    if(timeTrial){
+        generalLayout.addView(timeText);
+    }
+
+    generalLayout.addView(rightColumn);
+
+}
     private void createBoard(int rows, int cols) {
 
         // Layout para tablero
@@ -215,7 +295,12 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             boardLayout.addView(linearLayout);
             Log.d("InGame" ,"Creado linearLayout");
         }
-        generalLayout.addView(boardLayout);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            generalLayout.addView(boardLayout);
+        } else {
+            leftColumn.addView(boardLayout);
+        }
+
         setContentView(generalLayout);
     }
     private void finishGame(boolean win){
@@ -243,9 +328,29 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         solutionLayoutParams.setMargins(0,20,0,0);
         solutionText.setLayoutParams(solutionLayoutParams);
 
+        //Guardar partidas
+        int plays = sharedPreferences.getInt("plays", 0);
+        sharedPreferences.edit().putInt("plays", plays+1).apply();
+        plays++;
+        int wins = sharedPreferences.getInt("wins", 0);
+
         if(win) {
             endGameText.setText(R.string.winText);
             endGameText.setTextColor(getResources().getColor(R.color.green,getTheme()));
+            //Guardar victorias para luego hacer el porcentaje
+            sharedPreferences.edit().putInt("wins", wins+1).apply();
+            wins++;
+
+            //Racha victorias
+            int currentStreak = sharedPreferences.getInt("currentStreak", 0);
+            sharedPreferences.edit().putInt("currentStreak", currentStreak+1).apply();
+            currentStreak++;
+
+            //Mejor racha
+            int bestStreak = sharedPreferences.getInt("bestStreak", 0);
+            if(currentStreak > bestStreak) {
+                sharedPreferences.edit().putInt("bestStreak", currentStreak).apply();
+            }
         }
         else {
             endGameText.setText(R.string.loseText);
@@ -256,7 +361,16 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             solutionText.setText(R.string.solutionText);
             solutionText.append(" ");
             solutionText.append(game.getWord());
+
+            //Racha de victorias
+            sharedPreferences.edit().putInt("currentStreak", 0).apply();
         }
+
+        //Porcentaje partidas
+        sharedPreferences.edit().putFloat("percentage", (Float.valueOf(wins)/Float.valueOf(plays))*100).apply();
+        Log.d("w", String.valueOf(wins));
+        Log.d("p", String.valueOf(plays));
+        Log.d("%", String.valueOf((Float.valueOf(wins)/Float.valueOf(plays))*100));
 
         // Crear boton de jugar de nuevo
 
@@ -423,47 +537,9 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
     };
 
-  /*  protected void onSaveInstanceState(Bundle outState) {
+  protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        // Idioma
-        if (bSpanish.isChecked())
-            outState.putString("language", "es");
-        else if (bEnglish.isChecked())
-            outState.putString("language", "en");
-        else
-            outState.putString("language", "gl");
-
-        // Modo
-        if(bNormal.isChecked())
-            outState.putString("mode", "normal");
-        else
-            outState.putString("mode", "timetrial");
-
-        // Numero de intentos
-        if(bNTries3.isChecked())
-            outState.putInt("tries", 3);
-        else if(bNTries4.isChecked())
-            outState.putInt("tries", 4);
-        else if(bNTries5.isChecked())
-            outState.putInt("tries", 5);
-        else if(bNTries6.isChecked())
-            outState.putInt("tries", 6);
-        else if(bNTries7.isChecked())
-            outState.putInt("tries", 7);
-
-        // Longitud de palabra
-        if(bLWord3.isChecked())
-            outState.putInt("lenght", 3);
-        else if(bLWord4.isChecked())
-            outState.putInt("lenght", 4);
-        else if(bLWord5.isChecked())
-            outState.putInt("lenght", 5);
-        else if(bLWord6.isChecked())
-            outState.putInt("lenght", 6);
-        else if(bLWord7.isChecked())
-            outState.putInt("lenght", 7);
-
+        outState.putString("currentWord", game.getWord());
     }
 
     private void recoverSavedInstance(Bundle savedInstanceState) {
@@ -479,6 +555,5 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
 
     }
-*/
 }
 
