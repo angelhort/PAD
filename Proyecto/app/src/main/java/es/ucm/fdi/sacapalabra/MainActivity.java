@@ -14,7 +14,7 @@ import android.widget.Button;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Button button_info;
     private Button button_history;
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, HowToPlayActivity.class);
             startActivity(intent);
+
         }
     };
     View.OnClickListener bHistoryListener = new View.OnClickListener() {

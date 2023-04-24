@@ -20,7 +20,7 @@ import android.widget.ToggleButton;
 
 import java.util.Locale;
 
-public class ConfigActivity extends AppCompatActivity {
+public class ConfigActivity extends BaseActivity {
 
     private ToggleButton bSpanish;
     private ToggleButton bEnglish;
@@ -44,7 +44,6 @@ public class ConfigActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        // Recuperamos las preferencias
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String language = sharedPreferences.getString("language", "es");
         String theme = sharedPreferences.getString("theme", "dark");
@@ -200,9 +199,11 @@ public class ConfigActivity extends AppCompatActivity {
     View.OnClickListener confirmListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            finish();
             Intent intent = new Intent(ConfigActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
+            overridePendingTransition(R.transition.fade_in, R.transition.fade_out);
+
         }
     };
     CompoundButton.OnCheckedChangeListener bSpanishListener = new CompoundButton.OnCheckedChangeListener() {

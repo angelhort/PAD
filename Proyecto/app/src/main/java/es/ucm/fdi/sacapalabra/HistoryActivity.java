@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends BaseActivity {
 
     private SharedPreferences sharedPreferences;
 

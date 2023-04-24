@@ -8,12 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +28,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class inGameActivity extends AppCompatActivity implements WordLoaderCallbacksListener {
+public class inGameActivity extends BaseActivity implements WordLoaderCallbacksListener {
 
     private static final int WORD_LOADER_ID = 0;
     private WordLoaderCallbacks wordLoaderCallbacks;
@@ -46,14 +49,13 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
     private TextView[][] myTextViews;
 
     private boolean colorblind;
+    private boolean timeTrial;
     private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-        // Recuperamos las preferencias
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String theme = sharedPreferences.getString("theme", "dark");
         colorblind = sharedPreferences.getBoolean("colorblind",false);
@@ -63,36 +65,42 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         Intent intent = getIntent();
         game = new Game(intent.getStringExtra("idioma"), intent.getStringExtra("modo"),intent.getIntExtra("intentos", 0),intent.getIntExtra("longitud", 0));
         myTextViews = new TextView[game.getNtries()][game.getLenght()];
-
-        createTimer();
-
-
+        if(game.getMode().equals("contrarreloj")) timeTrial = true;
         // Obtener palabra del juego
         getAPIword();
 
         // Añadir vistas a la actividad
         addViews();
+        createTimer();
 
+        //if (savedInstanceState != null)
+          //  recoverSavedInstance(savedInstanceState);
     }
 
     private void createTimer() {
 
-        if(game.getMode().equals("contrarreloj")) {
-            countDownTimer = new CountDownTimer(10000, 1000) {
+        if(timeTrial) {
+            countDownTimer = new CountDownTimer(12000, 1000) {
                 public void onTick(long millisUntilFinished) {
                     // Actualizar la etiqueta de texto con el tiempo restante
-                    timeText.setText("Tiempo restante: " + millisUntilFinished / 1000);
+                    timeText.setText(R.string.timeRemaining);
+                    timeText.append(" ");
+                    timeText.append(String.valueOf(millisUntilFinished / 1000));
+                    if(String.valueOf(millisUntilFinished / 1000).equals("10"))
+                        timeText.setTextColor(getResources().getColor(R.color.red,getTheme()));
+
                 }
 
                 @Override
                 public void onFinish() {
-
+                    timeText.setText(R.string.noTime);
+                    finishGame(false);
                 }
-            };
+            }.start();
+        } else {
+            countDownTimer = null;
         }
-
     }
-
     private void addViews(){
 
         generalLayout = new LinearLayout(this);
@@ -113,6 +121,18 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
 
         createBoard(game.getNtries(), game.getLenght());
 
+        // Tiempo (solo si estamos en modo contrarreloj
+
+        if(timeTrial) {
+            timeText = new TextView(this);
+            LinearLayout.LayoutParams timeTextParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            timeTextParams.gravity = Gravity.CENTER_HORIZONTAL;
+            timeTextParams.setMargins(0, 50, 0, 0);
+            timeText.setLayoutParams(timeTextParams);
+            timeText.setTextSize(20);
+            timeText.setGravity(Gravity.CENTER);
+        }
+
         // Input Text for words
         inputText = new EditText(this);
         LinearLayout.LayoutParams inputLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
@@ -122,7 +142,6 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         inputText.setHint(R.string.inputText);
         inputText.setTextSize(28);
         inputText.setGravity(Gravity.CENTER);
-        inputText.setTextColor(ContextCompat.getColor(this, R.color.white));
         inputText.setHintTextColor(ContextCompat.getColor(this, R.color.theme_green));
 
 
@@ -142,9 +161,11 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
 
 
         // Add final views
+        if(timeTrial){
+            generalLayout.addView(timeText);
+        }
         generalLayout.addView(inputText);
         generalLayout.addView(submitButton);
-
     }
     private void createBoard(int rows, int cols) {
 
@@ -245,11 +266,9 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         playAgainButton.setText(R.string.playAgain);
         playAgainButton.setTextSize(28);
         playAgainButton.setBackgroundColor(getResources().getColor(R.color.theme_green,getTheme()));
-        playAgainButton.setTextColor(getResources().getColor(R.color.white,getTheme()));
 
         LinearLayout.LayoutParams playAgainLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
         playAgainLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        playAgainLayoutParams.setMargins(0,50,0,0);
         playAgainButton.setLayoutParams(playAgainLayoutParams);
         playAgainButton.setOnClickListener(playAgainListener);
 
@@ -276,8 +295,9 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
         generalLayout.addView(playAgainButton);
         generalLayout.addView(returnMenuButton);
 
-    }
+        // GUARDAR PARTIDA DB
 
+    }
     private void paintLetters(String palabra, int nTry){
 
         String letra;
@@ -297,14 +317,6 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
             myTextViews[nTry][i].setText(letra.toUpperCase());
         }
     }
-    private void setTheme(String theme){
-        if (theme.equals("dark")) {
-            setTheme(R.style.Theme_Default);
-        } else {
-            setTheme(R.style.Theme_White);
-        }
-    }
-
     private void getAPIword() {
 
         /* Como el juego dispone de jugabilidad local, si tenemos conexión llamaremos a la API para que nos sumistre la palabra
@@ -355,6 +367,14 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
 
     }
 
+    private void setTheme(String theme){
+        if (theme.equals("dark")) {
+            setTheme(R.style.Theme_Default);
+        } else {
+            setTheme(R.style.Theme_White);
+        }
+    }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -375,17 +395,12 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
 
             if(game.validateWord(palabra)){
                 inputText.setError(null);                                               // Borramos posibles errores de palabras anteriores
+                inputText.setText("");
                 paintLetters(palabra,game.getActualTry());
                 game.incrementTry();
 
-                if (game.isSolution(palabra)) {
-                    finishGame(true);
-                    // GUARDAR PARTIDA DB
-                }
-                else if (game.getActualTry() == game.getNtries()) {
-                    finishGame(false);
-                    // GUARDAR PARTIDA DB
-                }
+                if (game.isSolution(palabra)) finishGame(true);
+                else if (game.getActualTry() == game.getNtries()) finishGame(false);
 
             }
             else {
@@ -402,9 +417,68 @@ public class inGameActivity extends AppCompatActivity implements WordLoaderCallb
     View.OnClickListener returnMenuListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            finish();
             Intent intent = new Intent(inGameActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
         }
     };
+
+  /*  protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Idioma
+        if (bSpanish.isChecked())
+            outState.putString("language", "es");
+        else if (bEnglish.isChecked())
+            outState.putString("language", "en");
+        else
+            outState.putString("language", "gl");
+
+        // Modo
+        if(bNormal.isChecked())
+            outState.putString("mode", "normal");
+        else
+            outState.putString("mode", "timetrial");
+
+        // Numero de intentos
+        if(bNTries3.isChecked())
+            outState.putInt("tries", 3);
+        else if(bNTries4.isChecked())
+            outState.putInt("tries", 4);
+        else if(bNTries5.isChecked())
+            outState.putInt("tries", 5);
+        else if(bNTries6.isChecked())
+            outState.putInt("tries", 6);
+        else if(bNTries7.isChecked())
+            outState.putInt("tries", 7);
+
+        // Longitud de palabra
+        if(bLWord3.isChecked())
+            outState.putInt("lenght", 3);
+        else if(bLWord4.isChecked())
+            outState.putInt("lenght", 4);
+        else if(bLWord5.isChecked())
+            outState.putInt("lenght", 5);
+        else if(bLWord6.isChecked())
+            outState.putInt("lenght", 6);
+        else if(bLWord7.isChecked())
+            outState.putInt("lenght", 7);
+
+    }
+
+    private void recoverSavedInstance(Bundle savedInstanceState) {
+        // Recuperar la instancia si se ha cambiado la configuración
+        if (savedInstanceState != null) {
+            String languageSelected = savedInstanceState.getString("language");
+            String modeSelected = savedInstanceState.getString("mode");
+            int nTriesSelected = savedInstanceState.getInt("tries");
+            int lenghtSelected = savedInstanceState.getInt("lenght");
+
+            // FALTA TERMINAR
+
+        }
+
+    }
+*/
 }
+

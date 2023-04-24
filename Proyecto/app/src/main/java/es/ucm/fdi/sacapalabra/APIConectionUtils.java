@@ -63,8 +63,6 @@ public class APIConectionUtils {
                         hasAccents = true;
                     }
                 }
-
-                Log.i("api", hasAccents + resultString);
             } catch (MalformedURLException e){
                 throw new RuntimeException(e);
             } catch (IOException e){
