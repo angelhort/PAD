@@ -46,6 +46,13 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <!-- Boton de HISTORIAL -->
+
+    <!-- Boton de INSTRUCCIONES-->
+
+    <!-- TITULO APP 1/2 -->
+
+    <!-- TITULO APP 2/2 -->
+
     <Button
         android:id="@+id/button3"
         style="@style/homeButton"
@@ -60,18 +67,17 @@
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.696" />
 
-    <!-- Boton de INSTRUCCIONES-->
     <Button
         android:id="@+id/button4"
         style="@style/homeButton"
         android:layout_width="79dp"
         android:layout_height="79dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginEnd="72dp"
         app:icon="@drawable/ic_baseline_info"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
@@ -80,11 +86,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.708" />
-
-    <!-- TITULO APP 1/2 -->
-
-    <!-- TITULO APP 2/2 -->
+        app:layout_constraintVertical_bias="0.685" />
 
     <TextView
         android:id="@+id/textView34"

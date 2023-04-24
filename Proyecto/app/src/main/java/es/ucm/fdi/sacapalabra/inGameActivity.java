@@ -97,7 +97,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     private void createTimer() {
 
         if(timeTrial) {
-            countDownTimer = new CountDownTimer(12000, 1000) {
+            countDownTimer = new CountDownTimer(60000, 1000) {
                 public void onTick(long millisUntilFinished) {
                     // Actualizar la etiqueta de texto con el tiempo restante
                     timeText.setText(R.string.timeRemaining);
@@ -118,6 +118,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             countDownTimer = null;
         }
     }
+
     private void addViews(){
 
         generalLayout = new LinearLayout(this);

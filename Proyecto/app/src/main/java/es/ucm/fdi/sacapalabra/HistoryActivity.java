@@ -22,13 +22,14 @@ public class HistoryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
-        assignButtons();
 
         // Recuperamos las preferencias
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String theme = sharedPreferences.getString("theme", "dark");
         setTheme(theme);
+
+        setContentView(R.layout.activity_history);
+        assignButtons();
 
         setStatistics();
 
@@ -46,7 +47,6 @@ public class HistoryActivity extends BaseActivity {
         textMejorRachaVictorias.setText(String.valueOf(bestStreak));
         textRachaVictorias.setText(String.valueOf(currentStreak));
     }
-
 
     private void assignButtons(){
         historial = findViewById(R.id.lvHistorialPartidas);
