@@ -5,20 +5,20 @@ Repositorio para el proyecto de la asignatura PAD (Programación de aplicaciones
 
 La pantalla de inicio de la aplicación consta de 4 botones, identificados con números en amarillo.
 
-- Botón de ajustes (1). Conduce a la ventana _Ajustes_ donde el usuario puede cambiar las opciones que tiene la aplicación.
-- Botón de historial (2). Conduce a la ventana _Estadísticas e Historial._ En dicha ventana el usuario puede ver sus partidas anteriores y algunos datos medios.
+- Botón de ajustes (1). Conduce a la ventana *Ajustes* donde el usuario puede cambiar las opciones que tiene la aplicación.
+- Botón de historial (2). Conduce a la ventana *Estadísticas e Historial*. En dicha ventana el usuario puede ver sus partidas anteriores y algunos datos medios.
 - Botón de información (3). Conduce a una sucesión de ventanas donde se explica al usuario como se juega.
-- Botón de jugar (4). Conduce a la ventana _Opciones de Juego_ donde el usuario puede ajustar ciertos parámetros antes de jugar una partida.
+- Botón de jugar (4). Conduce a la ventana *Opciones de Juego* donde el usuario puede ajustar ciertos parámetros antes de jugar una partida.
 <br>
 <image src="./img/captura1.png" style="text-align:center;" alt="">
 <br><br>
-En la ventana de _Ajustes_ podemos encontrar distintas opciones para personalizar la aplicación, identificadas con números en amarillo.
+En la ventana de *Ajustes* podemos encontrar distintas opciones para personalizar la aplicación, identificadas con números en amarillo.
 
 - Idioma de la interfaz (1). Se puede seleccionar el idioma de la aplicación entre Español e Inglés.
 - Tema de la interfaz (2). Se puede seleccionar el tema de la interfaz entre noche (oscuro) y día (claro)
 - Modo daltónico (3). Se puede activar el modo daltónico lo que cambia los colores con los que se identifican las letras bien puestas para personas que tengan
 - Notificaciones (4). Se puede activar esta opción si el usuario desea recibir notificaciones de la aplicación.
-- Botón de confirmar (5). Confirma los cambios y vuelve a la ventana de _Inicio._
+- Botón de confirmar (5). Confirma los cambios y vuelve a la ventana de *Inicio*.
 <br>
 <image src="./img/captura2.png" style="text-align:center;" alt="">
 <br><br>
@@ -40,7 +40,7 @@ En la ventana de estadísticas e historial podemos ver los siguientes datos:
 <br>
 <image src="./img/captura5.png" style="text-align:center;" alt="">
 <br><br>
-En la ventana _Opciones de Juego_ podemos personalizar la partida
+En la ventana *Opciones de Juego* podemos personalizar la partida
 
 - Idioma de la partida (1). Se puede elegir entre adivinar una palabra española, inglesa o gallega.
 - Modo de juego (2). Se puede elegir el modo normal o el modo contrarreloj en el cual se dispone de 1 minuto para adivinar la palabra.
