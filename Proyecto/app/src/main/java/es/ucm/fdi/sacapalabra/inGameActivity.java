@@ -55,6 +55,8 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     private boolean timeTrial;
     private CountDownTimer countDownTimer;
 
+    private GameDBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -89,6 +91,9 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             addLandscapeViews();
         }
         createTimer();
+
+        // Get a reference to the instance of DataBase
+        dbHelper = DataBase.getDbHelper();
 
         //if (savedInstanceState != null)
           //  recoverSavedInstance(savedInstanceState);
@@ -411,6 +416,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         generalLayout.addView(returnMenuButton);
 
         // GUARDAR PARTIDA DB
+        dbHelper.insertGame(game.getLanguage(), game.getMode(), game.getWord(), win ? 1 : 0, game.getNtries());
 
     }
     private void paintLetters(String palabra, int nTry){

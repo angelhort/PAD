@@ -33,6 +33,8 @@
             android:name=".HowToPlayActivity"
             android:exported="false" />
         <activity
+            android:name=".DataBase"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
