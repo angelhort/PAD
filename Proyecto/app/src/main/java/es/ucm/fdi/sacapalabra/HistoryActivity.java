@@ -38,8 +38,8 @@ public class HistoryActivity extends BaseActivity {
         setStatistics();
 
         // Get a reference to the instance of DataBase
-        //dbHelper = DataBase.getDbHelper();
-        //displayGameHistory();
+        dbHelper = DataBase.getDbHelper(this.getApplicationContext());
+        displayGameHistory();
     }
 
     private void setStatistics(){

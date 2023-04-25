@@ -80,7 +80,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         setContentView(generalLayout);
 
         // Get a reference to the instance of DataBase
-        dbHelper = DataBase.getDbHelper();
+        dbHelper = DataBase.getDbHelper(this.getApplicationContext());
 
         //if (savedInstanceState != null)
            // recoverSavedInstance(savedInstanceState);
@@ -307,7 +307,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         int wins = sharedPreferences.getInt("wins", 0);
         
         // GUARDAR PARTIDA DB
-        // dbHelper.insertGame(game.getLanguage(), game.getMode(), game.getWord(), win ? 1 : 0, game.getNtries());
+        dbHelper.insertGame(game.getLanguage(), game.getMode(), game.getWord(), win ? 1 : 0, game.getNtries());
 
         if(win) {
             // Guardar victorias para luego hacer el porcentaje

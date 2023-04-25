@@ -1,19 +1,16 @@
 package es.ucm.fdi.sacapalabra;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 public class DataBase extends Application {
     private static GameDBHelper dbHelper;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        dbHelper = new GameDBHelper(getApplicationContext());
-        Log.d("DataBase", "onCreate() called");
-    }
-
-    public static GameDBHelper getDbHelper() {
+    public static GameDBHelper getDbHelper(Context context) {
+        if(dbHelper == null){
+            dbHelper = new GameDBHelper(context);
+        }
         return dbHelper;
     }
 }
