@@ -52,7 +52,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     private boolean colorblind;
     private boolean timeTrial;
     private CountDownTimer countDownTimer;
-
     private GameDBHelper dbHelper;
 
     @Override
@@ -62,7 +61,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String theme = sharedPreferences.getString("theme", "dark");
         colorblind = sharedPreferences.getBoolean("colorblind",false);
-        setTheme(theme);
 
         // Crear objetos
         Intent intent = getIntent();
@@ -76,7 +74,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             addViews(false);
 
         getAPIword();
-        createTimer();
+        createTimer(60000);
         setContentView(generalLayout);
 
         // Get a reference to the instance of DataBase
@@ -86,12 +84,13 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
            //recoverSavedInstance(savedInstanceState);
     }
 
-    private void createTimer() {
+    private void createTimer(long time) {
 
         if(timeTrial) {
-            countDownTimer = new CountDownTimer(5000, 1000) {
+            countDownTimer = new CountDownTimer(time, 1000) {
                 public void onTick(long millisUntilFinished) {
                     // Actualizar la etiqueta de texto con el tiempo restante
+                    game.setTime(millisUntilFinished);
                     timeText.setText(R.string.timeRemaining);
                     timeText.append(" ");
                     timeText.append(String.valueOf(millisUntilFinished / 1000));
@@ -109,7 +108,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             countDownTimer = null;
         }
     }
-
     private void addViews(boolean orientation) {
 
         generalLayout = new LinearLayout(this);
@@ -185,7 +183,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         generalLayout.addView(boardLayout);
         generalLayout.addView(buttonsLayout);
     }
-
     private void createBoard(boolean orientation) {
 
         int rows = game.getNtries();
@@ -286,14 +283,15 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         returnMenuButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_arrow_back,0,0,0);
         returnMenuButton.setPadding(10,10,10,10);
         returnMenuButton.setBackgroundColor(getResources().getColor(R.color.grey,getTheme()));
-        ;
         returnMenuButton.setLayoutParams(layoutParams);
         returnMenuButton.setOnClickListener(returnMenuListener);
 
         // Añadir vistas
-        buttonsLayout.removeView(timeText);
         buttonsLayout.addView(endGameText);
-        buttonsLayout.addView(timeText);
+        if(timeTrial) {
+            buttonsLayout.removeView(timeText);
+            buttonsLayout.addView(timeText);
+        }
         buttonsLayout.addView(solutionText);
         buttonsLayout.addView(playAgainButton);
         buttonsLayout.addView(returnMenuButton);
@@ -308,7 +306,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         int wins = sharedPreferences.getInt("wins", 0);
         
         // GUARDAR PARTIDA DB
-        dbHelper.insertGame(game.getLanguage(), game.getMode(), game.getWord(), win ? 1 : 0, game.getNtries());
+        // dbHelper.insertGame(game.getLanguage(), game.getMode(), game.getWord(), win ? 1 : 0, game.getNtries());
 
         if(win) {
             // Guardar victorias para luego hacer el porcentaje
@@ -466,6 +464,12 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("currentWord", game.getWord());
+        outState.putInt("nTries", game.getActualTry());
+
+
+        if(timeTrial)
+            outState.putLong("currentWord", game.getTime());
+
     }
 
     private void recoverSavedInstance(Bundle savedInstanceState) {

@@ -3,6 +3,8 @@ package es.ucm.fdi.sacapalabra;
 import android.content.Intent;
 import android.util.Log;
 
+import java.util.List;
+
 public class Game {
 
     private String word;
@@ -10,8 +12,11 @@ public class Game {
     private String mode;
     private int ntries;
     private int lenght;
+    private long time;
 
     private int actualTry;
+
+    private List<String> wordsTried;
 
     public Game(String idioma, String modo, int intentos, int longitud){
         language = idioma;
@@ -42,6 +47,16 @@ public class Game {
     }
     public int getActualTry(){return actualTry;}
     public void incrementTry(){actualTry++;}
+    public void setTime(long tiempo){
+        time = tiempo;
+    }
+    public long getTime(){
+        return time;
+    }
+    public List<String> getWordsTried(){
+        return wordsTried;
+    }
+
 
     public boolean validateWord(String palabra){
 
