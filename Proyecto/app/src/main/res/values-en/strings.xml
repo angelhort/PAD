@@ -84,6 +84,8 @@
     <string name="loseText">¡ YOU LOSE !</string>
     <string name="playAgain"> Play again </string>
     <string name="returnMenu"> Go back to main menu </string>
+    <string name="timeRemaining"> Remaining time: </string>
+    <string name="noTime"> Time\'s up! </string>
 
     <!-- Preferences -->>
     <string name="pref_language1">Establecer el idioma de la interfaz en español</string>

@@ -75,15 +75,17 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         else
             addViews(false);
 
-        getAPIword();
-        createTimer(60000);
+        if (savedInstanceState != null) {
+            recoverSavedInstance(savedInstanceState);
+        } else {
+            getAPIword();
+            if(timeTrial) createTimer(60000);
+        }
+
         setContentView(generalLayout);
 
         // Get a reference to the instance of DataBase
-        dbHelper = DataBase.getDbHelper(this.getApplicationContext());
-
-        //if (savedInstanceState != null)
-           // recoverSavedInstance(savedInstanceState);
+        dbHelper = DataBase.getDbHelper();
     }
 
     private void createTimer(long time) {
@@ -341,7 +343,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         String letra;
 
         for(int i = 0; i < palabra.length();i++) {
-            letra = String.valueOf(palabra.charAt(i));
+            letra = String.valueOf(palabra.charAt(i)).toLowerCase();
             if(game.getWord().contains(letra)) {
                 if (String.valueOf(game.getWord().charAt(i)).equals(letra)) {
                     if(!colorblind)
@@ -419,7 +421,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     }
     @Override
     public void onWordLoaded(String word) {
-        game.setWord("leves");
+        game.setWord(word);
         Log.d("inGame", "Palabra cargada correctamente");
     }
 
@@ -434,7 +436,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                 inputText.setText("");
                 paintLetters(palabra,game.getActualTry());
                 game.incrementTry();
-
+                game.addWord(palabra);
                 if (game.isSolution(palabra)) finishGame(true);
                 else if (game.getActualTry() == game.getNtries()) finishGame(false);
 
@@ -463,7 +465,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("currentWord", game.getWord());
-        outState.putInt("nTries", game.getActualTry());
+        outState.putInt("actualTry", game.getActualTry());
         outState.putStringArrayList("wordsTried", game.getWordsTried());
         if(timeTrial)
             outState.putLong("actualTime", game.getTime());
@@ -473,15 +475,20 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     private void recoverSavedInstance(Bundle savedInstanceState) {
         // Recuperar la instancia si se ha cambiado la configuración
         if (savedInstanceState != null) {
-            String wordSelected = savedInstanceState.getString("language");
-            int nTries = savedInstanceState.getInt("nTries");
             ArrayList<String> words = savedInstanceState.getStringArrayList("wordsTried");
 
+            game.setWord(savedInstanceState.getString("currentWord"));
+            game.setActualTry(savedInstanceState.getInt("nTries"));
+            game.setWordsTried(savedInstanceState.getStringArrayList("wordsTried"));
+
+            int i = 0;
+            for(String b : game.getWordsTried()){
+                paintLetters(b,i);
+                i++;
+            }
+
             if(timeTrial)
-                savedInstanceState.getLong("actualTime");
-
-
-
+                createTimer(savedInstanceState.getLong("actualTime"));
 
         }
     }

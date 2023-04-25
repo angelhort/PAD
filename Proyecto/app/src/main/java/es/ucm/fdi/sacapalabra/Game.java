@@ -22,6 +22,7 @@ public class Game {
         ntries = intentos;
         lenght = longitud;
         actualTry = 0;
+        wordsTried = new ArrayList<>();
     }
 
     public void setWord(String palabra){
@@ -43,7 +44,12 @@ public class Game {
     public int getLenght(){
         return lenght;
     }
-    public int getActualTry(){return actualTry;}
+    public int getActualTry(){
+        return actualTry;
+    }
+    public void setActualTry(int intento){
+        actualTry = intento;
+    }
     public void incrementTry(){actualTry++;}
     public void setTime(long tiempo){
         time = tiempo;
@@ -53,6 +59,12 @@ public class Game {
     }
     public ArrayList<String> getWordsTried(){
         return wordsTried;
+    }
+    public void setWordsTried(ArrayList<String> palabras){
+        wordsTried.addAll(palabras);
+    }
+    public void addWord(String palabra){
+        wordsTried.add(palabra);
     }
 
     public boolean validateWord(String palabra){
