@@ -26,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -61,6 +62,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String theme = sharedPreferences.getString("theme", "dark");
         colorblind = sharedPreferences.getBoolean("colorblind",false);
+        setTheme(theme);
 
         // Crear objetos
         Intent intent = getIntent();
@@ -81,7 +83,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         dbHelper = DataBase.getDbHelper();
 
         //if (savedInstanceState != null)
-           //recoverSavedInstance(savedInstanceState);
+           // recoverSavedInstance(savedInstanceState);
     }
 
     private void createTimer(long time) {
@@ -196,9 +198,9 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         screenHeight =(int) (0.9 * Resources.getSystem().getDisplayMetrics().heightPixels);
 
         if(orientation) {
-            maxSquareSize = (screenHeight / 2)  / cols;
+            maxSquareSize = (screenHeight / 2)  / Math.max(cols,rows);
         } else {
-            maxSquareSize = (screenWidth / 2)  / cols;
+            maxSquareSize = (screenWidth / 2)  / Math.max(cols,rows);
         }
 
         squareSize = maxSquareSize;
@@ -246,7 +248,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
 
         TextView solutionText = new TextView(this);
         solutionText.setLayoutParams(layoutParams);
-
 
         if(win) {
             endGameText.setText(R.string.winText);
@@ -403,7 +404,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
 
     }
-
     private void setTheme(String theme){
         if (theme.equals("dark")) {
             setTheme(R.style.Theme_Default);
@@ -411,7 +411,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             setTheme(R.style.Theme_White);
         }
     }
-
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -420,7 +419,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     }
     @Override
     public void onWordLoaded(String word) {
-        game.setWord(word);
+        game.setWord("leves");
         Log.d("inGame", "Palabra cargada correctamente");
     }
 
@@ -465,22 +464,24 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         super.onSaveInstanceState(outState);
         outState.putString("currentWord", game.getWord());
         outState.putInt("nTries", game.getActualTry());
-
-
+        outState.putStringArrayList("wordsTried", game.getWordsTried());
         if(timeTrial)
-            outState.putLong("currentWord", game.getTime());
+            outState.putLong("actualTime", game.getTime());
 
     }
 
     private void recoverSavedInstance(Bundle savedInstanceState) {
         // Recuperar la instancia si se ha cambiado la configuración
         if (savedInstanceState != null) {
-            String languageSelected = savedInstanceState.getString("language");
-            String modeSelected = savedInstanceState.getString("mode");
-            int nTriesSelected = savedInstanceState.getInt("tries");
-            int lenghtSelected = savedInstanceState.getInt("lenght");
+            String wordSelected = savedInstanceState.getString("language");
+            int nTries = savedInstanceState.getInt("nTries");
+            ArrayList<String> words = savedInstanceState.getStringArrayList("wordsTried");
 
-            // FALTA TERMINAR
+            if(timeTrial)
+                savedInstanceState.getLong("actualTime");
+
+
+
 
         }
     }
