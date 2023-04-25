@@ -1,6 +1,5 @@
 package es.ucm.fdi.sacapalabra;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.loader.app.LoaderManager;
 
@@ -9,14 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +26,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,12 +40,14 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     private Game game;
     private LinearLayout generalLayout;
 
-    private LinearLayout leftColumn;
+    private LinearLayout boardLayout;
+    private LinearLayout buttonsLayout;
     private TextView titleText;
     private TextView timeText;
     private EditText inputText;
     private Button submitButton;
     private TextView[][] myTextViews;
+    private LinearLayout.LayoutParams layoutParams;
 
     private boolean colorblind;
     private boolean timeTrial;
@@ -64,40 +62,29 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         colorblind = sharedPreferences.getBoolean("colorblind",false);
         setTheme(theme);
 
-        // Crear game object y tablero (y temporizador en caso de ser contrarreloj)
+        // Crear objetos
         Intent intent = getIntent();
         game = new Game(intent.getStringExtra("idioma"), intent.getStringExtra("modo"),intent.getIntExtra("intentos", 0),intent.getIntExtra("longitud", 0));
-        myTextViews = new TextView[game.getNtries()][game.getLenght()];
         if(game.getMode().equals("contrarreloj")) timeTrial = true;
 
-        // Restaurar la palabra del juego si existe
-        if (savedInstanceState != null) {
-            String currentWord = savedInstanceState.getString("currentWord");
-            if (currentWord != null) {
-                game.setWord(currentWord);
-            }
-        } else {
-            // Obtener palabra del juego si no existe
-            getAPIword();
-        }
-
         // Añadir vistas a la actividad
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            addViews();
-        } else {
-            addLandscapeViews();
-        }
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            addViews(true);
+        else
+            addViews(false);
+
+        getAPIword();
         createTimer();
+        setContentView(generalLayout);
 
         //if (savedInstanceState != null)
-          //  recoverSavedInstance(savedInstanceState);
+           //recoverSavedInstance(savedInstanceState);
     }
 
     private void createTimer() {
 
         if(timeTrial) {
-            countDownTimer = new CountDownTimer(60000, 1000) {
+            countDownTimer = new CountDownTimer(5000, 1000) {
                 public void onTick(long millisUntilFinished) {
                     // Actualizar la etiqueta de texto con el tiempo restante
                     timeText.setText(R.string.timeRemaining);
@@ -105,7 +92,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                     timeText.append(String.valueOf(millisUntilFinished / 1000));
                     if(String.valueOf(millisUntilFinished / 1000).equals("10"))
                         timeText.setTextColor(getResources().getColor(R.color.red,getTheme()));
-
                 }
 
                 @Override
@@ -119,48 +105,59 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
     }
 
-    private void addViews(){
+    private void addViews(boolean orientation) {
 
         generalLayout = new LinearLayout(this);
-        generalLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        generalLayout.setOrientation(LinearLayout.VERTICAL);
+        generalLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        if(orientation) {
+            generalLayout.setOrientation(LinearLayout.VERTICAL);
+            layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0,10,0,0);
+        } else {
+            generalLayout.setOrientation(LinearLayout.HORIZONTAL);
+            layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,1);
+            layoutParams.setMargins(10,20,10,0);
+        }
+        layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+
+        boardLayout = new LinearLayout(this);
+        boardLayout.setOrientation(LinearLayout.VERTICAL);
+        boardLayout.setLayoutParams(layoutParams);
+
+        buttonsLayout = new LinearLayout(this);
+        buttonsLayout.setLayoutParams(layoutParams);
+        buttonsLayout.setOrientation(LinearLayout.VERTICAL);
 
         // Header Title
         titleText = new TextView(this);
-        LinearLayout.LayoutParams titleLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        titleLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        titleLayoutParams.setMargins(0,50,0,0);
-        titleText.setLayoutParams(titleLayoutParams);
+        titleText.setLayoutParams(layoutParams);
 
         titleText.setText(R.string.sacapalabra);
         titleText.setTextSize(48);
         titleText.setGravity(Gravity.CENTER);
-        generalLayout.addView(titleText);
 
-        createBoard(game.getNtries(), game.getLenght());
+        // Add view to layout
+        if(orientation) generalLayout.addView(titleText);
+        else buttonsLayout.addView(titleText);
 
         // Tiempo (solo si estamos en modo contrarreloj
-
-        if(timeTrial) {
+        if (timeTrial) {
             timeText = new TextView(this);
-            LinearLayout.LayoutParams timeTextParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-            timeTextParams.gravity = Gravity.CENTER_HORIZONTAL;
-            timeTextParams.setMargins(0, 50, 0, 0);
-            timeText.setLayoutParams(timeTextParams);
+            timeText.setLayoutParams(layoutParams);
             timeText.setTextSize(20);
             timeText.setGravity(Gravity.CENTER);
+            buttonsLayout.addView(timeText);
         }
 
         // Input Text for words
         inputText = new EditText(this);
-        LinearLayout.LayoutParams inputLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        inputLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        inputLayoutParams.setMargins(0,50,0,0);
-        inputText.setLayoutParams(inputLayoutParams);
+        inputText.setLayoutParams(layoutParams);
         inputText.setHint(R.string.inputText);
         inputText.setTextSize(28);
         inputText.setGravity(Gravity.CENTER);
         inputText.setHintTextColor(ContextCompat.getColor(this, R.color.theme_green));
+        buttonsLayout.addView(inputText);
 
         // Submit button to send the word
         submitButton = new Button(this);
@@ -170,188 +167,88 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         submitButton.setText(R.string.confirmWord);
         submitButton.setTextSize(20);
 
-        LinearLayout.LayoutParams confirmButtonParams = (new LinearLayout.LayoutParams(240, 240, 1));
+        LinearLayout.LayoutParams confirmButtonParams = (new LinearLayout.LayoutParams(240, 240));
         confirmButtonParams.gravity = Gravity.CENTER_HORIZONTAL;
         confirmButtonParams.setMargins(0,50,0,0);
         submitButton.setLayoutParams(confirmButtonParams);
         submitButton.setOnClickListener(sendWordListener);
+        buttonsLayout.addView(submitButton);
 
-        // Add final views
-        if(timeTrial){
-            generalLayout.addView(timeText);
+        // Add views
+
+        createBoard(orientation);
+        generalLayout.addView(boardLayout);
+        generalLayout.addView(buttonsLayout);
+    }
+
+    private void createBoard(boolean orientation) {
+
+        int rows = game.getNtries();
+        int cols = game.getLenght();
+        myTextViews = new TextView[game.getNtries()][game.getLenght()];
+
+        int screenWidth,screenHeight = 0;
+        int marginSize,maxSquareSize,maxSquareSize2, squareSize;
+
+        screenWidth = (int) (0.85 * Resources.getSystem().getDisplayMetrics().widthPixels);
+        screenHeight =(int) (0.9 * Resources.getSystem().getDisplayMetrics().heightPixels);
+
+        if(orientation) {
+            maxSquareSize = (screenHeight / 2)  / cols;
+        } else {
+            maxSquareSize = (screenWidth / 2)  / cols;
         }
-        generalLayout.addView(inputText);
-        generalLayout.addView(submitButton);
-    }
 
-    private void addLandscapeViews(){
+        squareSize = maxSquareSize;
 
-    generalLayout = new LinearLayout(this);
-    generalLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-    generalLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-    // Create two columns for landscape mode
-    leftColumn = new LinearLayout(this);
-    leftColumn.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-    leftColumn.setOrientation(LinearLayout.VERTICAL);
-    createBoard(game.getNtries(), game.getLenght());
-    generalLayout.addView(leftColumn);
-
-    LinearLayout rightColumn = new LinearLayout(this);
-    rightColumn.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-    rightColumn.setOrientation(LinearLayout.VERTICAL);
-
-    // Tiempo (solo si estamos en modo contrarreloj
-    if(timeTrial) {
-        timeText = new TextView(this);
-        LinearLayout.LayoutParams timeTextParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        timeTextParams.gravity = Gravity.CENTER_HORIZONTAL;
-        timeTextParams.setMargins(0, 50, 0, 0);
-        timeText.setLayoutParams(timeTextParams);
-        timeText.setTextSize(20);
-        timeText.setGravity(Gravity.CENTER);
-        rightColumn.addView(timeText);
-    }
-
-    // Input Text for words
-    inputText = new EditText(this);
-    LinearLayout.LayoutParams inputLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-    inputLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-    inputLayoutParams.setMargins(0,50,0,0);
-    inputText.setLayoutParams(inputLayoutParams);
-    inputText.setHint(R.string.inputText);
-    inputText.setTextSize(28);
-    inputText.setGravity(Gravity.CENTER);
-    inputText.setHintTextColor(ContextCompat.getColor(this, R.color.theme_green));
-    rightColumn.addView(inputText);
-
-    // Submit button to send the word
-    submitButton = new Button(this);
-    submitButton.setBackgroundResource(R.drawable.roundbutton);
-    submitButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-    submitButton.setGravity(Gravity.CENTER);
-    submitButton.setText(R.string.confirmWord);
-    submitButton.setTextSize(20);
-
-    LinearLayout.LayoutParams confirmButtonParams = (new LinearLayout.LayoutParams(240, 240, 1));
-    confirmButtonParams.gravity = Gravity.CENTER_HORIZONTAL;
-    confirmButtonParams.setMargins(0,50,0,0);
-    submitButton.setLayoutParams(confirmButtonParams);
-    submitButton.setOnClickListener(sendWordListener);
-    rightColumn.addView(submitButton);
-
-    // Add final views
-    if(timeTrial){
-        generalLayout.addView(timeText);
-    }
-
-    generalLayout.addView(rightColumn);
-
-}
-    private void createBoard(int rows, int cols) {
-
-        // Layout para tablero
-        LinearLayout boardLayout = new LinearLayout(this);
-        LinearLayout.LayoutParams boardLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-
-        boardLayout.setOrientation(LinearLayout.VERTICAL);
-        boardLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        boardLayoutParams.setMargins(0,50,0,50);
-
-        boardLayout.setLayoutParams(boardLayoutParams);
-
-        // Creamos los LinearLayouts horizontales y los TextViews dentro de ellos
-        LinearLayout linearLayout;
-        TextView textView;
-
-        int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels - 30;       // 50 actua de margen
-        int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-        int marginSize = 3; // Grid margin
-        int maxSquareSize = (screenWidth - 2 * marginSize - (cols - 1) * 5) / cols;
-        int squareSize = Math.min(Math.min(maxSquareSize, (screenHeight - 2 * marginSize - (rows - 1) * 5) / rows), 150);
+        LinearLayout.LayoutParams layoutParamsText = (new LinearLayout.LayoutParams(squareSize, squareSize,1));
+        layoutParamsText.setMargins(4,4,4,4);
 
         for (int i = 0; i < rows; i++) {
-            linearLayout = new LinearLayout(this);
-            LinearLayout.LayoutParams rowLayout = (new LinearLayout.LayoutParams(squareSize*cols, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+            LinearLayout linearLayout = new LinearLayout(this);
+            LinearLayout.LayoutParams rowLayout = (new LinearLayout.LayoutParams(squareSize*cols, ViewGroup.LayoutParams.WRAP_CONTENT));
             rowLayout.gravity = Gravity.CENTER;
+            rowLayout.setMargins(0,0,0,0);
 
             linearLayout.setLayoutParams(rowLayout);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             linearLayout.setWeightSum(cols);
 
             for (int j = 0; j < cols; j++) {
-                textView = new TextView(this);
-                LinearLayout.LayoutParams layoutParamsText = (new LinearLayout.LayoutParams(squareSize, squareSize, 1));
-                layoutParamsText.setMargins(4,4,4,4);
-                textView.setLayoutParams(layoutParamsText);
-                textView.setBackgroundResource(R.drawable.textview_border_incorrect);
-                textView.setTextSize(24);
-                textView.setGravity(Gravity.CENTER);
-                textView.setTypeface(null, Typeface.BOLD);
+                myTextViews[i][j] = new TextView(this);
+                myTextViews[i][j].setLayoutParams(layoutParamsText);
+                myTextViews[i][j].setBackgroundResource(R.drawable.textview_border_incorrect);
+                myTextViews[i][j].setTextSize(24);
+                myTextViews[i][j].setGravity(Gravity.CENTER);
+                myTextViews[i][j].setTypeface(null, Typeface.BOLD);
 
-                myTextViews[i][j] = textView;
-                linearLayout.addView(textView);
+                linearLayout.addView(myTextViews[i][j]);
             }
 
             boardLayout.addView(linearLayout);
             Log.d("InGame" ,"Creado linearLayout");
         }
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            generalLayout.addView(boardLayout);
-        } else {
-            leftColumn.addView(boardLayout);
-        }
-
-        setContentView(generalLayout);
     }
     private void finishGame(boolean win){
 
-        // Borrar antiguos botones
-        // Añadir botones de acierto o fallo y sus posibilidades
-        // Crear listener con las acciones de los botones debidos
-
-        generalLayout.removeView(inputText);
-        generalLayout.removeView(submitButton);
+        // Borrar botones anteriores
+        buttonsLayout.removeView(inputText);
+        buttonsLayout.removeView(submitButton);
 
         // Crear texto de acierto/fallo
 
         TextView endGameText = new TextView(this);
-        LinearLayout.LayoutParams endGameLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        endGameLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        endGameLayoutParams.setMargins(0,50,0,0);
-        endGameText.setLayoutParams(endGameLayoutParams);
+        endGameText.setLayoutParams(layoutParams);
         endGameText.setTextSize(48);
         endGameText.setGravity(Gravity.CENTER);
 
         TextView solutionText = new TextView(this);
-        LinearLayout.LayoutParams solutionLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        solutionLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        solutionLayoutParams.setMargins(0,20,0,0);
-        solutionText.setLayoutParams(solutionLayoutParams);
+        solutionText.setLayoutParams(layoutParams);
 
-        //Guardar partidas
-        int plays = sharedPreferences.getInt("plays", 0);
-        sharedPreferences.edit().putInt("plays", plays+1).apply();
-        plays++;
-        int wins = sharedPreferences.getInt("wins", 0);
 
         if(win) {
             endGameText.setText(R.string.winText);
             endGameText.setTextColor(getResources().getColor(R.color.green,getTheme()));
-            //Guardar victorias para luego hacer el porcentaje
-            sharedPreferences.edit().putInt("wins", wins+1).apply();
-            wins++;
-
-            //Racha victorias
-            int currentStreak = sharedPreferences.getInt("currentStreak", 0);
-            sharedPreferences.edit().putInt("currentStreak", currentStreak+1).apply();
-            currentStreak++;
-
-            //Mejor racha
-            int bestStreak = sharedPreferences.getInt("bestStreak", 0);
-            if(currentStreak > bestStreak) {
-                sharedPreferences.edit().putInt("bestStreak", currentStreak).apply();
-            }
         }
         else {
             endGameText.setText(R.string.loseText);
@@ -362,19 +259,9 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             solutionText.setText(R.string.solutionText);
             solutionText.append(" ");
             solutionText.append(game.getWord());
-
-            //Racha de victorias
-            sharedPreferences.edit().putInt("currentStreak", 0).apply();
         }
 
-        //Porcentaje partidas
-        sharedPreferences.edit().putFloat("percentage", (Float.valueOf(wins)/Float.valueOf(plays))*100).apply();
-        Log.d("w", String.valueOf(wins));
-        Log.d("p", String.valueOf(plays));
-        Log.d("%", String.valueOf((Float.valueOf(wins)/Float.valueOf(plays))*100));
-
-        // Crear boton de jugar de nuevo
-
+        // Boton de jugar de nuevo
         Button playAgainButton = new Button(this);
         playAgainButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         playAgainButton.setGravity(Gravity.CENTER);
@@ -382,13 +269,10 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         playAgainButton.setTextSize(28);
         playAgainButton.setBackgroundColor(getResources().getColor(R.color.theme_green,getTheme()));
 
-        LinearLayout.LayoutParams playAgainLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        playAgainLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        playAgainButton.setLayoutParams(playAgainLayoutParams);
+        playAgainButton.setLayoutParams(layoutParams);
         playAgainButton.setOnClickListener(playAgainListener);
 
-        // Crear boton de volver al menu principal
-
+        // Boton de volver al menu principal
         Button returnMenuButton = new Button(this);
         returnMenuButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         returnMenuButton.setGravity(Gravity.CENTER);
@@ -397,21 +281,53 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         returnMenuButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_arrow_back,0,0,0);
         returnMenuButton.setPadding(10,10,10,10);
         returnMenuButton.setBackgroundColor(getResources().getColor(R.color.grey,getTheme()));
-
-        LinearLayout.LayoutParams returnMenuLayoutParams = (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        returnMenuLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        returnMenuLayoutParams.setMargins(0,50,0,0);
-        returnMenuButton.setLayoutParams(returnMenuLayoutParams);
+        ;
+        returnMenuButton.setLayoutParams(layoutParams);
         returnMenuButton.setOnClickListener(returnMenuListener);
 
         // Añadir vistas
-        generalLayout.addView(endGameText);
-        generalLayout.addView(solutionText);
-        generalLayout.addView(playAgainButton);
-        generalLayout.addView(returnMenuButton);
+        buttonsLayout.removeView(timeText);
+        buttonsLayout.addView(endGameText);
+        buttonsLayout.addView(timeText);
+        buttonsLayout.addView(solutionText);
+        buttonsLayout.addView(playAgainButton);
+        buttonsLayout.addView(returnMenuButton);
 
-        // GUARDAR PARTIDA DB
+        saveStats(win);
+    }
+    private void saveStats(boolean win){
+        // Guardar estadisticas partida
+        int plays = sharedPreferences.getInt("plays", 0);
+        sharedPreferences.edit().putInt("plays", plays + 1).apply();
+        plays++;
+        int wins = sharedPreferences.getInt("wins", 0);
 
+        if(win) {
+            // Guardar victorias para luego hacer el porcentaje
+            sharedPreferences.edit().putInt("wins", wins+1).apply();
+            wins++;
+
+            // Racha victorias
+            int currentStreak = sharedPreferences.getInt("currentStreak", 0);
+            sharedPreferences.edit().putInt("currentStreak", currentStreak + 1).apply();
+            currentStreak++;
+
+            // Mejor racha
+            int bestStreak = sharedPreferences.getInt("bestStreak", 0);
+            if(currentStreak > bestStreak) {
+                sharedPreferences.edit().putInt("bestStreak", currentStreak).apply();
+            }
+        }
+        else {
+            // Racha de victorias
+            sharedPreferences.edit().putInt("currentStreak", 0).apply();
+        }
+
+        //Porcentaje partidas
+        sharedPreferences.edit().putFloat("percentage", (wins/plays)*100).apply();
+        Log.d("w", String.valueOf(wins));
+        Log.d("p", String.valueOf(plays));
+        Log.d("%", String.valueOf((wins/plays)*100));
     }
     private void paintLetters(String palabra, int nTry){
 
@@ -474,7 +390,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                 int index = random.nextInt(words.size());
                 String randomWord = words.get(index);
                 game.setWord(randomWord);
-                System.out.println("fichero: "+game.getWord());
+                System.out.println("fichero: "+ game.getWord());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -538,7 +454,8 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
     };
 
-  protected void onSaveInstanceState(Bundle outState) {
+
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("currentWord", game.getWord());
     }
@@ -554,7 +471,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             // FALTA TERMINAR
 
         }
-
     }
 }
 
