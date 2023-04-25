@@ -3,7 +3,9 @@ package es.ucm.fdi.sacapalabra;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +21,8 @@ public class HistoryActivity extends BaseActivity {
     private TextView textPartidas;
     private TextView textVictoriasPorcentaje;
 
+    private GameDBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,9 @@ public class HistoryActivity extends BaseActivity {
 
         setStatistics();
 
+        // Get a reference to the instance of DataBase
+        dbHelper = DataBase.getDbHelper();
+        displayGameHistory();
     }
 
     private void setStatistics(){
@@ -54,6 +61,24 @@ public class HistoryActivity extends BaseActivity {
         textMejorRachaVictorias = findViewById(R.id.textViewMejorRacha);
         textPartidas = findViewById(R.id.textViewPartidasJugadas);
         textVictoriasPorcentaje = findViewById(R.id.textViewVictorias);
+    }
+
+    private void displayGameHistory() {
+        Cursor cursor = dbHelper.getAllGames();
+
+        // Iterate through the cursor to get the game data
+        while (cursor.moveToNext()) {
+            String language = cursor.getString(cursor.getColumnIndexOrThrow(GameContract.GameEntry.COLUMN_NAME_LANGUAGE));
+            String mode = cursor.getString(cursor.getColumnIndexOrThrow(GameContract.GameEntry.COLUMN_NAME_MODE));
+            String word = cursor.getString(cursor.getColumnIndexOrThrow(GameContract.GameEntry.COLUMN_NAME_WORD));
+            int tries = cursor.getInt(cursor.getColumnIndexOrThrow(GameContract.GameEntry.COLUMN_NAME_TRIES));
+            int result = cursor.getInt(cursor.getColumnIndexOrThrow(GameContract.GameEntry.COLUMN_NAME_RESULT));
+            Log.d("palabra", word);
+
+            // Do something with the game data
+        }
+
+        cursor.close();
     }
     private void setTheme(String theme){
         if (theme.equals("dark")) {

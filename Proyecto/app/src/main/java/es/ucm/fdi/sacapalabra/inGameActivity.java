@@ -53,6 +53,8 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     private boolean timeTrial;
     private CountDownTimer countDownTimer;
 
+    private GameDBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -76,6 +78,9 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         getAPIword();
         createTimer();
         setContentView(generalLayout);
+
+        // Get a reference to the instance of DataBase
+        dbHelper = DataBase.getDbHelper();
 
         //if (savedInstanceState != null)
            //recoverSavedInstance(savedInstanceState);
@@ -301,6 +306,9 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         sharedPreferences.edit().putInt("plays", plays + 1).apply();
         plays++;
         int wins = sharedPreferences.getInt("wins", 0);
+        
+        // GUARDAR PARTIDA DB
+        dbHelper.insertGame(game.getLanguage(), game.getMode(), game.getWord(), win ? 1 : 0, game.getNtries());
 
         if(win) {
             // Guardar victorias para luego hacer el porcentaje
