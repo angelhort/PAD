@@ -350,7 +350,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                         myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_correct);
                     else
                         myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_correct_colorblind);
-                } else {
+                } else if (palabra.indexOf(letra) == i && palabra.indexOf(letra) != i) {
                     myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_wrongpos);
                 }
             }
@@ -422,7 +422,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     @Override
     public void onWordLoaded(String word) {
         game.setWord(word);
-        Log.d("inGame", "Palabra cargada correctamente");
+        Log.d("inGame", "Palabra cargada correctamente: "+word);
     }
 
     View.OnClickListener sendWordListener = new View.OnClickListener() {

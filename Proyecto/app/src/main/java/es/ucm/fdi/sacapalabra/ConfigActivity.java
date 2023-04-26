@@ -12,6 +12,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -49,6 +50,8 @@ public class ConfigActivity extends BaseActivity {
         String theme = sharedPreferences.getString("theme", "dark");
         boolean colors = sharedPreferences.getBoolean("colorblind", false);
         boolean notifs = sharedPreferences.getBoolean("notifs", false);
+
+        setLanguage(language);
         setTheme(theme);
 
         setContentView(R.layout.activity_config);

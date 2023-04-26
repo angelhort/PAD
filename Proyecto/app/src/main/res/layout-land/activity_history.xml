@@ -45,7 +45,7 @@
 
             <TextView
                 android:id="@+id/textView13"
-                android:layout_width="131dp"
+                android:layout_width="139dp"
                 android:layout_height="wrap_content"
                 android:text="@string/games"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -77,10 +77,10 @@
 
             <TextView
                 android:id="@+id/textViewVictorias"
-                android:layout_width="113dp"
+                android:layout_width="131dp"
                 android:layout_height="match_parent"
                 android:gravity="right"
-                android:text="0" />
+                android:text="0.0%" />
         </LinearLayout>
 
         <LinearLayout

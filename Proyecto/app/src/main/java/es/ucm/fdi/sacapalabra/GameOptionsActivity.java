@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -12,6 +15,7 @@ import android.widget.ToggleButton;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class GameOptionsActivity extends BaseActivity {
 
@@ -45,6 +49,9 @@ public class GameOptionsActivity extends BaseActivity {
         // Recuperamos las preferencias
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String theme = sharedPreferences.getString("theme", "dark");
+        String language = sharedPreferences.getString("language", "es");
+
+        setLanguage(language);
         setTheme(theme);
 
         setContentView(R.layout.activity_game_options);
@@ -172,6 +179,15 @@ public class GameOptionsActivity extends BaseActivity {
         } else {
             setTheme(R.style.Theme_White);
         }
+    }
+
+    private void setLanguage(String language) {
+        Locale locale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = locale;
+        res.updateConfiguration(conf, dm);
     }
 
     View.OnClickListener bPlayListener = new View.OnClickListener() {

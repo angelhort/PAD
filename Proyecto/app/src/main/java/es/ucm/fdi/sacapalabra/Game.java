@@ -78,7 +78,7 @@ public class Game {
         return correct;
     }
     public boolean isSolution(String palabra){
-        return word.equals(palabra);
+        return word.trim().equals(palabra.trim());
     }
 
 }

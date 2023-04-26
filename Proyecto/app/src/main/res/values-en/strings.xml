@@ -50,7 +50,7 @@
     <!-- History activity -->
     <string name="statistics">Statistics</string>
     <string name="games">Games</string>
-    <string name="wins">% Wins</string>
+    <string name="wins">% Game Wins</string>
     <string name="currentStreak">Actual win streak</string>
     <string name="bestStreak">Best win streak</string>
     <string name="history">History</string>

@@ -3,8 +3,11 @@ package es.ucm.fdi.sacapalabra;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -32,7 +35,10 @@ public class HistoryActivity extends BaseActivity {
         // Recuperamos las preferencias
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String theme = sharedPreferences.getString("theme", "dark");
+        String language = sharedPreferences.getString("language", "es");
+
         setTheme(theme);
+        setLanguage(language);
 
         setContentView(R.layout.activity_history);
         assignButtons();
@@ -42,6 +48,7 @@ public class HistoryActivity extends BaseActivity {
         // Get a reference to the instance of DataBase
         dbHelper = DataBase.getDbHelper(this.getApplicationContext());
         displayGameHistory();
+
     }
 
     private void setStatistics(){
@@ -90,5 +97,14 @@ public class HistoryActivity extends BaseActivity {
         } else {
             setTheme(R.style.Theme_White);
         }
+    }
+
+    private void setLanguage(String language) {
+        Locale locale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = locale;
+        res.updateConfiguration(conf, dm);
     }
 }
