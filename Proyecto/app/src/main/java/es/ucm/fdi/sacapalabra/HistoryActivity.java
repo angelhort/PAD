@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class HistoryActivity extends BaseActivity {
@@ -65,6 +67,9 @@ public class HistoryActivity extends BaseActivity {
 
     private void displayGameHistory() {
         Cursor cursor = dbHelper.getAllGames();
+        ArrayList<String> lista = new ArrayList<String>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lista);
+        historial.setAdapter(adapter);
 
         // Iterate through the cursor to get the game data
         while (cursor.moveToNext()) {
@@ -74,11 +79,10 @@ public class HistoryActivity extends BaseActivity {
             int tries = cursor.getInt(cursor.getColumnIndexOrThrow(GameContract.GameEntry.COLUMN_NAME_TRIES));
             int result = cursor.getInt(cursor.getColumnIndexOrThrow(GameContract.GameEntry.COLUMN_NAME_RESULT));
             Log.d("palabra", word);
-
-            // Do something with the game data
+            lista.add(word);
         }
-
         cursor.close();
+        adapter.notifyDataSetChanged();
     }
     private void setTheme(String theme){
         if (theme.equals("dark")) {

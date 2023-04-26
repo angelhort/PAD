@@ -85,7 +85,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         setContentView(generalLayout);
 
         // Get a reference to the instance of DataBase
-        dbHelper = DataBase.getDbHelper();
+        dbHelper = DataBase.getDbHelper(this.getApplicationContext());
     }
 
     private void createTimer(long time) {
