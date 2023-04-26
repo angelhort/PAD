@@ -338,25 +338,62 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         Log.d("p", String.valueOf(plays));
         Log.d("%", String.valueOf((wins/plays)*100));
     }
-    private void paintLetters(String palabra, int nTry){
-
+    private void paintLetters(String palabra, int nTry) {
         String letra;
+        boolean letterCorrectlyPlaced, sameLetterCorrectlyPlaced;
 
-        for(int i = 0; i < palabra.length();i++) {
+        for (int i = 0; i < palabra.length(); i++) {
             letra = String.valueOf(palabra.charAt(i)).toLowerCase();
-            if(game.getWord().contains(letra)) {
+            letterCorrectlyPlaced = false;
+            sameLetterCorrectlyPlaced = false;
+
+            if (game.getWord().contains(letra)) {
                 if (String.valueOf(game.getWord().charAt(i)).equals(letra)) {
-                    if(!colorblind)
+                    if (!colorblind) {
                         myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_correct);
-                    else
+                    } else {
                         myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_correct_colorblind);
-                } else if (palabra.indexOf(letra) == i && palabra.indexOf(letra) != i) {
-                    myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_wrongpos);
+                    }
+                    letterCorrectlyPlaced = true;
+                } else {
+                    for (int j = 0; j < palabra.length(); j++) {
+                        if (i != j && String.valueOf(palabra.charAt(j)).toLowerCase().equals(letra)) {
+                            if (String.valueOf(game.getWord().charAt(j)).equals(letra)) {
+                                sameLetterCorrectlyPlaced = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!letterCorrectlyPlaced && !sameLetterCorrectlyPlaced && ((game.getWord().indexOf(letra) < i || game.getWord().lastIndexOf(letra) > i))) {
+                        myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_wrongpos);
+                    }
                 }
             }
             myTextViews[nTry][i].setText(letra.toUpperCase());
         }
     }
+
+
+    private boolean alreadyPaintedSameLetter(String letra, int index, int nTry) {
+        for (int i = 0; i < index; i++) {
+            if (myTextViews[nTry][i].getText().toString().toLowerCase().equals(letra)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean alreadyPainted(String letra, int index, int nTry) {
+        for (int i = 0; i < index; i++) {
+            if (myTextViews[nTry][i].getText().toString().toLowerCase().equals(letra)) {
+                if (game.getWord().charAt(i) != letra.charAt(0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void getAPIword() {
 
         /* Como el juego dispone de jugabilidad local, si tenemos conexión llamaremos a la API para que nos sumistre la palabra
