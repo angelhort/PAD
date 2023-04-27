@@ -75,14 +75,15 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         else
             addViews(false);
 
+        setContentView(generalLayout);
+
+        // Recuperar instancia
         if (savedInstanceState != null) {
             recoverSavedInstance(savedInstanceState);
         } else {
             getAPIword();
             if(timeTrial) createTimer(60000);
         }
-
-        setContentView(generalLayout);
 
         // Get a reference to the instance of DataBase
         dbHelper = DataBase.getDbHelper(this.getApplicationContext());
@@ -373,7 +374,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
     }
 
-
     private boolean alreadyPaintedSameLetter(String letra, int index, int nTry) {
         for (int i = 0; i < index; i++) {
             if (myTextViews[nTry][i].getText().toString().toLowerCase().equals(letra)) {
@@ -382,7 +382,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
         return false;
     }
-
     private boolean alreadyPainted(String letra, int index, int nTry) {
         for (int i = 0; i < index; i++) {
             if (myTextViews[nTry][i].getText().toString().toLowerCase().equals(letra)) {

@@ -54,13 +54,9 @@ public class ConfigActivity extends BaseActivity {
         setLanguage(language);
         setTheme(theme);
 
-        setContentView(R.layout.activity_config);
-        assignButtons();
-        setButtons(language, theme,colors,notifs);
-
         notif = new NotificationCompat.Builder(this, CHANNEL_ID);
         notif.setAutoCancel(true);
-        setTheme(theme);
+
         setContentView(R.layout.activity_config);
         assignButtons();
         setButtons(language, theme, colors, notifs);
@@ -90,7 +86,6 @@ public class ConfigActivity extends BaseActivity {
         notifSwitch.setOnCheckedChangeListener(notifSwitchListener);
         confirm_button.setOnClickListener(confirmListener);
     }
-
     private void setButtons(String language, String theme, boolean colors, boolean notifs) {
 
         if (language.equals("es")) {
@@ -121,6 +116,7 @@ public class ConfigActivity extends BaseActivity {
         notifSwitch.setChecked(notifs);
 
     }
+
     private void setTheme(String theme) {
         if (theme.equals("dark")) {
             setTheme(R.style.Theme_Default);
@@ -149,7 +145,15 @@ public class ConfigActivity extends BaseActivity {
         channel.setDescription("Channel description");
         notifManager.createNotificationChannel(channel);
     }
-
+    private void startNotificationService() {
+        Intent intent = new Intent(this, NotificationService.class);
+        intent.putExtra("notification_enabled", true);
+        startService(intent);
+    }
+    private void stopNotificationService() {
+        Intent intent = new Intent(this, NotificationService.class);
+        stopService(intent);
+    }
 
     private void recoverSavedInstance(Bundle savedInstanceState) {
         // Recuperar la instancia si se ha cambiado la configuración
@@ -259,7 +263,6 @@ public class ConfigActivity extends BaseActivity {
             }
         }
     };
-
     CompoundButton.OnCheckedChangeListener dSwitchListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
@@ -269,7 +272,6 @@ public class ConfigActivity extends BaseActivity {
             }
         }
     };
-
     CompoundButton.OnCheckedChangeListener notifSwitchListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
@@ -284,16 +286,5 @@ public class ConfigActivity extends BaseActivity {
             }
         }
     };
-
-    private void startNotificationService() {
-        Intent intent = new Intent(this, NotificationService.class);
-        intent.putExtra("notification_enabled", true);
-        startService(intent);
-    }
-
-    private void stopNotificationService() {
-        Intent intent = new Intent(this, NotificationService.class);
-        stopService(intent);
-    }
 
 }
