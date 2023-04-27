@@ -336,7 +336,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
 
         //Porcentaje partidas
-        sharedPreferences.edit().putFloat("percentage", (wins/plays)*100).apply();
+        sharedPreferences.edit().putFloat("percentage", ((float)wins/(float)plays)*100).apply();
         Log.d("w", String.valueOf(wins));
         Log.d("p", String.valueOf(plays));
         Log.d("%", String.valueOf((wins/plays)*100));
