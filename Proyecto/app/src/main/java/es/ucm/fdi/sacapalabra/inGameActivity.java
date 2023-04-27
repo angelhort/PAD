@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -29,20 +30,21 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class inGameActivity extends BaseActivity implements WordLoaderCallbacksListener {
 
     private static final int WORD_LOADER_ID = 0;
     private WordLoaderCallbacks wordLoaderCallbacks;
-
     private SharedPreferences sharedPreferences;
 
     private Game game;
-    private LinearLayout generalLayout;
 
+    private LinearLayout generalLayout;
     private LinearLayout boardLayout;
     private LinearLayout buttonsLayout;
+
     private TextView titleText;
     private TextView timeText;
     private EditText inputText;
@@ -52,42 +54,53 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
 
     private boolean colorblind;
     private boolean timeTrial;
+    private boolean gameFinished;
     private CountDownTimer countDownTimer;
     private GameDBHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        dbHelper = DataBase.getDbHelper(this.getApplicationContext());
+
+        // Recuperamos las preferencias como es habitual en todas las activities
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String theme = sharedPreferences.getString("theme", "dark");
+        String language = sharedPreferences.getString("language", "es");
         colorblind = sharedPreferences.getBoolean("colorblind",false);
         setTheme(theme);
+        setLanguage(language);
 
-        // Crear objetos
+        // Creamos el objeto game, que contiene la informacion de la partida
         Intent intent = getIntent();
         game = new Game(intent.getStringExtra("idioma"), intent.getStringExtra("modo"),intent.getIntExtra("intentos", 0),intent.getIntExtra("longitud", 0));
         if(game.getMode().equals("contrarreloj")) timeTrial = true;
 
-        // Añadir vistas a la actividad
+        // Añadimos vistas a la actividad
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
             addViews(true);
         else
             addViews(false);
 
-        setTheme(theme);
-        setContentView(generalLayout);
+        // Solo hay 2 posibilidades para ejecutarse onCreate(), diferenciamos entre ambas
 
-        // Recuperar instancia
+        gameFinished = false; // Este booleano solo existe por la posibilidad de rotar la pantalla cuando la partida ha terminado
+
+        // 1º Se ejecuta tras rotar el dispositivo, la partida ya existia, debemos recuperar la información
         if (savedInstanceState != null) {
             recoverSavedInstance(savedInstanceState);
-        } else {
+        }
+        // 2º Se ejecuta la primera vez que se crea la actividad, no por cambios de configuración, establecemos
+        // los parametros variables de la partida (obtener la palabra y, en caso de serlo, establecer el cronometro)
+        else {
             getAPIword();
             if(timeTrial) createTimer(60000);
         }
 
-        // Get a reference to the instance of DataBase
-        dbHelper = DataBase.getDbHelper(this.getApplicationContext());
+        setContentView(generalLayout);
     }
 
     private void createTimer(long time) {
@@ -119,6 +132,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         generalLayout = new LinearLayout(this);
         generalLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
+        // Es necesario comprobar la orientacion para establecer la direccion del layout general
         if(orientation) {
             generalLayout.setOrientation(LinearLayout.VERTICAL);
             layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -146,7 +160,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         titleText.setTextSize(48);
         titleText.setGravity(Gravity.CENTER);
 
-        // Add view to layout
         if(orientation) generalLayout.addView(titleText);
         else buttonsLayout.addView(titleText);
 
@@ -159,7 +172,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             buttonsLayout.addView(timeText);
         }
 
-        // Input Text for words
+        // Input Text para introducir las palabras
         inputText = new EditText(this);
         inputText.setLayoutParams(layoutParams);
         inputText.setHint(R.string.inputText);
@@ -168,7 +181,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         inputText.setHintTextColor(ContextCompat.getColor(this, R.color.theme_green));
         buttonsLayout.addView(inputText);
 
-        // Submit button to send the word
+        // Boton para enviar la palabra a comprobar
         submitButton = new Button(this);
         submitButton.setBackgroundResource(R.drawable.roundbutton);
         submitButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -183,8 +196,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         submitButton.setOnClickListener(sendWordListener);
         buttonsLayout.addView(submitButton);
 
-        // Add views
-
+        // Finalmente, creamos el tablero según la orientación y añadimos las vistas
         createBoard(orientation);
         generalLayout.addView(boardLayout);
         generalLayout.addView(buttonsLayout);
@@ -434,6 +446,12 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
 
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        Log.d("inGame", "Active network info: " + activeNetworkInfo);
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
     private void setTheme(String theme){
         if (theme.equals("dark")) {
             setTheme(R.style.Theme_Default);
@@ -441,11 +459,13 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             setTheme(R.style.Theme_White);
         }
     }
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        Log.d("inGame", "Active network info: " + activeNetworkInfo);
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    private void setLanguage(String language) {
+        Locale locale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = locale;
+        res.updateConfiguration(conf, dm);
     }
     @Override
     public void onWordLoaded(String word) {
@@ -468,10 +488,12 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                 if (game.isSolution(palabra)) {
                     finishGame(true);
                     saveStats(true);
+                    gameFinished = true;
                 }
                 else if (game.getActualTry() == game.getNtries()) {
                     finishGame(false);
                     saveStats(false);
+                    gameFinished = true;
                 }
             }
             else {
@@ -508,6 +530,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putBoolean("gameFinished", gameFinished);
         outState.putString("currentWord", game.getWord());
         outState.putInt("actualTry", game.getActualTry());
         outState.putStringArrayList("wordsTried", game.getWordsTried());
@@ -517,25 +540,26 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
 
     }
     private void recoverSavedInstance(Bundle savedInstanceState) {
-        // Recuperar la instancia si se ha cambiado la configuración
-        if (savedInstanceState != null) {
-            ArrayList<String> words = savedInstanceState.getStringArrayList("wordsTried");
 
-            game.setWord(savedInstanceState.getString("currentWord"));
-            game.setActualTry(savedInstanceState.getInt("nTries"));
-            game.setWordsTried(savedInstanceState.getStringArrayList("wordsTried"));
+        gameFinished = savedInstanceState.getBoolean("gameFinished");
+        game.setWord(savedInstanceState.getString("currentWord"));
+        game.setActualTry(savedInstanceState.getInt("actualTry"));
+        game.setWordsTried(savedInstanceState.getStringArrayList("wordsTried"));
 
-            int i = 0;
-            for(String b : game.getWordsTried()){
-                paintLetters(b,i);
-                i++;
-            }
-            if(game.getWordsTried().get(i).equals(game.getWord()))
+        int i = 0;
+        for(String b : game.getWordsTried()){
+            paintLetters(b,i);
+            i++;
+        }
+
+        if(gameFinished) {
+            if (game.isSolution(game.getWord( i - 1))) {
                 finishGame(true);
-            else if(game.getNtries() - 1 == i)
+            } else if (game.getActualTry() == game.getNtries()) {
                 finishGame(false);
-
-            if(timeTrial)
+            }
+        } else {
+            if (timeTrial)
                 createTimer(savedInstanceState.getLong("actualTime"));
         }
     }

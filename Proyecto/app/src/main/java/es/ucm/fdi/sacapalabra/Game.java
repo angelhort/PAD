@@ -1,5 +1,7 @@
 package es.ucm.fdi.sacapalabra;
 
+import android.util.Log;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -12,7 +14,6 @@ public class Game {
     private int lenght;
     private long time;
     private int actualTry;
-
     private ArrayList<String> wordsTried;
 
     public Game(String idioma, String modo, int intentos, int longitud){
@@ -65,6 +66,9 @@ public class Game {
     }
     public void addWord(String palabra){
         wordsTried.add(palabra);
+    }
+    public String getWord(int index){
+        return wordsTried.get(index);
     }
 
     public boolean validateWord(String palabra){
