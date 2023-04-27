@@ -299,6 +299,8 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         buttonsLayout.addView(solutionText);
         buttonsLayout.addView(playAgainButton);
         buttonsLayout.addView(returnMenuButton);
+        if(timeTrial)
+            countDownTimer.cancel();
 
         saveStats(win);
     }
