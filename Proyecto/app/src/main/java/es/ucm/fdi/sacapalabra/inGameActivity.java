@@ -302,8 +302,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         buttonsLayout.addView(returnMenuButton);
         if(timeTrial)
             countDownTimer.cancel();
-
-        saveStats(win);
     }
     private void saveStats(boolean win){
         // Guardar estadisticas partida
@@ -467,9 +465,14 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                 paintLetters(palabra,game.getActualTry());
                 game.incrementTry();
                 game.addWord(palabra);
-                if (game.isSolution(palabra)) finishGame(true);
-                else if (game.getActualTry() == game.getNtries()) finishGame(false);
-
+                if (game.isSolution(palabra)) {
+                    finishGame(true);
+                    saveStats(true);
+                }
+                else if (game.getActualTry() == game.getNtries()) {
+                    finishGame(false);
+                    saveStats(false);
+                }
             }
             else {
                 inputText.setError(getResources().getString(R.string.inputError));
@@ -508,6 +511,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         outState.putString("currentWord", game.getWord());
         outState.putInt("actualTry", game.getActualTry());
         outState.putStringArrayList("wordsTried", game.getWordsTried());
+
         if(timeTrial)
             outState.putLong("actualTime", game.getTime());
 
@@ -526,10 +530,13 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                 paintLetters(b,i);
                 i++;
             }
+            if(game.getWordsTried().get(i).equals(game.getWord()))
+                finishGame(true);
+            else if(game.getNtries() - 1 == i)
+                finishGame(false);
 
             if(timeTrial)
                 createTimer(savedInstanceState.getLong("actualTime"));
-
         }
     }
 }

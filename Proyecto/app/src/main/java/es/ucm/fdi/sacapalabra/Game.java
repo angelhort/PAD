@@ -11,7 +11,6 @@ public class Game {
     private int ntries;
     private int lenght;
     private long time;
-
     private int actualTry;
 
     private ArrayList<String> wordsTried;
@@ -57,6 +56,7 @@ public class Game {
     public long getTime(){
         return time;
     }
+
     public ArrayList<String> getWordsTried(){
         return wordsTried;
     }
