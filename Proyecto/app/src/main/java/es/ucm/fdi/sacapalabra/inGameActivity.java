@@ -75,6 +75,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         else
             addViews(false);
 
+        setTheme(theme);
         setContentView(generalLayout);
 
         // Recuperar instancia
@@ -375,7 +376,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             myTextViews[nTry][i].setText(letra.toUpperCase());
         }
     }
-
     private boolean alreadyPainted(String letra, int index, int nTry) {
         for (int i = 0; i < index; i++) {
             if (myTextViews[nTry][i].getText().toString().toLowerCase().equals(letra)) {
@@ -479,7 +479,19 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
     View.OnClickListener playAgainListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            recreate();
+            finish();
+            // Create Intent to start InGameActivity
+            Intent intent = new Intent(inGameActivity.this, inGameActivity.class);
+
+            // Put selected data as extras in Intent
+            intent.putExtra("idioma", game.getLanguage().trim());
+            intent.putExtra("modo", game.getMode().trim());
+            intent.putExtra("intentos", game.getNtries());
+            intent.putExtra("longitud", game.getLenght());
+
+            // Start InGameActivity with Intent
+            startActivity(intent);
+
         }
     };
     View.OnClickListener returnMenuListener = new View.OnClickListener() {
@@ -491,7 +503,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
     };
 
-
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("currentWord", game.getWord());
@@ -501,7 +512,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
             outState.putLong("actualTime", game.getTime());
 
     }
-
     private void recoverSavedInstance(Bundle savedInstanceState) {
         // Recuperar la instancia si se ha cambiado la configuración
         if (savedInstanceState != null) {
