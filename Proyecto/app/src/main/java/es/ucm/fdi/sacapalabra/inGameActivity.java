@@ -121,6 +121,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                 public void onFinish() {
                     timeText.setText(R.string.noTime);
                     finishGame(false);
+                    saveStats(false);
                 }
             }.start();
         } else {
