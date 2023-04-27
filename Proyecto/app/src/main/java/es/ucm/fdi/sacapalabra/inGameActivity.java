@@ -365,7 +365,7 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
                             }
                         }
                     }
-                    if (!letterCorrectlyPlaced && !sameLetterCorrectlyPlaced && ((game.getWord().indexOf(letra) < i || game.getWord().lastIndexOf(letra) > i))) {
+                    if (!letterCorrectlyPlaced && !alreadyPainted(letra, i, nTry) && !sameLetterCorrectlyPlaced && ((game.getWord().indexOf(letra) < i || game.getWord().lastIndexOf(letra) > i))) {
                         myTextViews[nTry][i].setBackgroundResource(R.drawable.textview_border_wrongpos);
                     }
                 }
@@ -374,14 +374,6 @@ public class inGameActivity extends BaseActivity implements WordLoaderCallbacksL
         }
     }
 
-    private boolean alreadyPaintedSameLetter(String letra, int index, int nTry) {
-        for (int i = 0; i < index; i++) {
-            if (myTextViews[nTry][i].getText().toString().toLowerCase().equals(letra)) {
-                return true;
-            }
-        }
-        return false;
-    }
     private boolean alreadyPainted(String letra, int index, int nTry) {
         for (int i = 0; i < index; i++) {
             if (myTextViews[nTry][i].getText().toString().toLowerCase().equals(letra)) {

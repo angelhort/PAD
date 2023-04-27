@@ -58,7 +58,7 @@ public class APIConectionUtils {
 
                 for (int i = 0; i < resultString.length(); i++) {
                     char c = resultString.charAt(i);
-                    if (c == 'ñ' || c == 'á' || c == 'é' || c == 'í' || c == 'ó' || c == 'ú' || c == 'ê' || c == 'ü') {
+                    if (c == 'ñ' || c == 'á' || c == 'é' || c == 'í' || c == 'ó' || c == 'ú' || c == 'ê' || c == 'ü' || c == 'Á' || c == 'É' || c == 'Í' || c == 'Ó' || c == 'Ú') {
                         System.out.println("Word contains accents or ñ: " + resultString);
                         hasAccents = true;
                     }
