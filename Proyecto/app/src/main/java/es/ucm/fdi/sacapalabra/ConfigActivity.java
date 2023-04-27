@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.Locale;
@@ -274,14 +275,16 @@ public class ConfigActivity extends BaseActivity {
     };
     CompoundButton.OnCheckedChangeListener notifSwitchListener = new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
+            if (isChecked && !sharedPreferences.getBoolean("notifs", false)) {
                 sharedPreferences.edit().putBoolean("notifs", true).apply();
                 notifSwitch.setChecked(true);
-
+                Toast.makeText(ConfigActivity.this, "De ahora en adelante recibirás notificaciones", Toast.LENGTH_SHORT).show();
                 startNotificationService(); // Arrancamos el servicio de notificaciones
-            } else {
+            } else if (!isChecked && sharedPreferences.getBoolean("notifs", false)) {
                 sharedPreferences.edit().putBoolean("notifs", false).apply();
                 notifSwitch.setChecked(false);
+                Toast.makeText(ConfigActivity.this, "Ya no recibirás más notificaciones", Toast.LENGTH_SHORT).show();
+
                 stopNotificationService(); // Paramos el envío de notificaciones
             }
         }
