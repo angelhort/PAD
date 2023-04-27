@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,8 +93,8 @@ public class HistoryActivity extends BaseActivity {
             language = (language.substring(0, 1).toUpperCase() + language.substring(1)).trim();
             mode = (mode.substring(0, 1).toUpperCase() + mode.substring(1)).trim();
             word = (word.substring(0, 1).toUpperCase() + word.substring(1)).trim();
-           
-            lista.add(new MyData(language, mode, word, tries));
+
+            lista.add(new MyData(language, mode, word, tries, result));
             Log.d("PalabraHistorial", word);
         }
         cursor.close();
@@ -164,7 +166,18 @@ public class HistoryActivity extends BaseActivity {
             holder.modeTextView.setText(data.mode);
             holder.wordTextView.setText(data.word);
             holder.triesTextView.setText(String.valueOf(data.tries));
-
+            if(data.result == 1){
+                holder.languageTextView.setBackgroundColor(getColor(R.color.dark_green));
+                holder.modeTextView.setBackgroundColor(getColor(R.color.dark_green));
+                holder.wordTextView.setBackgroundColor(getColor(R.color.dark_green));
+                holder.triesTextView.setBackgroundColor(getColor(R.color.dark_green));
+            }
+            else{
+                holder.languageTextView.setBackgroundColor(Color.RED);
+                holder.modeTextView.setBackgroundColor(Color.RED);
+                holder.wordTextView.setBackgroundColor(Color.RED);
+                holder.triesTextView.setBackgroundColor(Color.RED);
+            }
             return convertView;
         }
 
@@ -180,12 +193,14 @@ public class HistoryActivity extends BaseActivity {
         public String mode;
         public String word;
         public int tries;
+        public int result;
 
-        public MyData(String language, String mode, String word, int tries) {
+        public MyData(String language, String mode, String word, int tries, int result) {
             this.language = language;
             this.mode = mode;
             this.word = word;
             this.tries = tries;
+            this.result = result;
         }
     }
 }

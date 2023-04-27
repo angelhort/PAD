@@ -153,7 +153,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/word"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewTituloIdioma"
@@ -162,7 +163,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/language"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewTituloModo"
@@ -171,7 +173,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/mode"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewTituloIntentos"
@@ -180,7 +183,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tries"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
